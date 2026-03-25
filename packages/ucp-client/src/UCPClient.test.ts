@@ -94,10 +94,14 @@ describe('UCPClient', () => {
       await client.searchProducts('shoes');
       await client.searchProducts('boots');
 
-      const headers1 = (mockFetch.mock.calls[0] as [string, RequestInit])[1]
-        .headers as Record<string, string>;
-      const headers2 = (mockFetch.mock.calls[1] as [string, RequestInit])[1]
-        .headers as Record<string, string>;
+      const headers1 = (mockFetch.mock.calls[0] as [string, RequestInit])[1].headers as Record<
+        string,
+        string
+      >;
+      const headers2 = (mockFetch.mock.calls[1] as [string, RequestInit])[1].headers as Record<
+        string,
+        string
+      >;
       expect(headers1['request-id']).not.toBe(headers2['request-id']);
     });
 
@@ -300,9 +304,7 @@ describe('UCPClient', () => {
         }),
       );
 
-      const err = await client
-        .completeCheckout('chk_1', paymentPayload)
-        .catch((e: unknown) => e);
+      const err = await client.completeCheckout('chk_1', paymentPayload).catch((e: unknown) => e);
 
       expect(err).toBeInstanceOf(UCPEscalationError);
       expect((err as UCPEscalationError).continue_url).toBe('https://store.com/pay');
