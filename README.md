@@ -1,10 +1,10 @@
-# @momentum/ucp-client
+# @getmomentumtoday/ucp-client
 
 Typed TypeScript HTTP client for the UCP Gateway REST API.
 
 ## Overview
 
-`@momentum/ucp-client` is a thin, typed wrapper over the [ucp-gateway](https://github.com/GetMomentumToday/ucp-gateway) HTTP surface. It provides:
+`@getmomentumtoday/ucp-client` is a thin, typed wrapper over the [ucp-gateway](https://github.com/GetMomentumToday/ucp-gateway) HTTP surface. It provides:
 
 - Auto-attached UCP headers (`UCP-Agent`, `idempotency-key`, `request-id`)
 - Typed inputs/outputs with Zod runtime validation
@@ -14,7 +14,7 @@ Typed TypeScript HTTP client for the UCP Gateway REST API.
 ## Quick Start
 
 ```typescript
-import { UCPClient } from '@momentum/ucp-client';
+import { UCPClient } from '@getmomentumtoday/ucp-client';
 
 const client = new UCPClient({
   gatewayUrl: 'http://localhost:3000',

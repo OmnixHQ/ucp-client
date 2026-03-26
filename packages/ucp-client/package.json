@@ -1,8 +1,19 @@
 {
-  "name": "@momentum/ucp-client",
+  "name": "@getmomentumtoday/ucp-client",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GetMomentumToday/ucp-client.git",
+    "directory": "packages/ucp-client"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "dist",
+    "LICENSE.md"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

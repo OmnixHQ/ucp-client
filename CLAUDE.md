@@ -2,7 +2,7 @@
 
 ## What This Is
 
-`@momentum/ucp-client` is a typed TypeScript HTTP client wrapping the ucp-gateway REST API.
+`@getmomentumtoday/ucp-client` is a typed TypeScript HTTP client wrapping the ucp-gateway REST API.
 It is a **library, not a server** — no port, no process, no Docker container.
 
 ## Architecture
