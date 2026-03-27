@@ -11,7 +11,8 @@ import type {
   UCPSpecOrder,
   UCPProfile,
 } from './types.js';
-import { UCPError, UCPEscalationError } from './errors.js';
+import { UCPError, UCPEscalationError, UCPIdempotencyConflictError } from './errors.js';
+import type { UCPMessage } from './errors.js';
 import {
   CheckoutSessionSchema,
   UCPProfileSchema,
@@ -237,23 +238,51 @@ export class UCPClient {
   }
 
   private throwFromResponse(data: unknown, statusCode: number): never {
+    if (statusCode === 409) {
+      throw new UCPIdempotencyConflictError();
+    }
+
     if (typeof data !== 'object' || data === null) {
       throw new UCPError('HTTP_ERROR', `Gateway returned ${statusCode}`, 'error', statusCode);
     }
 
     const body = data as Record<string, unknown>;
-    const messages = body['messages'];
+    const rawMessages = body['messages'];
 
-    if (Array.isArray(messages) && messages.length > 0) {
-      const first = messages[0] as Record<string, string>;
-      const severity = first['severity'] ?? 'error';
-      const validSeverities = new Set(['error', 'warning', 'info']);
-      throw new UCPError(
-        first['code'] ?? 'UNKNOWN',
-        first['content'] ?? 'Unknown error',
-        validSeverities.has(severity) ? (severity as 'error' | 'warning' | 'info') : 'error',
-        statusCode,
-      );
+    if (Array.isArray(rawMessages) && rawMessages.length > 0) {
+      const allMessages: UCPMessage[] = rawMessages.map((m: Record<string, unknown>) => {
+        const rawType = String(m['type'] ?? 'error');
+        const messageType = (['error', 'warning', 'info'].includes(rawType) ? rawType : 'error') as
+          | 'error'
+          | 'warning'
+          | 'info';
+        const msg: UCPMessage = {
+          type: messageType,
+          content: String(m['content'] ?? 'Unknown error'),
+        };
+        if (m['code'] !== undefined) (msg as { code: string }).code = String(m['code']);
+        if (m['severity'] !== undefined)
+          (msg as { severity: string }).severity = String(m['severity']);
+        if (m['path'] !== undefined) (msg as { path: string }).path = String(m['path']);
+        if (m['content_type'] !== undefined)
+          (msg as { content_type: string }).content_type = String(m['content_type']);
+        return msg;
+      });
+
+      const first = allMessages[0]!;
+      const code = first.code ?? 'UNKNOWN';
+
+      const options: {
+        readonly type: 'error' | 'warning' | 'info';
+        readonly path?: string;
+        readonly contentType?: 'plain' | 'markdown';
+        readonly messages: readonly UCPMessage[];
+      } = { type: first.type, messages: allMessages };
+      if (first.path !== undefined) (options as { path: string }).path = first.path;
+      if (first.content_type !== undefined)
+        (options as { contentType: string }).contentType = first.content_type;
+
+      throw new UCPError(code, first.content, first.type, statusCode, options);
     }
 
     throw new UCPError('HTTP_ERROR', `Gateway returned ${statusCode}`, 'error', statusCode);

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { UCPClient } from './UCPClient.js';
-import { UCPError, UCPEscalationError } from './errors.js';
+import { UCPError, UCPEscalationError, UCPIdempotencyConflictError } from './errors.js';
 
 const mockFetch = vi.fn();
 vi.stubGlobal('fetch', mockFetch);
@@ -418,6 +418,58 @@ describe('UCPClient', () => {
         expect(ucpErr.message).toBe('Product xyz not found');
         expect(ucpErr.severity).toBe('error');
         expect(ucpErr.statusCode).toBe(404);
+      }
+    });
+
+    it('preserves all messages and enriched fields from gateway error', async () => {
+      mockResponse(
+        {
+          messages: [
+            {
+              type: 'error',
+              code: 'INVALID_ADDRESS',
+              content: 'Street address is required',
+              severity: 'recoverable',
+              path: '$.buyer.address.street_address',
+              content_type: 'plain',
+            },
+            {
+              type: 'warning',
+              code: 'LOW_STOCK',
+              content: 'Item nearly out of stock',
+            },
+          ],
+        },
+        400,
+      );
+
+      try {
+        await client.getProduct('xyz');
+        expect.unreachable('should have thrown');
+      } catch (err) {
+        expect(err).toBeInstanceOf(UCPError);
+        const ucpErr = err as UCPError;
+        expect(ucpErr.type).toBe('error');
+        expect(ucpErr.path).toBe('$.buyer.address.street_address');
+        expect(ucpErr.contentType).toBe('plain');
+        expect(ucpErr.messages).toHaveLength(2);
+        expect(ucpErr.messages[1]!.type).toBe('warning');
+        expect(ucpErr.messages[1]!.code).toBe('LOW_STOCK');
+      }
+    });
+
+    it('throws UCPIdempotencyConflictError on 409 status', async () => {
+      mockResponse({}, 409);
+
+      try {
+        await client.createCheckout({
+          line_items: [{ item: { id: 'prod-001' }, quantity: 1 }],
+        });
+        expect.unreachable('should have thrown');
+      } catch (err) {
+        expect(err).toBeInstanceOf(UCPIdempotencyConflictError);
+        expect(err).toBeInstanceOf(UCPError);
+        expect((err as UCPError).statusCode).toBe(409);
       }
     });
 

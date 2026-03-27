@@ -33,6 +33,13 @@ export type UCPSpecOrder = Order;
  * Request payloads — gateway accepts partial payloads, so these are
  * more lenient than the SDK's full spec types.
  */
+export interface BuyerConsent {
+  readonly analytics?: boolean;
+  readonly preferences?: boolean;
+  readonly marketing?: boolean;
+  readonly sale_of_data?: boolean;
+}
+
 export interface CreateCheckoutPayload {
   readonly line_items: ReadonlyArray<{
     readonly item: { readonly id: string };
@@ -44,6 +51,12 @@ export interface CreateCheckoutPayload {
     readonly last_name?: string;
     readonly email?: string;
     readonly phone_number?: string;
+    readonly consent?: BuyerConsent;
+  };
+  readonly context?: {
+    readonly address_country?: string;
+    readonly address_region?: string;
+    readonly postal_code?: string;
   };
   readonly payment?: {
     readonly instruments?: readonly unknown[];
@@ -57,6 +70,7 @@ export interface UpdateCheckoutPayload {
     readonly last_name?: string;
     readonly email?: string;
     readonly phone_number?: string;
+    readonly consent?: BuyerConsent;
   };
   readonly fulfillment?: {
     readonly destinations?: ReadonlyArray<{
@@ -72,12 +86,16 @@ export interface UpdateCheckoutPayload {
     readonly methods?: ReadonlyArray<{
       readonly id: string;
       readonly type: string;
+      readonly line_item_ids?: readonly string[];
       readonly selected_destination_id?: string;
       readonly groups?: ReadonlyArray<{
         readonly id: string;
         readonly selected_option_id?: string;
       }>;
     }>;
+  };
+  readonly payment?: {
+    readonly instruments?: ReadonlyArray<PaymentInstrument>;
   };
   readonly discounts?: {
     readonly codes?: readonly string[];
@@ -89,6 +107,25 @@ export interface UpdateCheckoutPayload {
   };
 }
 
+export interface TokenCredential {
+  readonly type: string;
+  readonly token: string;
+}
+
+export interface CardCredential {
+  readonly type: 'card';
+  readonly card_number_type?: 'fpan' | 'network_token' | 'dpan';
+  readonly number?: string;
+  readonly expiry_month?: string;
+  readonly expiry_year?: string;
+  readonly name?: string;
+  readonly cvc?: string;
+  readonly cryptogram?: string;
+  readonly eci_value?: string;
+}
+
+export type PaymentCredential = TokenCredential | CardCredential;
+
 export interface PaymentInstrument {
   readonly id: string;
   readonly handler_id: string;
@@ -97,10 +134,8 @@ export interface PaymentInstrument {
   readonly last_digits?: string;
   readonly handler_name?: string;
   readonly selected?: boolean;
-  readonly credential?: {
-    readonly type: string;
-    readonly token?: string;
-  };
+  readonly display?: Readonly<Record<string, unknown>>;
+  readonly credential?: PaymentCredential;
   readonly billing_address?: unknown;
 }
 
@@ -115,7 +150,7 @@ export interface CompleteCheckoutPayload {
     readonly instruments: ReadonlyArray<PaymentInstrument>;
   };
   readonly payment_data?: PaymentInstrument;
-  readonly risk_signals?: Readonly<Record<string, string>>;
+  readonly risk_signals?: Readonly<Record<string, unknown>>;
 }
 
 /**

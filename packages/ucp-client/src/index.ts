@@ -1,5 +1,6 @@
 export { UCPClient } from './UCPClient.js';
-export { UCPError, UCPEscalationError } from './errors.js';
+export { UCPError, UCPEscalationError, UCPIdempotencyConflictError } from './errors.js';
+export type { UCPMessage } from './errors.js';
 
 export {
   // Response validation
@@ -38,6 +39,10 @@ export type {
   CompleteCheckoutPayload,
   CheckoutSession,
   CheckoutSessionStatus,
+  BuyerConsent,
+  TokenCredential,
+  CardCredential,
+  PaymentCredential,
   PaymentInstrument,
   UCPProduct,
   UCPOrder,
