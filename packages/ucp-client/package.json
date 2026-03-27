@@ -1,18 +1,21 @@
 {
-  "name": "@getmomentumtoday/ucp-client",
+  "name": "@omnix/client",
   "version": "0.1.0",
+  "description": "Capability-aware TypeScript client for any UCP-compliant server",
+  "license": "MIT",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GetMomentumToday/ucp-client.git",
+    "url": "https://github.com/OmnixHQ/omnix-client.git",
     "directory": "packages/ucp-client"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   },
   "files": [
     "dist",
-    "LICENSE.md"
+    "LICENSE"
   ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

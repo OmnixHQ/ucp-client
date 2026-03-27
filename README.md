@@ -1,4 +1,4 @@
-# @getmomentumtoday/ucp-client
+# @omnix/client
 
 Capability-aware TypeScript client for any [UCP](https://ucp.dev)-compliant server.
 
@@ -7,7 +7,7 @@ Connects to a UCP server, discovers what it supports, and exposes only the avail
 ## Quick Start
 
 ```typescript
-import { UCPClient } from '@getmomentumtoday/ucp-client';
+import { UCPClient } from '@omnix/client';
 
 const client = await UCPClient.connect({
   gatewayUrl: 'https://shoes-store.example.com/ucp',
@@ -191,11 +191,7 @@ Auto-attached on every request:
 ## Error Handling
 
 ```typescript
-import {
-  UCPError,
-  UCPEscalationError,
-  UCPIdempotencyConflictError,
-} from '@getmomentumtoday/ucp-client';
+import { UCPError, UCPEscalationError, UCPIdempotencyConflictError } from '@omnix/client';
 
 try {
   await client.checkout.complete(id, payload);
@@ -225,4 +221,4 @@ npm run format:check # prettier --check
 
 ## License
 
-Elastic License 2.0
+[MIT](./packages/ucp-client/LICENSE)
