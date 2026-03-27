@@ -1,5 +1,5 @@
 {
-  "name": "@omnix/client-monorepo",
+  "name": "@omnix/ucp-client-monorepo",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",

@@ -1,5 +1,5 @@
 {
-  "name": "@omnix/client",
+  "name": "@omnix/ucp-client",
   "version": "0.1.0",
   "description": "Capability-aware TypeScript client for any UCP-compliant server",
   "license": "MIT",

@@ -1,4 +1,4 @@
-# @omnix/client
+# @omnix/ucp-client
 
 Capability-aware TypeScript client for any [UCP](https://ucp.dev)-compliant server.
 
@@ -7,7 +7,7 @@ Connects to a UCP server, discovers what it supports, and exposes only the avail
 ## Quick Start
 
 ```typescript
-import { UCPClient } from '@omnix/client';
+import { UCPClient } from '@omnix/ucp-client';
 
 const client = await UCPClient.connect({
   gatewayUrl: 'https://shoes-store.example.com/ucp',
@@ -191,7 +191,7 @@ Auto-attached on every request:
 ## Error Handling
 
 ```typescript
-import { UCPError, UCPEscalationError, UCPIdempotencyConflictError } from '@omnix/client';
+import { UCPError, UCPEscalationError, UCPIdempotencyConflictError } from '@omnix/ucp-client';
 
 try {
   await client.checkout.complete(id, payload);

@@ -2,7 +2,7 @@
 
 ## What This Is
 
-`@omnix/client` is a capability-aware TypeScript HTTP client for any UCP-compliant server.
+`@omnix/ucp-client` is a capability-aware TypeScript HTTP client for any UCP-compliant server.
 It is a **library, not a server** — no port, no process, no Docker container.
 
 ## Architecture
