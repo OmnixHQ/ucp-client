@@ -12,6 +12,8 @@ import { DEFAULT_UCP_VERSION, UCP_CAPABILITIES } from './types/config.js';
 import type { CheckoutExtensions } from './types/checkout.js';
 import type { OAuthServerMetadata } from './types/identity-linking.js';
 import type { PaymentHandlerMap } from './types/payment.js';
+import { getAgentTools } from './agent-tools.js';
+import type { AgentTool } from './agent-tools.js';
 
 /** UCP discovery profile returned by `GET /.well-known/ucp`. */
 export type UCPProfile = UcpDiscoveryProfile;
@@ -40,8 +42,13 @@ export interface ConnectedClient {
   readonly products: ProductsCapability;
   /** Payment handlers declared by the server, keyed by namespace. */
   readonly paymentHandlers: PaymentHandlerMap;
-  /** Returns only the tools this server supports, for dynamic agent tool registration. */
+  /** Returns only the tools this server supports (name + description only). */
   describeTools(): readonly ToolDescriptor[];
+  /**
+   * Returns complete tool definitions with JSON Schema parameters and execute functions.
+   * Ready for direct use with any AI agent framework (Claude API, OpenAI, Vercel AI SDK, LangChain, MCP).
+   */
+  getAgentTools(): readonly AgentTool[];
 }
 
 /**
@@ -85,7 +92,7 @@ export async function connect(
   const products = new ProductsCapability(http);
   const paymentHandlers = extractPaymentHandlers(profile);
 
-  return Object.freeze({
+  const client: ConnectedClient = {
     profile,
     checkout,
     order,
@@ -93,7 +100,10 @@ export async function connect(
     products,
     paymentHandlers,
     describeTools: () => buildToolDescriptors(checkout, order, identityLinking),
-  });
+    getAgentTools: () => getAgentTools(client),
+  };
+
+  return Object.freeze(client);
 }
 
 /**

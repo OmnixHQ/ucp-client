@@ -1,6 +1,9 @@
 export { UCPClient, connect } from './UCPClient.js';
 export type { ConnectedClient, ToolDescriptor, UCPProfile } from './UCPClient.js';
 
+export { getAgentTools } from './agent-tools.js';
+export type { AgentTool, JsonSchema } from './agent-tools.js';
+
 export {
   UCPError,
   UCPEscalationError,

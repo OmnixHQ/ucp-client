@@ -64,7 +64,9 @@ async function main() {
     const products = await client.products.search('shirt', { limit: 3 });
     console.log(`Found ${products.length} products`);
     for (const p of products) {
-      console.log(`  ${p.id}: ${p.title} — ${p.price_cents}c (${p.in_stock ? 'in stock' : 'out of stock'})`);
+      console.log(
+        `  ${p.id}: ${p.title} — ${p.price_cents}c (${p.in_stock ? 'in stock' : 'out of stock'})`,
+      );
     }
   } catch (err) {
     console.error('Product search failed:', (err as Error).message);
