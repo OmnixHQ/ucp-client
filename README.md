@@ -12,49 +12,76 @@ TypeScript client that connects to any [UCP](https://ucp.dev)-compliant server, 
 
 Every AI agent that wants to buy something from a UCP store needs to discover capabilities, construct headers, handle idempotency, parse errors, manage escalation. That's a lot of boilerplate.
 
-`@omnix/ucp-client` handles all of it. Connect, get tools, register with your agent:
-
-```typescript
-import Anthropic from '@anthropic-ai/sdk';
-import { UCPClient } from '@omnix/ucp-client';
-
-const client = await UCPClient.connect({
-  gatewayUrl: 'https://store.example.com',
-  agentProfileUrl: 'https://your-app.com/.well-known/ucp',
-});
-
-const tools = client.getAgentTools();
-
-const anthropic = new Anthropic();
-const response = await anthropic.messages.create({
-  model: 'claude-sonnet-4-20250514',
-  max_tokens: 1024,
-  tools: tools.map((t) => ({
-    name: t.name,
-    description: t.description,
-    input_schema: t.parameters,
-  })),
-  messages: [{ role: 'user', content: 'Find me running shoes under $100' }],
-});
-
-for (const block of response.content) {
-  if (block.type === 'tool_use') {
-    const tool = tools.find((t) => t.name === block.name);
-    if (tool) {
-      const result = await tool.execute(block.input);
-      // Send result back to Claude...
-    }
-  }
-}
-```
-
-The client figures out what the store supports and gives Claude only the tools that work.
+`@omnix/ucp-client` handles all of it. You connect, get tools, give them to the LLM — and the LLM orchestrates the checkout flow on its own.
 
 ## Install
 
 ```bash
 npm install @omnix/ucp-client
 ```
+
+## Quick Start
+
+```typescript
+import Anthropic from '@anthropic-ai/sdk';
+import { UCPClient } from '@omnix/ucp-client';
+
+// Connect to any UCP server — discovers capabilities automatically
+const client = await UCPClient.connect({
+  gatewayUrl: 'https://store.example.com',
+  agentProfileUrl: 'https://your-app.com/.well-known/ucp',
+});
+
+// Get tools — only what this server supports, with schemas + executors
+const tools = client.getAgentTools();
+const anthropic = new Anthropic();
+const messages: Anthropic.MessageParam[] = [
+  { role: 'user', content: 'Buy me running shoes under $100' },
+];
+
+// Agent loop — Claude decides which tools to call and in what order
+let done = false;
+while (!done) {
+  const response = await anthropic.messages.create({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 4096,
+    tools: tools.map((t) => ({
+      name: t.name,
+      description: t.description,
+      input_schema: t.parameters,
+    })),
+    messages,
+  });
+
+  // Add Claude's response to the conversation
+  messages.push({ role: 'assistant', content: response.content });
+
+  // Find tool calls and execute them
+  const toolBlocks = response.content.filter((b) => b.type === 'tool_use');
+
+  if (toolBlocks.length === 0) {
+    done = true;
+    break;
+  }
+
+  const toolResults: Anthropic.ToolResultBlockParam[] = [];
+  for (const block of toolBlocks) {
+    const tool = tools.find((t) => t.name === block.name);
+    if (tool) {
+      const result = await tool.execute(block.input as Record<string, unknown>);
+      toolResults.push({
+        type: 'tool_result',
+        tool_use_id: block.id,
+        content: JSON.stringify(result),
+      });
+    }
+  }
+
+  messages.push({ role: 'user', content: toolResults });
+}
+```
+
+You write the loop. Claude decides the flow: search → create checkout → set shipping → complete → done.
 
 ## What `getAgentTools()` returns
 
@@ -147,45 +174,6 @@ if (client.checkout) {
 // Payment handlers from server profile
 console.log(Object.keys(client.paymentHandlers));
 // e.g., ['com.google.pay', 'dev.shopify.shop_pay']
-```
-
-## Full checkout flow (programmatic)
-
-```typescript
-const client = await UCPClient.connect(config);
-
-if (!client.checkout) throw new Error('Server does not support checkout');
-
-const products = await client.products.search('running shoes');
-
-const session = await client.checkout.create({
-  line_items: [{ item: { id: products[0].id }, quantity: 1 }],
-});
-
-if (client.checkout.extensions.fulfillment) {
-  await client.checkout.setFulfillment(session.id, 'shipping');
-}
-
-if (client.checkout.extensions.discount) {
-  await client.checkout.applyDiscountCodes(session.id, ['10OFF']);
-}
-
-const completed = await client.checkout.complete(session.id, {
-  payment: {
-    instruments: [
-      {
-        id: 'instr_1',
-        handler_id: 'gpay',
-        type: 'card',
-        credential: { type: 'PAYMENT_GATEWAY', token: '...' },
-      },
-    ],
-  },
-});
-
-if (completed.order && client.order) {
-  const order = await client.order.get(completed.order.id);
-}
 ```
 
 ## How connect() works
