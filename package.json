@@ -61,6 +61,7 @@
     "format:check": "prettier --check '**/*.{ts,json,md}'",
     "mock-server": "tsx scripts/mock-ucp-server.ts",
     "test:e2e": "GATEWAY_URL=http://localhost:3002 npx tsx scripts/test-gateway-connection.ts",
+    "agent-demo": "tsx scripts/agent-demo.ts",
     "check:comments": "bash scripts/no-descriptive-comments.sh",
     "check:schemas": "bash scripts/validate-schema-coverage.sh",
     "check:exports": "attw --pack .",
@@ -73,6 +74,7 @@
     "zod": "^3.23.0"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "0.80.0",
     "@arethetypeswrong/cli": "^0.17.0",
     "@types/node": "^25.5.0",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
