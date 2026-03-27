@@ -14,7 +14,12 @@ const DEFAULT_GROUP_ID = 'default';
 
 type FulfillmentPatch = Omit<UpdateCheckoutPayload, 'fulfillment' | 'discounts'>;
 
+/**
+ * Checkout session operations. Available when the server declares `dev.ucp.shopping.checkout`.
+ * Check `extensions` to see which optional features (fulfillment, discount, etc.) are supported.
+ */
 export class CheckoutCapability {
+  /** Which checkout extensions the server supports. */
   readonly extensions: CheckoutExtensions;
 
   constructor(

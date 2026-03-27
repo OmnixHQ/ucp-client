@@ -19,9 +19,14 @@ const TokenResponseSchema = z
   })
   .passthrough();
 
+/**
+ * OAuth 2.0 identity linking for account linking between platforms and merchants.
+ * Available when the server declares `dev.ucp.common.identity_linking`.
+ */
 export class IdentityLinkingCapability {
   constructor(private readonly metadata: OAuthServerMetadata) {}
 
+  /** Build the OAuth authorization URL to redirect the buyer to. */
   getAuthorizationUrl(params: AuthorizationParams): string {
     const url = new URL(this.metadata.authorization_endpoint);
     url.searchParams.set('response_type', 'code');

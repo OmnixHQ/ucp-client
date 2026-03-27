@@ -13,24 +13,52 @@ import type { CheckoutExtensions } from './types/checkout.js';
 import type { OAuthServerMetadata } from './types/identity-linking.js';
 import type { PaymentHandlerMap } from './types/payment.js';
 
+/** UCP discovery profile returned by `GET /.well-known/ucp`. */
 export type UCPProfile = UcpDiscoveryProfile;
 
+/** Describes a single tool the agent can use with the connected server. */
 export interface ToolDescriptor {
   readonly name: string;
   readonly capability: string;
   readonly description: string;
 }
 
+/**
+ * A connected UCP client. Only capabilities the server declared are non-null.
+ * Use `describeTools()` to get the list of available tools for agent registration.
+ */
 export interface ConnectedClient {
+  /** The server's UCP discovery profile. */
   readonly profile: UCPProfile;
+  /** Checkout operations. Null if server does not support `dev.ucp.shopping.checkout`. */
   readonly checkout: CheckoutCapability | null;
+  /** Order operations. Null if server does not support `dev.ucp.shopping.order`. */
   readonly order: OrderCapability | null;
+  /** OAuth 2.0 identity linking. Null if server does not support `dev.ucp.common.identity_linking`. */
   readonly identityLinking: IdentityLinkingCapability | null;
+  /** Product search and retrieval. Always available (gateway-specific). */
   readonly products: ProductsCapability;
+  /** Payment handlers declared by the server, keyed by namespace. */
   readonly paymentHandlers: PaymentHandlerMap;
+  /** Returns only the tools this server supports, for dynamic agent tool registration. */
   describeTools(): readonly ToolDescriptor[];
 }
 
+/**
+ * Connect to a UCP server, discover its capabilities, and return a {@link ConnectedClient}.
+ *
+ * @example
+ * ```typescript
+ * const client = await connect({
+ *   gatewayUrl: 'https://store.example.com/ucp',
+ *   agentProfileUrl: 'https://platform.example.com/.well-known/ucp',
+ * });
+ *
+ * if (client.checkout) {
+ *   const session = await client.checkout.create({ line_items: [...] });
+ * }
+ * ```
+ */
 export async function connect(
   config: UCPClientConfig,
   options?: { readonly onValidationWarning?: LogFn },
@@ -68,6 +96,18 @@ export async function connect(
   });
 }
 
+/**
+ * UCP client entry point. Use `UCPClient.connect()` to discover server capabilities
+ * and get a {@link ConnectedClient}.
+ *
+ * @example
+ * ```typescript
+ * const client = await UCPClient.connect({
+ *   gatewayUrl: 'https://store.example.com/ucp',
+ *   agentProfileUrl: 'https://platform.example.com/.well-known/ucp',
+ * });
+ * ```
+ */
 export class UCPClient {
   private constructor() {
     /* use UCPClient.connect() or the standalone connect() function */

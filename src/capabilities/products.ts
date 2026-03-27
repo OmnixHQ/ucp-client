@@ -3,9 +3,11 @@ import { UCPProductSchema } from '../schemas.js';
 import type { UCPProduct } from '../types/product.js';
 import type { SearchFilters } from '../types/common.js';
 
+/** Product catalog search and retrieval. Always available (gateway-specific, not part of UCP spec). */
 export class ProductsCapability {
   constructor(private readonly http: HttpClient) {}
 
+  /** Search products by query string with optional filters. */
   async search(query: string, filters: SearchFilters = {}): Promise<readonly UCPProduct[]> {
     const params = new URLSearchParams({ q: query });
 
