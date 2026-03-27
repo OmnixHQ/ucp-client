@@ -12,6 +12,8 @@ import type {
 const DEFAULT_METHOD_ID = 'default';
 const DEFAULT_GROUP_ID = 'default';
 
+type FulfillmentPatch = Omit<UpdateCheckoutPayload, 'fulfillment' | 'discounts'>;
+
 export class CheckoutCapability {
   readonly extensions: CheckoutExtensions;
 
@@ -61,7 +63,7 @@ export class CheckoutCapability {
   async setFulfillment(
     id: string,
     type: string,
-    patch?: UpdateCheckoutPayload,
+    patch?: FulfillmentPatch,
   ): Promise<CheckoutSession> {
     return this.update(id, {
       ...patch,
@@ -73,7 +75,7 @@ export class CheckoutCapability {
     id: string,
     destinationId: string,
     fulfillmentType = 'shipping',
-    patch?: UpdateCheckoutPayload,
+    patch?: FulfillmentPatch,
   ): Promise<CheckoutSession> {
     return this.update(id, {
       ...patch,
@@ -94,7 +96,7 @@ export class CheckoutCapability {
     optionId: string,
     destinationId?: string,
     fulfillmentType = 'shipping',
-    patch?: UpdateCheckoutPayload,
+    patch?: FulfillmentPatch,
   ): Promise<CheckoutSession> {
     return this.update(id, {
       ...patch,
@@ -114,7 +116,7 @@ export class CheckoutCapability {
   async applyDiscountCodes(
     id: string,
     codes: readonly string[],
-    patch?: UpdateCheckoutPayload,
+    patch?: FulfillmentPatch,
   ): Promise<CheckoutSession> {
     return this.update(id, {
       ...patch,
@@ -123,7 +125,7 @@ export class CheckoutCapability {
   }
 
   private validateSession(data: unknown): CheckoutSession {
-    const session = this.http.validate(data, CheckoutSessionSchema) as CheckoutSession;
+    const session = this.http.validate(data, CheckoutSessionSchema);
 
     if (session.status === 'requires_escalation' && session.continue_url) {
       throw new UCPEscalationError(session.continue_url);

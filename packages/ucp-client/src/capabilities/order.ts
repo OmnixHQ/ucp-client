@@ -7,6 +7,6 @@ export class OrderCapability {
 
   async get(id: string): Promise<UCPSpecOrder> {
     const data = await this.http.request('GET', `/orders/${encodeURIComponent(id)}`);
-    return this.http.validate(data, UCPSpecOrderSchema) as UCPSpecOrder;
+    return this.http.validate(data, UCPSpecOrderSchema);
   }
 }

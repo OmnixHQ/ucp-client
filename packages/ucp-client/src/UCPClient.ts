@@ -48,7 +48,7 @@ export async function connect(
   });
 
   const rawProfile = await http.request('GET', '/.well-known/ucp');
-  const profile = http.validate(rawProfile, UCPProfileSchema) as UCPProfile;
+  const profile = http.validate(rawProfile, UCPProfileSchema);
   const capabilityNames = extractCapabilityNames(profile);
 
   const checkout = buildCheckoutCapability(http, capabilityNames);

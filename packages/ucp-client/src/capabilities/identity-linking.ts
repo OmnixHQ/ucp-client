@@ -92,8 +92,7 @@ export class IdentityLinkingCapability {
     });
 
     if (!res.ok) {
-      const errorBody = await res.text().catch(() => '');
-      throw new UCPOAuthError(`Token exchange failed: ${res.status} ${errorBody}`, res.status);
+      throw new UCPOAuthError(`Token exchange failed with status ${res.status}`, res.status);
     }
 
     const raw: unknown = await res.json();

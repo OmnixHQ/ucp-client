@@ -27,11 +27,11 @@ export class ProductsCapability {
     const res = await this.http.request('GET', `/ucp/products?${params.toString()}`);
     const data = res as { products?: UCPProduct[] } | UCPProduct[];
     const products = Array.isArray(data) ? data : (data.products ?? []);
-    return products.map((p) => this.http.validate(p, UCPProductSchema) as UCPProduct);
+    return products.map((p) => this.http.validate(p, UCPProductSchema));
   }
 
   async get(id: string): Promise<UCPProduct> {
     const data = await this.http.request('GET', `/ucp/products/${encodeURIComponent(id)}`);
-    return this.http.validate(data, UCPProductSchema) as UCPProduct;
+    return this.http.validate(data, UCPProductSchema);
   }
 }

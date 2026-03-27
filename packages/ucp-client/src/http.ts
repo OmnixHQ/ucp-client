@@ -30,9 +30,9 @@ export class HttpClient {
     this.ucpVersion = config.ucpVersion;
     this.requestSignature = config.requestSignature;
     this.accessToken = config.accessToken;
-    // eslint-disable-next-line no-console
     this.onValidationWarning =
-      config.onValidationWarning ?? ((msg, detail) => console.warn(msg, detail));
+      config.onValidationWarning ?? // eslint-disable-next-line no-console
+      ((msg, detail) => console.warn(msg, detail));
   }
 
   withAccessToken(token: string): HttpClient {
@@ -86,11 +86,11 @@ export class HttpClient {
     return data;
   }
 
-  validate(data: unknown, schema: ZodType): unknown {
+  validate<T>(data: unknown, schema: ZodType<T>): T {
     const result = schema.safeParse(data);
     if (!result.success) {
       this.onValidationWarning('[UCPClient] Response validation failed:', result.error.message);
-      return data;
+      return data as T;
     }
     return result.data;
   }
