@@ -1,0 +1,33 @@
+export interface PostalAddress {
+  readonly first_name?: string;
+  readonly last_name?: string;
+  readonly street_address?: string;
+  readonly extended_address?: string;
+  readonly address_locality?: string;
+  readonly address_region?: string;
+  readonly address_country?: string;
+  readonly postal_code?: string;
+  readonly phone_number?: string;
+}
+
+export interface BuyerConsent {
+  readonly analytics?: boolean;
+  readonly preferences?: boolean;
+  readonly marketing?: boolean;
+  readonly sale_of_data?: boolean;
+}
+
+export interface LocalizationContext {
+  readonly address_country?: string;
+  readonly address_region?: string;
+  readonly postal_code?: string;
+}
+
+export interface SearchFilters {
+  readonly max_price_cents?: number;
+  readonly min_price_cents?: number;
+  readonly in_stock?: boolean;
+  readonly category?: string;
+  readonly limit?: number;
+  readonly page?: number;
+}
