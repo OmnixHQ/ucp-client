@@ -40,8 +40,7 @@ const messages: Anthropic.MessageParam[] = [
 ];
 
 // Agent loop — Claude decides which tools to call and in what order
-let done = false;
-while (!done) {
+while (true) {
   const response = await anthropic.messages.create({
     model: 'claude-sonnet-4-20250514',
     max_tokens: 4096,
@@ -59,10 +58,7 @@ while (!done) {
   // Find tool calls and execute them
   const toolBlocks = response.content.filter((b) => b.type === 'tool_use');
 
-  if (toolBlocks.length === 0) {
-    done = true;
-    break;
-  }
+  if (toolBlocks.length === 0) break;
 
   const toolResults: Anthropic.ToolResultBlockParam[] = [];
   for (const block of toolBlocks) {
