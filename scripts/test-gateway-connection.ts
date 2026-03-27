@@ -60,9 +60,10 @@ async function main() {
   console.log('');
 
   console.log('--- Product Search ---');
+  const SEARCH_QUERY = process.env['SEARCH_QUERY'] ?? '';
   try {
-    const products = await client.products.search('shirt', { limit: 3 });
-    console.log(`Found ${products.length} products`);
+    const products = await client.products.search(SEARCH_QUERY, { limit: 3 });
+    console.log(`Found ${products.length} products (query: ${SEARCH_QUERY || '(all)'})`);
     for (const p of products) {
       console.log(
         `  ${p.id}: ${p.title} — ${p.price_cents}c (${p.in_stock ? 'in stock' : 'out of stock'})`,
@@ -80,7 +81,7 @@ async function main() {
 
   console.log('--- Checkout Flow ---');
 
-  const products = await client.products.search('shirt', { limit: 1 });
+  const products = await client.products.search(SEARCH_QUERY, { limit: 1 });
   if (products.length === 0) {
     console.log('No products found — cannot test checkout.');
     return;

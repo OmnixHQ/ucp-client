@@ -59,6 +59,8 @@
     "lint": "eslint . --ext .ts",
     "format": "prettier --write '**/*.{ts,json,md}'",
     "format:check": "prettier --check '**/*.{ts,json,md}'",
+    "mock-server": "tsx scripts/mock-ucp-server.ts",
+    "test:e2e": "GATEWAY_URL=http://localhost:3002 npx tsx scripts/test-gateway-connection.ts",
     "check:comments": "bash scripts/no-descriptive-comments.sh",
     "check:schemas": "bash scripts/validate-schema-coverage.sh",
     "check:exports": "attw --pack .",
