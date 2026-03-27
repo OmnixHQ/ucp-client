@@ -1,20 +1,24 @@
 export { UCPClient } from './UCPClient.js';
+export type { ConnectedClient, ToolDescriptor, UCPProfile } from './UCPClient.js';
+
 export { UCPError, UCPEscalationError, UCPIdempotencyConflictError } from './errors.js';
 export type { UCPMessage } from './errors.js';
 
+export { HttpClient } from './http.js';
+
+export { CheckoutCapability } from './capabilities/checkout.js';
+export { OrderCapability } from './capabilities/order.js';
+export { IdentityLinkingCapability } from './capabilities/identity-linking.js';
+export { ProductsCapability } from './capabilities/products.js';
+
 export {
-  // Response validation
   CheckoutSessionSchema,
   UCPProfileSchema,
   UCPProductSchema,
   UCPOrderSchema,
-
-  // Request validation
   CreateCheckoutRequestSchema,
   UpdateCheckoutRequestSchema,
   CompleteCheckoutRequestSchema,
-
-  // SDK sub-entity schemas (for AI Brain tool definitions)
   CheckoutResponseStatusSchema,
   BuyerSchema,
   TotalResponseSchema,
@@ -34,18 +38,31 @@ export {
 export type {
   UCPClientConfig,
   SearchFilters,
+  PostalAddress,
+  BuyerConsent,
+  LocalizationContext,
+  CheckoutSession,
+  CheckoutSessionStatus,
+  CheckoutExtensions,
   CreateCheckoutPayload,
   UpdateCheckoutPayload,
   CompleteCheckoutPayload,
-  CheckoutSession,
-  CheckoutSessionStatus,
-  BuyerConsent,
   TokenCredential,
   CardCredential,
   PaymentCredential,
   PaymentInstrument,
-  UCPProduct,
-  UCPOrder,
+  PaymentHandlerInstance,
+  PaymentHandlerMap,
   UCPSpecOrder,
-  UCPProfile,
-} from './types.js';
+  UCPOrder,
+  WebhookEvent,
+  OAuthServerMetadata,
+  AuthorizationParams,
+  TokenResponse,
+  TokenExchangeParams,
+  TokenRefreshParams,
+  TokenRevokeParams,
+  UCPProduct,
+} from './types/index.js';
+
+export { UCP_CAPABILITIES, DEFAULT_UCP_VERSION } from './types/config.js';

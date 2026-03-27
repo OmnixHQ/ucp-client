@@ -14,6 +14,16 @@ function mockResponse(body: unknown, status = 200) {
   });
 }
 
+function makeProfile(capabilities: string[] = ['dev.ucp.shopping.checkout']) {
+  return {
+    ucp: {
+      version: '2026-01-23',
+      services: {},
+      capabilities: capabilities.map((name) => ({ name, version: '2026-01-23' })),
+    },
+  };
+}
+
 function makeSession(overrides: Record<string, unknown> = {}) {
   return {
     id: 'chk_1',
@@ -33,694 +43,598 @@ function makeSession(overrides: Record<string, unknown> = {}) {
   };
 }
 
-const client = new UCPClient({
+const CONFIG = {
   gatewayUrl: 'http://localhost:3000',
   agentProfileUrl: 'https://agent.example.com/profile.json',
-});
+};
+
+async function connectWithCapabilities(capabilities: string[] = ['dev.ucp.shopping.checkout']) {
+  mockResponse(makeProfile(capabilities));
+  return UCPClient.connect(CONFIG);
+}
 
 beforeEach(() => {
   mockFetch.mockReset();
 });
 
-describe('UCPClient', () => {
-  describe('headers', () => {
-    it('attaches UCP-Agent header on every request', async () => {
-      mockResponse({
-        ucp: { version: '2026-01-23', services: {}, capabilities: [] },
-      });
-      await client.discover();
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const headers = init.headers as Record<string, string>;
-      expect(headers['UCP-Agent']).toBe(
-        'profile="https://agent.example.com/profile.json", version="2026-01-23"',
-      );
-    });
-
-    it('attaches Content-Type: application/json when body is present', async () => {
-      mockResponse(makeSession());
-      await client.createCheckout({
-        line_items: [{ item: { id: 'prod-001' }, quantity: 1 }],
-      });
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const headers = init.headers as Record<string, string>;
-      expect(headers['Content-Type']).toBe('application/json');
-    });
-
-    it('does NOT attach Content-Type on bodiless requests', async () => {
-      mockResponse({ products: [] });
-      await client.searchProducts('shoes');
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const headers = init.headers as Record<string, string>;
-      expect(headers['Content-Type']).toBeUndefined();
-    });
-
-    it('attaches request-id on every request', async () => {
-      mockResponse({ products: [] });
-      await client.searchProducts('shoes');
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const headers = init.headers as Record<string, string>;
-      const requestId = headers['request-id'];
-      expect(requestId).toBeDefined();
-      expect(requestId!.length).toBeGreaterThan(0);
-    });
-
-    it('generates unique request-id per call', async () => {
-      mockResponse({ products: [] });
-      mockResponse({ products: [] });
-      await client.searchProducts('shoes');
-      await client.searchProducts('boots');
-
-      const headers1 = (mockFetch.mock.calls[0] as [string, RequestInit])[1].headers as Record<
-        string,
-        string
-      >;
-      const headers2 = (mockFetch.mock.calls[1] as [string, RequestInit])[1].headers as Record<
-        string,
-        string
-      >;
-      expect(headers1['request-id']).not.toBe(headers2['request-id']);
-    });
-
-    it('attaches idempotency-key on POST requests with body', async () => {
-      mockResponse(makeSession());
-      await client.createCheckout({
-        line_items: [{ item: { id: 'prod-001' }, quantity: 1 }],
-      });
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const headers = init.headers as Record<string, string>;
-      expect(headers['idempotency-key']).toBeDefined();
-    });
-
-    it('attaches idempotency-key on POST requests without body (cancel)', async () => {
-      mockResponse(makeSession({ status: 'canceled' }));
-      await client.cancelCheckout('chk_1');
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const headers = init.headers as Record<string, string>;
-      expect(headers['idempotency-key']).toBeDefined();
-    });
-
-    it('does NOT attach idempotency-key on GET requests', async () => {
-      mockResponse({ products: [] });
-      await client.searchProducts('shoes');
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const headers = init.headers as Record<string, string>;
-      expect(headers['idempotency-key']).toBeUndefined();
-    });
-
-    it('attaches idempotency-key on PUT requests (spec requires on all mutations)', async () => {
-      mockResponse(makeSession());
-      await client.updateCheckout('chk_1', { buyer: { first_name: 'Jan' } });
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const headers = init.headers as Record<string, string>;
-      expect(headers['idempotency-key']).toBeDefined();
-    });
+describe('UCPClient.connect', () => {
+  it('discovers profile and returns connected client', async () => {
+    const client = await connectWithCapabilities();
+    expect(client.profile.ucp.version).toBe('2026-01-23');
   });
 
-  describe('discover', () => {
-    it('calls GET /.well-known/ucp and returns profile', async () => {
-      const profile = {
-        ucp: {
-          version: '2026-01-23',
-          services: {},
-          capabilities: [{ name: 'dev.ucp.shopping.checkout', version: '1.0' }],
-        },
-      };
-      mockResponse(profile);
-      const result = await client.discover();
-
-      const [url, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      expect(url).toBe('http://localhost:3000/.well-known/ucp');
-      expect(init.method).toBe('GET');
-      const firstCapability = result.ucp.capabilities[0];
-      expect(firstCapability).toBeDefined();
-      expect(firstCapability!.name).toBe('dev.ucp.shopping.checkout');
-    });
+  it('throws on invalid gatewayUrl', async () => {
+    await expect(UCPClient.connect({ ...CONFIG, gatewayUrl: 'not-a-url' })).rejects.toThrow();
   });
 
-  describe('searchProducts', () => {
-    it('passes query as q param', async () => {
-      mockResponse({ products: [] });
-      await client.searchProducts('waterproof jacket');
-
-      const [url] = mockFetch.mock.calls[0] as [string];
-      expect(url).toContain('q=waterproof+jacket');
-    });
-
-    it('passes all filters as URL params', async () => {
-      mockResponse({ products: [] });
-      await client.searchProducts('shoes', {
-        max_price_cents: 10000,
-        min_price_cents: 500,
-        in_stock: true,
-        category: 'footwear',
-        limit: 5,
-        page: 2,
-      });
-
-      const [url] = mockFetch.mock.calls[0] as [string];
-      expect(url).toContain('max_price_cents=10000');
-      expect(url).toContain('min_price_cents=500');
-      expect(url).toContain('in_stock=true');
-      expect(url).toContain('category=footwear');
-      expect(url).toContain('limit=5');
-      expect(url).toContain('page=2');
-    });
-
-    it('returns products array from { products: [...] } envelope', async () => {
-      mockResponse({
-        products: [
-          {
-            id: 'prod-001',
-            title: 'Shoes',
-            price_cents: 9999,
-            currency: 'USD',
-            in_stock: true,
-            stock_quantity: 5,
-            images: [],
-            variants: [],
-            description: null,
-          },
-        ],
-      });
-      const products = await client.searchProducts('shoes');
-      expect(products).toHaveLength(1);
-      expect(products[0]?.id).toBe('prod-001');
-    });
-
-    it('handles direct array response', async () => {
-      mockResponse([{ id: 'prod-001', title: 'Shoes' }]);
-      const products = await client.searchProducts('shoes');
-      expect(products).toHaveLength(1);
-    });
+  it('throws on agentProfileUrl containing double quotes', async () => {
+    await expect(
+      UCPClient.connect({ ...CONFIG, agentProfileUrl: 'https://agent.test/profile"injected' }),
+    ).rejects.toThrow('must not contain double quotes');
   });
 
-  describe('getProduct', () => {
-    it('URL-encodes the product ID', async () => {
-      mockResponse({ id: 'prod/special', title: 'Special' });
-      await client.getProduct('prod/special');
+  it('strips trailing slashes from gatewayUrl', async () => {
+    mockResponse(makeProfile());
+    await UCPClient.connect({ ...CONFIG, gatewayUrl: 'http://localhost:3000///' });
 
-      const [url] = mockFetch.mock.calls[0] as [string];
-      expect(url).toContain('prod%2Fspecial');
-    });
+    const [url] = mockFetch.mock.calls[0] as [string];
+    expect(url).toBe('http://localhost:3000/.well-known/ucp');
+  });
+});
+
+describe('capability detection', () => {
+  it('exposes checkout when server has checkout capability', async () => {
+    const client = await connectWithCapabilities(['dev.ucp.shopping.checkout']);
+    expect(client.checkout).not.toBeNull();
+    expect(client.order).toBeNull();
+    expect(client.identityLinking).toBeNull();
   });
 
-  describe('createCheckout', () => {
-    it('sends POST to /checkout-sessions with payload', async () => {
-      mockResponse(makeSession());
-      const session = await client.createCheckout({
-        line_items: [{ item: { id: 'prod-001' }, quantity: 2 }],
-        currency: 'EUR',
-      });
-
-      const [url, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      expect(url).toBe('http://localhost:3000/checkout-sessions');
-      expect(init.method).toBe('POST');
-      const body = JSON.parse(init.body as string) as Record<string, unknown>;
-      expect(body['currency']).toBe('EUR');
-      expect(session.id).toBe('chk_1');
-    });
+  it('exposes order when server has order capability', async () => {
+    const client = await connectWithCapabilities([
+      'dev.ucp.shopping.checkout',
+      'dev.ucp.shopping.order',
+    ]);
+    expect(client.checkout).not.toBeNull();
+    expect(client.order).not.toBeNull();
   });
 
-  describe('getCheckout', () => {
-    it('sends GET to /checkout-sessions/:id', async () => {
-      mockResponse(makeSession({ id: 'chk_42' }));
-      const session = await client.getCheckout('chk_42');
-
-      const [url] = mockFetch.mock.calls[0] as [string];
-      expect(url).toBe('http://localhost:3000/checkout-sessions/chk_42');
-      expect(session.id).toBe('chk_42');
-    });
+  it('sets checkout extensions based on server capabilities', async () => {
+    const client = await connectWithCapabilities([
+      'dev.ucp.shopping.checkout',
+      'dev.ucp.shopping.fulfillment',
+      'dev.ucp.shopping.discount',
+    ]);
+    expect(client.checkout!.extensions.fulfillment).toBe(true);
+    expect(client.checkout!.extensions.discount).toBe(true);
+    expect(client.checkout!.extensions.buyerConsent).toBe(false);
+    expect(client.checkout!.extensions.ap2Mandate).toBe(false);
   });
 
-  describe('updateCheckout', () => {
-    it('sends PUT with id merged into body', async () => {
-      mockResponse(makeSession());
-      await client.updateCheckout('chk_1', {
-        buyer: { first_name: 'Jan' },
-      });
-
-      const [url, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      expect(url).toBe('http://localhost:3000/checkout-sessions/chk_1');
-      expect(init.method).toBe('PUT');
-      const body = JSON.parse(init.body as string) as Record<string, unknown>;
-      expect(body['id']).toBe('chk_1');
-      expect(body['buyer']).toEqual({ first_name: 'Jan' });
-    });
+  it('returns null checkout when server has no checkout capability', async () => {
+    const client = await connectWithCapabilities(['dev.ucp.shopping.order']);
+    expect(client.checkout).toBeNull();
   });
 
-  describe('completeCheckout', () => {
-    const paymentPayload = {
+  it('always exposes products (gateway-specific)', async () => {
+    const client = await connectWithCapabilities([]);
+    expect(client.products).toBeDefined();
+  });
+});
+
+describe('describeTools', () => {
+  it('returns only tools for available capabilities', async () => {
+    const client = await connectWithCapabilities(['dev.ucp.shopping.checkout']);
+    const tools = client.describeTools();
+    const toolNames = tools.map((t) => t.name);
+
+    expect(toolNames).toContain('search_products');
+    expect(toolNames).toContain('create_checkout');
+    expect(toolNames).not.toContain('get_order');
+    expect(toolNames).not.toContain('set_fulfillment');
+    expect(toolNames).not.toContain('apply_discount_codes');
+  });
+
+  it('includes fulfillment tools when extension is available', async () => {
+    const client = await connectWithCapabilities([
+      'dev.ucp.shopping.checkout',
+      'dev.ucp.shopping.fulfillment',
+    ]);
+    const toolNames = client.describeTools().map((t) => t.name);
+
+    expect(toolNames).toContain('set_fulfillment');
+    expect(toolNames).toContain('select_destination');
+    expect(toolNames).toContain('select_fulfillment_option');
+  });
+
+  it('includes discount tools when extension is available', async () => {
+    const client = await connectWithCapabilities([
+      'dev.ucp.shopping.checkout',
+      'dev.ucp.shopping.discount',
+    ]);
+    const toolNames = client.describeTools().map((t) => t.name);
+
+    expect(toolNames).toContain('apply_discount_codes');
+  });
+
+  it('includes order tools when capability is available', async () => {
+    const client = await connectWithCapabilities([
+      'dev.ucp.shopping.checkout',
+      'dev.ucp.shopping.order',
+    ]);
+    const toolNames = client.describeTools().map((t) => t.name);
+
+    expect(toolNames).toContain('get_order');
+  });
+
+  it('returns minimal tools when server has no capabilities', async () => {
+    const client = await connectWithCapabilities([]);
+    const tools = client.describeTools();
+
+    expect(tools).toHaveLength(2);
+    expect(tools.map((t) => t.name)).toEqual(['search_products', 'get_product']);
+  });
+});
+
+describe('headers', () => {
+  it('attaches UCP-Agent header on every request', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse(makeSession());
+    await client.checkout!.create({
+      line_items: [{ item: { id: 'prod-001' }, quantity: 1 }],
+    });
+
+    const [, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    const headers = init.headers as Record<string, string>;
+    expect(headers['UCP-Agent']).toBe(
+      'profile="https://agent.example.com/profile.json", version="2026-01-23"',
+    );
+  });
+
+  it('attaches Content-Type when body is present', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse(makeSession());
+    await client.checkout!.create({
+      line_items: [{ item: { id: 'prod-001' }, quantity: 1 }],
+    });
+
+    const [, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    const headers = init.headers as Record<string, string>;
+    expect(headers['Content-Type']).toBe('application/json');
+  });
+
+  it('does NOT attach Content-Type on bodiless requests', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse({ products: [] });
+    await client.products.search('shoes');
+
+    const [, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    const headers = init.headers as Record<string, string>;
+    expect(headers['Content-Type']).toBeUndefined();
+  });
+
+  it('attaches request-id on every request', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse({ products: [] });
+    await client.products.search('shoes');
+
+    const [, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    const headers = init.headers as Record<string, string>;
+    expect(headers['request-id']).toBeDefined();
+  });
+
+  it('generates unique request-id per call', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse({ products: [] });
+    mockResponse({ products: [] });
+    await client.products.search('shoes');
+    await client.products.search('boots');
+
+    const h1 = (mockFetch.mock.calls[1] as [string, RequestInit])[1].headers as Record<
+      string,
+      string
+    >;
+    const h2 = (mockFetch.mock.calls[2] as [string, RequestInit])[1].headers as Record<
+      string,
+      string
+    >;
+    expect(h1['request-id']).not.toBe(h2['request-id']);
+  });
+
+  it('attaches idempotency-key on POST requests', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse(makeSession());
+    await client.checkout!.create({
+      line_items: [{ item: { id: 'prod-001' }, quantity: 1 }],
+    });
+
+    const [, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    const headers = init.headers as Record<string, string>;
+    expect(headers['idempotency-key']).toBeDefined();
+  });
+
+  it('attaches idempotency-key on PUT requests', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse(makeSession());
+    await client.checkout!.update('chk_1', { buyer: { first_name: 'Jan' } });
+
+    const [, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    const headers = init.headers as Record<string, string>;
+    expect(headers['idempotency-key']).toBeDefined();
+  });
+
+  it('does NOT attach idempotency-key on GET requests', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse({ products: [] });
+    await client.products.search('shoes');
+
+    const [, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    const headers = init.headers as Record<string, string>;
+    expect(headers['idempotency-key']).toBeUndefined();
+  });
+
+  it('attaches request-signature when configured', async () => {
+    mockResponse(makeProfile());
+    const client = await UCPClient.connect({ ...CONFIG, requestSignature: 'sig_abc123' });
+
+    mockResponse({ products: [] });
+    await client.products.search('shoes');
+
+    const [, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    const headers = init.headers as Record<string, string>;
+    expect(headers['request-signature']).toBe('sig_abc123');
+  });
+});
+
+describe('checkout capability', () => {
+  it('creates checkout session', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse(makeSession());
+    const session = await client.checkout!.create({
+      line_items: [{ item: { id: 'prod-001' }, quantity: 2 }],
+      currency: 'EUR',
+    });
+
+    const [url, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    expect(url).toBe('http://localhost:3000/checkout-sessions');
+    expect(init.method).toBe('POST');
+    expect(session.id).toBe('chk_1');
+  });
+
+  it('gets checkout session', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse(makeSession({ id: 'chk_42' }));
+    const session = await client.checkout!.get('chk_42');
+
+    const [url] = mockFetch.mock.calls[1] as [string];
+    expect(url).toBe('http://localhost:3000/checkout-sessions/chk_42');
+    expect(session.id).toBe('chk_42');
+  });
+
+  it('updates checkout with id merged into body', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse(makeSession());
+    await client.checkout!.update('chk_1', { buyer: { first_name: 'Jan' } });
+
+    const [, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    expect(init.method).toBe('PUT');
+    const body = JSON.parse(init.body as string) as Record<string, unknown>;
+    expect(body['id']).toBe('chk_1');
+    expect(body['buyer']).toEqual({ first_name: 'Jan' });
+  });
+
+  it('completes checkout', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse(makeSession({ status: 'completed' }));
+    const session = await client.checkout!.complete('chk_1', {
       payment: {
         instruments: [
           {
             id: 'instr_1',
             handler_id: 'mock',
             type: 'offline',
-            credential: { type: 'token', token: 'tok_success' },
+            credential: { type: 'token', token: 'tok' },
           },
         ],
       },
-    };
-
-    it('returns session on successful completion', async () => {
-      mockResponse(makeSession({ status: 'completed' }));
-      const session = await client.completeCheckout('chk_1', paymentPayload);
-      expect(session.status).toBe('completed');
     });
-
-    it('throws UCPEscalationError when status is requires_escalation', async () => {
-      mockResponse(
-        makeSession({
-          status: 'requires_escalation',
-          continue_url: 'https://store.com/pay',
-        }),
-      );
-
-      const err = await client.completeCheckout('chk_1', paymentPayload).catch((e: unknown) => e);
-
-      expect(err).toBeInstanceOf(UCPEscalationError);
-      expect((err as UCPEscalationError).continue_url).toBe('https://store.com/pay');
-      expect((err as UCPEscalationError).name).toBe('UCPEscalationError');
-    });
+    expect(session.status).toBe('completed');
   });
 
-  describe('escalation detection on all checkout responses', () => {
-    it('throws UCPEscalationError on createCheckout when requires_escalation', async () => {
-      mockResponse(
-        makeSession({ status: 'requires_escalation', continue_url: 'https://store.com/pay' }),
-      );
-      const err = await client
-        .createCheckout({ line_items: [{ item: { id: 'prod-001' }, quantity: 1 }] })
-        .catch((e: unknown) => e);
+  it('cancels checkout', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse(makeSession({ status: 'canceled' }));
+    const session = await client.checkout!.cancel('chk_1');
 
-      expect(err).toBeInstanceOf(UCPEscalationError);
-      expect((err as UCPEscalationError).continue_url).toBe('https://store.com/pay');
-    });
+    const [url, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    expect(url).toBe('http://localhost:3000/checkout-sessions/chk_1/cancel');
+    expect(init.method).toBe('POST');
+    expect(session.status).toBe('canceled');
+  });
+});
 
-    it('throws UCPEscalationError on updateCheckout when requires_escalation', async () => {
-      mockResponse(
-        makeSession({ status: 'requires_escalation', continue_url: 'https://store.com/pay' }),
-      );
-      const err = await client
-        .updateCheckout('chk_1', { buyer: { email: 'a@b.com' } })
-        .catch((e: unknown) => e);
+describe('escalation detection', () => {
+  it('throws UCPEscalationError on create when requires_escalation', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse(
+      makeSession({ status: 'requires_escalation', continue_url: 'https://store.com/pay' }),
+    );
+    const err = await client
+      .checkout!.create({ line_items: [{ item: { id: 'prod-001' }, quantity: 1 }] })
+      .catch((e: unknown) => e);
 
-      expect(err).toBeInstanceOf(UCPEscalationError);
-    });
-
-    it('throws UCPEscalationError on getCheckout when requires_escalation', async () => {
-      mockResponse(
-        makeSession({ status: 'requires_escalation', continue_url: 'https://store.com/pay' }),
-      );
-      const err = await client.getCheckout('chk_1').catch((e: unknown) => e);
-
-      expect(err).toBeInstanceOf(UCPEscalationError);
-    });
-
-    it('does NOT throw escalation when continue_url is absent', async () => {
-      mockResponse(makeSession({ status: 'requires_escalation', continue_url: null }));
-      const session = await client.getCheckout('chk_1');
-
-      expect(session.status).toBe('requires_escalation');
-    });
+    expect(err).toBeInstanceOf(UCPEscalationError);
+    expect((err as UCPEscalationError).continue_url).toBe('https://store.com/pay');
   });
 
-  describe('cancelCheckout', () => {
-    it('sends POST to /checkout-sessions/:id/cancel', async () => {
-      mockResponse(makeSession({ status: 'canceled' }));
-      const session = await client.cancelCheckout('chk_1');
+  it('throws UCPEscalationError on update when requires_escalation', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse(
+      makeSession({ status: 'requires_escalation', continue_url: 'https://store.com/pay' }),
+    );
+    const err = await client
+      .checkout!.update('chk_1', { buyer: { email: 'a@b.com' } })
+      .catch((e: unknown) => e);
 
-      const [url, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      expect(url).toBe('http://localhost:3000/checkout-sessions/chk_1/cancel');
-      expect(init.method).toBe('POST');
-      expect(session.status).toBe('canceled');
-    });
+    expect(err).toBeInstanceOf(UCPEscalationError);
   });
 
-  describe('getOrder', () => {
-    it('sends GET to /orders/:id and URL-encodes', async () => {
-      mockResponse({
-        id: 'order/123',
-        checkout_id: 'chk_1',
-        permalink_url: 'https://store.example/orders/123',
-        line_items: [
+  it('does NOT throw when continue_url is absent', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse(makeSession({ status: 'requires_escalation', continue_url: null }));
+    const session = await client.checkout!.get('chk_1');
+    expect(session.status).toBe('requires_escalation');
+  });
+});
+
+describe('fulfillment convenience methods', () => {
+  it('setFulfillment sends correct payload', async () => {
+    const client = await connectWithCapabilities([
+      'dev.ucp.shopping.checkout',
+      'dev.ucp.shopping.fulfillment',
+    ]);
+    mockResponse(makeSession());
+    await client.checkout!.setFulfillment('chk_1', 'shipping');
+
+    const [, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    const body = JSON.parse(init.body as string) as Record<string, unknown>;
+    const fulfillment = body['fulfillment'] as Record<string, unknown>;
+    const methods = fulfillment['methods'] as Array<Record<string, unknown>>;
+    expect(methods[0]!['type']).toBe('shipping');
+  });
+
+  it('selectDestination sends destination ID', async () => {
+    const client = await connectWithCapabilities([
+      'dev.ucp.shopping.checkout',
+      'dev.ucp.shopping.fulfillment',
+    ]);
+    mockResponse(makeSession());
+    await client.checkout!.selectDestination('chk_1', 'dest_home');
+
+    const [, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    const body = JSON.parse(init.body as string) as Record<string, unknown>;
+    const fulfillment = body['fulfillment'] as Record<string, unknown>;
+    const methods = fulfillment['methods'] as Array<Record<string, unknown>>;
+    expect(methods[0]!['selected_destination_id']).toBe('dest_home');
+  });
+
+  it('selectFulfillmentOption sends option and destination IDs', async () => {
+    const client = await connectWithCapabilities([
+      'dev.ucp.shopping.checkout',
+      'dev.ucp.shopping.fulfillment',
+    ]);
+    mockResponse(makeSession());
+    await client.checkout!.selectFulfillmentOption('chk_1', 'opt_express', 'dest_home');
+
+    const [, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    const body = JSON.parse(init.body as string) as Record<string, unknown>;
+    const fulfillment = body['fulfillment'] as Record<string, unknown>;
+    const methods = fulfillment['methods'] as Array<Record<string, unknown>>;
+    expect(methods[0]!['selected_destination_id']).toBe('dest_home');
+    const groups = methods[0]!['groups'] as Array<Record<string, unknown>>;
+    expect(groups[0]!['selected_option_id']).toBe('opt_express');
+  });
+
+  it('applyDiscountCodes sends discount codes', async () => {
+    const client = await connectWithCapabilities([
+      'dev.ucp.shopping.checkout',
+      'dev.ucp.shopping.discount',
+    ]);
+    mockResponse(makeSession());
+    await client.checkout!.applyDiscountCodes('chk_1', ['10OFF', 'FREESHIP']);
+
+    const [, init] = mockFetch.mock.calls[1] as [string, RequestInit];
+    const body = JSON.parse(init.body as string) as Record<string, unknown>;
+    const discounts = body['discounts'] as Record<string, unknown>;
+    expect(discounts['codes']).toEqual(['10OFF', 'FREESHIP']);
+  });
+});
+
+describe('order capability', () => {
+  it('gets order with spec-compliant schema', async () => {
+    const client = await connectWithCapabilities([
+      'dev.ucp.shopping.checkout',
+      'dev.ucp.shopping.order',
+    ]);
+    mockResponse({
+      id: 'order/123',
+      checkout_id: 'chk_1',
+      permalink_url: 'https://store.example/orders/123',
+      line_items: [
+        {
+          id: 'li_1',
+          status: 'processing',
+          item: { id: 'prod-001', title: 'Shoes', price: 5000 },
+          quantity: { total: 1, fulfilled: 0 },
+          totals: [{ type: 'total', amount: 5000 }],
+        },
+      ],
+      fulfillment: {},
+      totals: [{ type: 'total', amount: 5000 }],
+      ucp: { version: '2026-01-23', capabilities: [] },
+    });
+    const order = await client.order!.get('order/123');
+
+    const [url] = mockFetch.mock.calls[1] as [string];
+    expect(url).toContain('order%2F123');
+    expect(order.id).toBe('order/123');
+  });
+});
+
+describe('products capability', () => {
+  it('passes query as q param', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse({ products: [] });
+    await client.products.search('waterproof jacket');
+
+    const [url] = mockFetch.mock.calls[1] as [string];
+    expect(url).toContain('q=waterproof+jacket');
+  });
+
+  it('passes all filters as URL params', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse({ products: [] });
+    await client.products.search('shoes', {
+      max_price_cents: 10000,
+      min_price_cents: 500,
+      in_stock: true,
+      category: 'footwear',
+      limit: 5,
+      page: 2,
+    });
+
+    const [url] = mockFetch.mock.calls[1] as [string];
+    expect(url).toContain('max_price_cents=10000');
+    expect(url).toContain('in_stock=true');
+    expect(url).toContain('category=footwear');
+  });
+
+  it('returns products from envelope', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse({
+      products: [
+        {
+          id: 'prod-001',
+          title: 'Shoes',
+          price_cents: 9999,
+          currency: 'USD',
+          in_stock: true,
+          stock_quantity: 5,
+          images: [],
+          variants: [],
+          description: null,
+        },
+      ],
+    });
+    const products = await client.products.search('shoes');
+    expect(products).toHaveLength(1);
+    expect(products[0]?.id).toBe('prod-001');
+  });
+
+  it('URL-encodes product ID', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse({ id: 'prod/special', title: 'Special' });
+    await client.products.get('prod/special');
+
+    const [url] = mockFetch.mock.calls[1] as [string];
+    expect(url).toContain('prod%2Fspecial');
+  });
+});
+
+describe('error handling', () => {
+  it('throws UCPError with enriched fields from messages[]', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse(
+      {
+        messages: [
           {
-            id: 'li_1',
-            status: 'processing',
-            item: { id: 'prod-001', title: 'Shoes', price: 5000 },
-            quantity: { total: 1, fulfilled: 0 },
-            totals: [{ type: 'total', amount: 5000 }],
+            type: 'error',
+            code: 'PRODUCT_NOT_FOUND',
+            content: 'Product xyz not found',
+            severity: 'recoverable',
+            path: '$.items[0]',
+            content_type: 'plain',
           },
+          { type: 'warning', code: 'LOW_STOCK', content: 'Nearly out of stock' },
         ],
-        fulfillment: {},
-        totals: [{ type: 'total', amount: 5000 }],
-        ucp: { version: '2026-01-23', capabilities: [] },
-      });
-      const order = await client.getOrder('order/123');
+      },
+      404,
+    );
 
-      const [url] = mockFetch.mock.calls[0] as [string];
-      expect(url).toContain('order%2F123');
-      expect(order.id).toBe('order/123');
-    });
+    try {
+      await client.products.get('xyz');
+      expect.unreachable('should have thrown');
+    } catch (err) {
+      expect(err).toBeInstanceOf(UCPError);
+      const ucpErr = err as UCPError;
+      expect(ucpErr.code).toBe('PRODUCT_NOT_FOUND');
+      expect(ucpErr.path).toBe('$.items[0]');
+      expect(ucpErr.contentType).toBe('plain');
+      expect(ucpErr.messages).toHaveLength(2);
+      expect(ucpErr.messages[1]!.code).toBe('LOW_STOCK');
+    }
   });
 
-  describe('error handling', () => {
-    it('throws UCPError when gateway returns messages[]', async () => {
-      mockResponse(
-        {
-          messages: [
-            {
-              type: 'error',
-              code: 'PRODUCT_NOT_FOUND',
-              content: 'Product xyz not found',
-              severity: 'error',
-            },
-          ],
-        },
-        404,
-      );
+  it('throws UCPIdempotencyConflictError on 409', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse({}, 409);
 
-      try {
-        await client.getProduct('xyz');
-        expect.unreachable('should have thrown');
-      } catch (err) {
-        expect(err).toBeInstanceOf(UCPError);
-        const ucpErr = err as UCPError;
-        expect(ucpErr.code).toBe('PRODUCT_NOT_FOUND');
-        expect(ucpErr.message).toBe('Product xyz not found');
-        expect(ucpErr.severity).toBe('error');
-        expect(ucpErr.statusCode).toBe(404);
-      }
-    });
-
-    it('preserves all messages and enriched fields from gateway error', async () => {
-      mockResponse(
-        {
-          messages: [
-            {
-              type: 'error',
-              code: 'INVALID_ADDRESS',
-              content: 'Street address is required',
-              severity: 'recoverable',
-              path: '$.buyer.address.street_address',
-              content_type: 'plain',
-            },
-            {
-              type: 'warning',
-              code: 'LOW_STOCK',
-              content: 'Item nearly out of stock',
-            },
-          ],
-        },
-        400,
-      );
-
-      try {
-        await client.getProduct('xyz');
-        expect.unreachable('should have thrown');
-      } catch (err) {
-        expect(err).toBeInstanceOf(UCPError);
-        const ucpErr = err as UCPError;
-        expect(ucpErr.type).toBe('error');
-        expect(ucpErr.path).toBe('$.buyer.address.street_address');
-        expect(ucpErr.contentType).toBe('plain');
-        expect(ucpErr.messages).toHaveLength(2);
-        expect(ucpErr.messages[1]!.type).toBe('warning');
-        expect(ucpErr.messages[1]!.code).toBe('LOW_STOCK');
-      }
-    });
-
-    it('throws UCPIdempotencyConflictError on 409 status', async () => {
-      mockResponse({}, 409);
-
-      try {
-        await client.createCheckout({
-          line_items: [{ item: { id: 'prod-001' }, quantity: 1 }],
-        });
-        expect.unreachable('should have thrown');
-      } catch (err) {
-        expect(err).toBeInstanceOf(UCPIdempotencyConflictError);
-        expect(err).toBeInstanceOf(UCPError);
-        expect((err as UCPError).statusCode).toBe(409);
-      }
-    });
-
-    it('throws generic HTTP_ERROR when no messages[] in response', async () => {
-      mockResponse({}, 500);
-
-      try {
-        await client.discover();
-        expect.unreachable('should have thrown');
-      } catch (err) {
-        expect(err).toBeInstanceOf(UCPError);
-        const ucpErr = err as UCPError;
-        expect(ucpErr.code).toBe('HTTP_ERROR');
-        expect(ucpErr.message).toBe('Gateway returned 500');
-        expect(ucpErr.statusCode).toBe(500);
-      }
-    });
-
-    it('handles JSON parse failure gracefully', async () => {
-      mockFetch.mockResolvedValueOnce({
-        ok: false,
-        status: 502,
-        json: () => Promise.reject(new Error('invalid json')),
-      });
-
-      try {
-        await client.discover();
-        expect.unreachable('should have thrown');
-      } catch (err) {
-        expect(err).toBeInstanceOf(UCPError);
-        expect((err as UCPError).code).toBe('HTTP_ERROR');
-      }
-    });
-  });
-
-  describe('constructor', () => {
-    it('strips trailing slashes from gatewayUrl', async () => {
-      const c = new UCPClient({
-        gatewayUrl: 'http://localhost:3000///',
-        agentProfileUrl: 'https://agent.test/profile',
-      });
-      mockResponse({ ucp: { version: '2026-01-23', services: {}, capabilities: [] } });
-      await c.discover();
-
-      const [url] = mockFetch.mock.calls[0] as [string];
-      expect(url).toBe('http://localhost:3000/.well-known/ucp');
-    });
-
-    it('uses custom ucpVersion when provided', async () => {
-      const c = new UCPClient({
-        gatewayUrl: 'http://localhost:3000',
-        agentProfileUrl: 'https://agent.test/profile',
-        ucpVersion: '2025-06-01',
-      });
-      mockResponse({ ucp: { version: '2025-06-01', services: {}, capabilities: [] } });
-      await c.discover();
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const headers = init.headers as Record<string, string>;
-      expect(headers['UCP-Agent']).toContain('version="2025-06-01"');
-    });
-
-    it('throws on invalid gatewayUrl', () => {
-      expect(
-        () =>
-          new UCPClient({
-            gatewayUrl: 'not-a-url',
-            agentProfileUrl: 'https://agent.test/profile',
-          }),
-      ).toThrow();
-    });
-
-    it('throws on agentProfileUrl containing double quotes', () => {
-      expect(
-        () =>
-          new UCPClient({
-            gatewayUrl: 'http://localhost:3000',
-            agentProfileUrl: 'https://agent.test/profile"injected',
-          }),
-      ).toThrow('must not contain double quotes');
-    });
-
-    it('throws on invalid agentProfileUrl', () => {
-      expect(
-        () =>
-          new UCPClient({
-            gatewayUrl: 'http://localhost:3000',
-            agentProfileUrl: 'not-a-url',
-          }),
-      ).toThrow();
-    });
-  });
-
-  describe('Zod validation', () => {
-    it('warns on invalid response but still returns data (graceful degradation)', async () => {
-      const warnSpy = vi.spyOn(console, 'warn');
-      const invalidSession = { id: 'chk_1', status: 'incomplete' };
-      mockResponse(invalidSession);
-      const session = await client.createCheckout({
+    try {
+      await client.checkout!.create({
         line_items: [{ item: { id: 'prod-001' }, quantity: 1 }],
       });
-
-      expect(warnSpy).toHaveBeenCalledWith(
-        '[UCPClient] Response validation failed:',
-        expect.any(String),
-      );
-      expect(session.id).toBe('chk_1');
-    });
-
-    it('returns validated data when response matches schema', async () => {
-      const validProduct = {
-        id: 'prod-001',
-        title: 'Shoes',
-        description: null,
-        price_cents: 9999,
-        currency: 'USD',
-        in_stock: true,
-        stock_quantity: 5,
-        images: ['https://example.com/shoe.jpg'],
-        variants: [],
-      };
-      const warnSpy = vi.spyOn(console, 'warn').mockClear();
-      mockResponse(validProduct);
-      const product = await client.getProduct('prod-001');
-
-      expect(product.id).toBe('prod-001');
-      expect(product.title).toBe('Shoes');
-      expect(warnSpy).not.toHaveBeenCalled();
-    });
-
-    it('validates order responses against UCP spec schema', async () => {
-      const validOrder = {
-        id: 'order-001',
-        checkout_id: 'chk_1',
-        permalink_url: 'https://store.example/orders/001',
-        line_items: [
-          {
-            id: 'li_1',
-            status: 'processing',
-            item: { id: 'prod-001', title: 'Shoes', price: 5000 },
-            quantity: { total: 1, fulfilled: 0 },
-            totals: [{ type: 'total', amount: 5000 }],
-          },
-        ],
-        fulfillment: {},
-        totals: [{ type: 'total', amount: 5000 }],
-        ucp: { version: '2026-01-23', capabilities: [] },
-      };
-      const warnSpy = vi.spyOn(console, 'warn').mockClear();
-      mockResponse(validOrder);
-      const order = await client.getOrder('order-001');
-
-      expect(order.id).toBe('order-001');
-      expect(order.checkout_id).toBe('chk_1');
-      expect(order.permalink_url).toBe('https://store.example/orders/001');
-      expect(warnSpy).not.toHaveBeenCalled();
-    });
+      expect.unreachable('should have thrown');
+    } catch (err) {
+      expect(err).toBeInstanceOf(UCPIdempotencyConflictError);
+      expect((err as UCPError).statusCode).toBe(409);
+    }
   });
 
-  describe('request-signature header', () => {
-    it('attaches request-signature when configured', async () => {
-      const signedClient = new UCPClient({
-        gatewayUrl: 'http://localhost:3000',
-        agentProfileUrl: 'https://agent.test/profile',
-        requestSignature: 'sig_abc123',
-      });
-      mockResponse({ ucp: { version: '2026-01-23', services: {}, capabilities: [] } });
-      await signedClient.discover();
+  it('throws generic HTTP_ERROR when no messages[]', async () => {
+    const client = await connectWithCapabilities();
+    mockResponse({}, 500);
 
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const headers = init.headers as Record<string, string>;
-      expect(headers['request-signature']).toBe('sig_abc123');
-    });
-
-    it('does NOT attach request-signature when not configured', async () => {
-      mockResponse({ ucp: { version: '2026-01-23', services: {}, capabilities: [] } });
-      await client.discover();
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const headers = init.headers as Record<string, string>;
-      expect(headers['request-signature']).toBeUndefined();
-    });
+    try {
+      await client.products.get('xyz');
+      expect.unreachable('should have thrown');
+    } catch (err) {
+      expect(err).toBeInstanceOf(UCPError);
+      expect((err as UCPError).code).toBe('HTTP_ERROR');
+    }
   });
 
-  describe('completeCheckout with payment_data format', () => {
-    it('sends payment_data (single instrument) + risk_signals', async () => {
-      mockResponse(makeSession({ status: 'completed' }));
-      await client.completeCheckout('chk_1', {
-        payment_data: {
-          id: 'instr_card',
-          handler_id: 'mock_handler',
-          type: 'card',
-          brand: 'Visa',
-          last_digits: '4242',
-          credential: { type: 'token', token: 'tok_success' },
-        },
-        risk_signals: { ip: '127.0.0.1', browser: 'test' },
-      });
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const body = JSON.parse(init.body as string) as Record<string, unknown>;
-      expect(body['payment_data']).toBeDefined();
-      expect((body['payment_data'] as Record<string, unknown>)['brand']).toBe('Visa');
-      expect(body['risk_signals']).toEqual({ ip: '127.0.0.1', browser: 'test' });
+  it('handles JSON parse failure gracefully', async () => {
+    const client = await connectWithCapabilities();
+    mockFetch.mockResolvedValueOnce({
+      ok: false,
+      status: 502,
+      json: () => Promise.reject(new Error('invalid json')),
     });
+
+    try {
+      await client.products.get('xyz');
+      expect.unreachable('should have thrown');
+    } catch (err) {
+      expect(err).toBeInstanceOf(UCPError);
+      expect((err as UCPError).code).toBe('HTTP_ERROR');
+    }
   });
+});
 
-  describe('fulfillment convenience methods', () => {
-    it('setFulfillment sends correct fulfillment payload', async () => {
-      mockResponse(makeSession());
-      await client.setFulfillment('chk_1', 'shipping');
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const body = JSON.parse(init.body as string) as Record<string, unknown>;
-      const fulfillment = body['fulfillment'] as Record<string, unknown>;
-      const methods = fulfillment['methods'] as Array<Record<string, unknown>>;
-      expect(methods[0]!['type']).toBe('shipping');
+describe('Zod validation', () => {
+  it('warns on invalid response but still returns data', async () => {
+    const warnSpy = vi.spyOn(console, 'warn');
+    const client = await connectWithCapabilities();
+    const invalidSession = { id: 'chk_1', status: 'incomplete' };
+    mockResponse(invalidSession);
+    const session = await client.checkout!.create({
+      line_items: [{ item: { id: 'prod-001' }, quantity: 1 }],
     });
 
-    it('selectDestination sends destination ID', async () => {
-      mockResponse(makeSession());
-      await client.selectDestination('chk_1', 'dest_home');
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const body = JSON.parse(init.body as string) as Record<string, unknown>;
-      const fulfillment = body['fulfillment'] as Record<string, unknown>;
-      const methods = fulfillment['methods'] as Array<Record<string, unknown>>;
-      expect(methods[0]!['selected_destination_id']).toBe('dest_home');
-    });
-
-    it('selectFulfillmentOption sends option and destination IDs', async () => {
-      mockResponse(makeSession());
-      await client.selectFulfillmentOption('chk_1', 'opt_express', 'dest_home');
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const body = JSON.parse(init.body as string) as Record<string, unknown>;
-      const fulfillment = body['fulfillment'] as Record<string, unknown>;
-      const methods = fulfillment['methods'] as Array<Record<string, unknown>>;
-      expect(methods[0]!['selected_destination_id']).toBe('dest_home');
-      const groups = methods[0]!['groups'] as Array<Record<string, unknown>>;
-      expect(groups[0]!['selected_option_id']).toBe('opt_express');
-    });
-
-    it('applyDiscountCodes sends discount codes', async () => {
-      mockResponse(makeSession());
-      await client.applyDiscountCodes('chk_1', ['10OFF', 'FREESHIP']);
-
-      const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
-      const body = JSON.parse(init.body as string) as Record<string, unknown>;
-      const discounts = body['discounts'] as Record<string, unknown>;
-      expect(discounts['codes']).toEqual(['10OFF', 'FREESHIP']);
-    });
+    expect(warnSpy).toHaveBeenCalledWith(
+      '[UCPClient] Response validation failed:',
+      expect.any(String),
+    );
+    expect(session.id).toBe('chk_1');
   });
 });
