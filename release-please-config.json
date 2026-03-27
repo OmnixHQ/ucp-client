@@ -2,7 +2,7 @@
   "packages": {
     ".": {
       "release-type": "node",
-      "package-name": "@omnix/ucp-client",
+      "package-name": "@omnixhq/ucp-client",
       "include-component-in-tag": false,
       "changelog-sections": [
         { "type": "feat", "section": "Features" },

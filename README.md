@@ -1,6 +1,6 @@
-# @omnix/ucp-client
+# @omnixhq/ucp-client
 
-[![npm version](https://img.shields.io/npm/v/@omnix/ucp-client.svg)](https://www.npmjs.com/package/@omnix/ucp-client)
+[![npm version](https://img.shields.io/npm/v/@omnixhq/ucp-client.svg)](https://www.npmjs.com/package/@omnixhq/ucp-client)
 [![CI](https://github.com/OmnixHQ/ucp-client/actions/workflows/ci.yml/badge.svg)](https://github.com/OmnixHQ/ucp-client/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4+-blue.svg)](https://www.typescriptlang.org/)
@@ -12,19 +12,19 @@ TypeScript client that connects to any [UCP](https://ucp.dev)-compliant server, 
 
 Every AI agent that wants to buy something from a UCP store needs to discover capabilities, construct headers, handle idempotency, parse errors, manage escalation. That's a lot of boilerplate.
 
-`@omnix/ucp-client` handles all of it. You connect, get tools, give them to the LLM — and the LLM orchestrates the checkout flow on its own.
+`@omnixhq/ucp-client` handles all of it. You connect, get tools, give them to the LLM — and the LLM orchestrates the checkout flow on its own.
 
 ## Install
 
 ```bash
-npm install @omnix/ucp-client
+npm install @omnixhq/ucp-client
 ```
 
 ## Quick Start
 
 ```typescript
 import Anthropic from '@anthropic-ai/sdk';
-import { UCPClient } from '@omnix/ucp-client';
+import { UCPClient } from '@omnixhq/ucp-client';
 
 // Connect to any UCP server — discovers capabilities automatically
 const client = await UCPClient.connect({
@@ -84,7 +84,7 @@ Each tool returned by `getAgentTools()` has: `name`, `description`, `parameters`
 ## Error handling
 
 ```typescript
-import { UCPError, UCPEscalationError } from '@omnix/ucp-client';
+import { UCPError, UCPEscalationError } from '@omnixhq/ucp-client';
 
 try {
   await client.checkout.complete(sessionId, payload);

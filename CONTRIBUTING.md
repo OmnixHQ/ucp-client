@@ -1,4 +1,4 @@
-# Contributing to @omnix/ucp-client
+# Contributing to @omnixhq/ucp-client
 
 Thank you for your interest in contributing! This document explains how to get started.
 
