@@ -3,6 +3,12 @@ name: Release
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      publish_only:
+        description: 'Publish current main to npm without creating a release'
+        required: false
+        default: 'true'
 
 permissions:
   contents: write
@@ -10,6 +16,7 @@ permissions:
 
 jobs:
   release-please:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
@@ -24,8 +31,12 @@ jobs:
           token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
 
   publish:
-    needs: release-please
-    if: ${{ needs.release-please.outputs.release_created }}
+    needs: [release-please]
+    if: |
+      always() && (
+        (github.event_name == 'push' && needs.release-please.outputs.release_created == 'true') ||
+        github.event_name == 'workflow_dispatch'
+      )
     runs-on: ubuntu-latest
     permissions:
       contents: read
