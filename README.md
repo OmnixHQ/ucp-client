@@ -1,6 +1,6 @@
 # @getmomentumtoday/ucp-client
 
-Capability-aware TypeScript client for the [UCP Gateway](https://github.com/GetMomentumToday/ucp-gateway).
+Capability-aware TypeScript client for any [UCP](https://ucp.dev)-compliant server.
 
 Connects to a UCP server, discovers what it supports, and exposes only the available tools to your agent.
 
