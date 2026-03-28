@@ -101,6 +101,15 @@ src/
   schemas.ts            — Zod schemas (SDK re-exports)
   index.ts              — Public API surface
 
+examples/
+  basic-checkout.ts          — Connect, search, create checkout, complete
+  capability-detection.ts    — Show what a UCP server supports
+  anthropic-agent-loop.ts    — Full agent loop with Anthropic Claude
+  openai-agent-loop.ts       — Full agent loop with OpenAI
+  langchain-agent.ts         — LangChain agent with DynamicStructuredTool
+  vercel-ai-nextjs.ts        — Next.js App Router route handler with streamText
+  mcp-server.ts              — Expose UCP tools as an MCP server
+
 scripts/
   mock-ucp-server.ts         — Spec-compliant local UCP server for testing
   agent-demo.ts              — End-to-end Claude agent demo (Anthropic SDK)
