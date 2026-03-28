@@ -1,6 +1,11 @@
 import { describe, it, expect } from 'vitest';
 import type { AgentTool } from '../agent-tools.js';
-import { UCPError, UCPEscalationError, UCPIdempotencyConflictError } from '../errors.js';
+import {
+  UCPError,
+  UCPEscalationError,
+  UCPIdempotencyConflictError,
+  UCPOAuthError,
+} from '../errors.js';
 import { toOpenAITools, executeOpenAIToolCall } from './openai.js';
 import { toAnthropicTools, executeAnthropicToolCall } from './anthropic.js';
 import { toVercelAITools } from './vercel-ai.js';
@@ -21,6 +26,7 @@ const escalationTool = makeTool(() =>
   Promise.reject(new UCPEscalationError('https://pay.example.com')),
 );
 const idempotencyTool = makeTool(() => Promise.reject(new UCPIdempotencyConflictError()));
+const oauthErrorTool = makeTool(() => Promise.reject(new UCPOAuthError('Token expired', 401)));
 const genericErrorTool = makeTool(() => Promise.reject(new Error('Network timeout')));
 const unknownErrorTool = makeTool(() => Promise.reject('raw string error'));
 const successTool = makeTool(() => Promise.resolve({ ok: true }));
@@ -58,14 +64,31 @@ describe('executeOpenAIToolCall catchErrors', () => {
     expect(result).toEqual({ requires_escalation: true, continue_url: 'https://pay.example.com' });
   });
 
-  it('returns { error: "Duplicate request" } for UCPIdempotencyConflictError', async () => {
+  it('returns { error } for UCPIdempotencyConflictError with code and message', async () => {
     const result = await executeOpenAIToolCall(
       [idempotencyTool],
       'test_tool',
       {},
       { catchErrors: true },
     );
-    expect(result).toEqual({ error: 'Duplicate request' });
+    expect(result).toEqual({
+      error: 'IDEMPOTENCY_CONFLICT: Idempotency key reused with different request body',
+    });
+  });
+
+  it('returns { error } for UCPOAuthError with statusCode and message', async () => {
+    const result = await executeOpenAIToolCall(
+      [oauthErrorTool],
+      'test_tool',
+      {},
+      { catchErrors: true },
+    );
+    expect(result).toEqual({ error: 'OAuth error (401): Token expired' });
+  });
+
+  it('returns { error } for tool-not-found when catchErrors is true', async () => {
+    const result = await executeOpenAIToolCall([], 'missing_tool', {}, { catchErrors: true });
+    expect(result).toEqual({ error: 'Tool not found: missing_tool' });
   });
 
   it('returns { error } for generic Error', async () => {
@@ -109,6 +132,11 @@ describe('executeAnthropicToolCall catchErrors', () => {
     expect(result).toEqual({ requires_escalation: true, continue_url: 'https://pay.example.com' });
   });
 
+  it('returns { error } for tool-not-found when catchErrors is true', async () => {
+    const result = await executeAnthropicToolCall([], 'missing_tool', {}, { catchErrors: true });
+    expect(result).toEqual({ error: 'Tool not found: missing_tool' });
+  });
+
   it('still throws by default', async () => {
     await expect(executeAnthropicToolCall([ucpErrorTool], 'test_tool', {})).rejects.toThrow();
   });
@@ -130,6 +158,11 @@ describe('executeMCPToolCall catchErrors', () => {
       { catchErrors: true },
     );
     expect(result).toEqual({ error: 'raw string error' });
+  });
+
+  it('returns { error } for tool-not-found when catchErrors is true', async () => {
+    const result = await executeMCPToolCall([], 'missing_tool', {}, { catchErrors: true });
+    expect(result).toEqual({ error: 'Tool not found: missing_tool' });
   });
 
   it('still throws by default', async () => {

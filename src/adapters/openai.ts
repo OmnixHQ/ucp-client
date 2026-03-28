@@ -16,6 +16,7 @@ export interface OpenAITool {
 
 export function toOpenAITools(
   agentTools: readonly AgentTool[],
+  // accepted for API symmetry with executeOpenAIToolCall; catchErrors only applies at call time
   _options?: AdapterOptions,
 ): readonly OpenAITool[] {
   return agentTools.map((tool) => ({
@@ -34,9 +35,9 @@ export async function executeOpenAIToolCall(
   toolInput: Record<string, unknown>,
   options?: AdapterOptions,
 ): Promise<unknown> {
-  const tool = agentTools.find((t) => t.name === toolName);
-  if (!tool) {
-    throw new Error(`Tool not found: ${toolName}`);
-  }
-  return safeExecute(() => tool.execute(toolInput), options?.catchErrors ?? false);
+  return safeExecute(() => {
+    const tool = agentTools.find((t) => t.name === toolName);
+    if (!tool) throw new Error(`Tool not found: ${toolName}`);
+    return tool.execute(toolInput);
+  }, options?.catchErrors ?? false);
 }

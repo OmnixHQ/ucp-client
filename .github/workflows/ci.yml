@@ -47,6 +47,9 @@ jobs:
       - name: Validate package
         run: npm run check:publish
 
+      - name: Check for descriptive comments
+        run: bash scripts/no-descriptive-comments.sh
+
       - name: Run tests with coverage
         run: npm run test:coverage
 

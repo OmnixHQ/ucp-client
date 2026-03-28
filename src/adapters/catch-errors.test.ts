@@ -1,6 +1,11 @@
 import { describe, it, expect } from 'vitest';
 import { formatToolError } from './catch-errors.js';
-import { UCPError, UCPEscalationError, UCPIdempotencyConflictError } from '../errors.js';
+import {
+  UCPError,
+  UCPEscalationError,
+  UCPIdempotencyConflictError,
+  UCPOAuthError,
+} from '../errors.js';
 
 describe('formatToolError', () => {
   it('formats UCPError as { error: "[code]: message" }', () => {
@@ -16,9 +21,16 @@ describe('formatToolError', () => {
     });
   });
 
-  it('formats UCPIdempotencyConflictError as { error: "Duplicate request" }', () => {
+  it('formats UCPIdempotencyConflictError via UCPError branch with code and message', () => {
     const err = new UCPIdempotencyConflictError();
-    expect(formatToolError(err)).toEqual({ error: 'Duplicate request' });
+    expect(formatToolError(err)).toEqual({
+      error: 'IDEMPOTENCY_CONFLICT: Idempotency key reused with different request body',
+    });
+  });
+
+  it('formats UCPOAuthError with statusCode and message', () => {
+    const err = new UCPOAuthError('Token exchange failed', 401);
+    expect(formatToolError(err)).toEqual({ error: 'OAuth error (401): Token exchange failed' });
   });
 
   it('formats plain Error as { error: message }', () => {

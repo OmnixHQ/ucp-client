@@ -1,4 +1,4 @@
-import { UCPError, UCPEscalationError, UCPIdempotencyConflictError } from '../errors.js';
+import { UCPError, UCPEscalationError, UCPOAuthError } from '../errors.js';
 
 export interface AdapterOptions {
   readonly catchErrors?: boolean;
@@ -12,11 +12,13 @@ export function formatToolError(err: unknown): ToolErrorResult {
   if (err instanceof UCPEscalationError) {
     return { requires_escalation: true, continue_url: err.continue_url };
   }
-  if (err instanceof UCPIdempotencyConflictError) {
-    return { error: 'Duplicate request' };
-  }
+  // UCPIdempotencyConflictError extends UCPError — handled by the branch below
   if (err instanceof UCPError) {
     return { error: `${err.code}: ${err.message}` };
+  }
+  // OAuth errors carry statusCode but no UCP code — surface both for actionability
+  if (err instanceof UCPOAuthError) {
+    return { error: `OAuth error (${err.statusCode}): ${err.message}` };
   }
   if (err instanceof Error) {
     return { error: err.message };
