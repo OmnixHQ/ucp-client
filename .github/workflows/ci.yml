@@ -89,3 +89,6 @@ jobs:
 
       - name: Run integration test
         run: npm run test:e2e
+
+      - name: Run adapter catchErrors integration tests
+        run: INTEGRATION=true GATEWAY_URL=http://localhost:3002 npx vitest run tests/adapters-catcherrors.test.ts
