@@ -142,13 +142,13 @@ console.log(Object.keys(client.paymentHandlers));
 
 Ready-made adapters convert `getAgentTools()` output to each framework's native format — no manual mapping.
 
-| Framework | Import | Example |
-|---|---|---|
+| Framework         | Import                           | Example                                                                |
+| ----------------- | -------------------------------- | ---------------------------------------------------------------------- |
 | **Anthropic SDK** | `@omnixhq/ucp-client` (built-in) | [examples/anthropic-agent-loop.ts](./examples/anthropic-agent-loop.ts) |
-| **OpenAI SDK** | `@omnixhq/ucp-client/openai` | [examples/openai-agent-loop.ts](./examples/openai-agent-loop.ts) |
-| **Vercel AI SDK** | `@omnixhq/ucp-client/vercel-ai` | [examples/vercel-ai-nextjs.ts](./examples/vercel-ai-nextjs.ts) |
-| **LangChain** | `@omnixhq/ucp-client/langchain` | [examples/langchain-agent.ts](./examples/langchain-agent.ts) |
-| **MCP server** | `@omnixhq/ucp-client/mcp` | [examples/mcp-server.ts](./examples/mcp-server.ts) |
+| **OpenAI SDK**    | `@omnixhq/ucp-client/openai`     | [examples/openai-agent-loop.ts](./examples/openai-agent-loop.ts)       |
+| **Vercel AI SDK** | `@omnixhq/ucp-client/vercel-ai`  | [examples/vercel-ai-nextjs.ts](./examples/vercel-ai-nextjs.ts)         |
+| **LangChain**     | `@omnixhq/ucp-client/langchain`  | [examples/langchain-agent.ts](./examples/langchain-agent.ts)           |
+| **MCP server**    | `@omnixhq/ucp-client/mcp`        | [examples/mcp-server.ts](./examples/mcp-server.ts)                     |
 
 **OpenAI:**
 
@@ -161,7 +161,11 @@ const tools = toOpenAITools(client.getAgentTools());
 const response = await openai.chat.completions.create({ model: 'gpt-4o', tools, messages });
 
 for (const call of response.choices[0].message.tool_calls ?? []) {
-  const result = await executeOpenAIToolCall(agentTools, call.function.name, JSON.parse(call.function.arguments));
+  const result = await executeOpenAIToolCall(
+    agentTools,
+    call.function.name,
+    JSON.parse(call.function.arguments),
+  );
 }
 ```
 
@@ -194,7 +198,13 @@ import { z } from 'zod';
 const rawTools = toLangChainTools(client.getAgentTools());
 
 const tools = rawTools.map(
-  (t) => new DynamicStructuredTool({ name: t.name, description: t.description, schema: z.object({}), func: t.call }),
+  (t) =>
+    new DynamicStructuredTool({
+      name: t.name,
+      description: t.description,
+      schema: z.object({}),
+      func: t.call,
+    }),
 );
 ```
 
@@ -210,9 +220,14 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
 }));
 
 server.setRequestHandler(CallToolRequestSchema, async (req) => ({
-  content: [{ type: 'text', text: JSON.stringify(
-    await executeMCPToolCall(agentTools, req.params.name, req.params.arguments ?? {})
-  )}],
+  content: [
+    {
+      type: 'text',
+      text: JSON.stringify(
+        await executeMCPToolCall(agentTools, req.params.name, req.params.arguments ?? {}),
+      ),
+    },
+  ],
 }));
 ```
 

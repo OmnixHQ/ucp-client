@@ -37,7 +37,11 @@ while (true) {
       block.name,
       block.input as Record<string, unknown>,
     );
-    toolResults.push({ type: 'tool_result', tool_use_id: block.id, content: JSON.stringify(result) });
+    toolResults.push({
+      type: 'tool_result',
+      tool_use_id: block.id,
+      content: JSON.stringify(result),
+    });
   }
 
   messages.push({ role: 'user', content: toolResults });

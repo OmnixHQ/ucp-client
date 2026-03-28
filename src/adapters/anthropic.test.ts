@@ -58,14 +58,14 @@ describe('executeAnthropicToolCall', () => {
   });
 
   it('throws when the tool name is not found', async () => {
-    await expect(
-      executeAnthropicToolCall(mockTools, 'unknown_tool', {}),
-    ).rejects.toThrow('Tool not found: unknown_tool');
+    await expect(executeAnthropicToolCall(mockTools, 'unknown_tool', {})).rejects.toThrow(
+      'Tool not found: unknown_tool',
+    );
   });
 
   it('propagates errors from execute', async () => {
-    await expect(
-      executeAnthropicToolCall(mockTools, 'failing_tool', {}),
-    ).rejects.toThrow('execution failed');
+    await expect(executeAnthropicToolCall(mockTools, 'failing_tool', {})).rejects.toThrow(
+      'execution failed',
+    );
   });
 });

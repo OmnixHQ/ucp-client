@@ -1,9 +1,6 @@
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import {
-  CallToolRequestSchema,
-  ListToolsRequestSchema,
-} from '@modelcontextprotocol/sdk/types.js';
+import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
 import { UCPClient } from '@omnixhq/ucp-client';
 import { getAgentTools } from '@omnixhq/ucp-client/agent-tools';
 import { toMCPTools, executeMCPToolCall } from '@omnixhq/ucp-client/mcp';

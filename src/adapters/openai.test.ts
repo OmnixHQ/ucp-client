@@ -57,14 +57,14 @@ describe('executeOpenAIToolCall', () => {
   });
 
   it('throws when the tool name is not found', async () => {
-    await expect(
-      executeOpenAIToolCall(mockTools, 'unknown_tool', {}),
-    ).rejects.toThrow('Tool not found: unknown_tool');
+    await expect(executeOpenAIToolCall(mockTools, 'unknown_tool', {})).rejects.toThrow(
+      'Tool not found: unknown_tool',
+    );
   });
 
   it('propagates errors from execute', async () => {
-    await expect(
-      executeOpenAIToolCall(mockTools, 'failing_tool', {}),
-    ).rejects.toThrow('execution failed');
+    await expect(executeOpenAIToolCall(mockTools, 'failing_tool', {})).rejects.toThrow(
+      'execution failed',
+    );
   });
 });
