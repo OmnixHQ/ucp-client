@@ -47,6 +47,9 @@ jobs:
       - name: Validate package
         run: npm run check:publish
 
+      - name: Check API surface
+        run: npm run check:api
+
       - name: Check for descriptive comments
         run: bash scripts/no-descriptive-comments.sh
 
