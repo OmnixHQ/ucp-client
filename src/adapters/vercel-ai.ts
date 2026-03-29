@@ -3,19 +3,19 @@ import { type AdapterOptions, safeExecute } from './catch-errors.js';
 
 export type { AgentTool, JsonSchema };
 
-// Minimal Standard Schema v1 interface (https://standardschema.dev) — no external deps.
-// Vercel AI SDK detects { '~standard' } to recognise a schema, and reads { jsonSchema }
-// to extract the raw JSON schema it sends to the LLM.
-interface StandardSchemaV1 {
+// Minimal Standard Schema v1 + JSON Schema v1 interfaces (https://standardschema.dev).
+// Vercel AI SDK's FlexibleSchema requires both StandardSchemaV1 (validate) and
+// StandardJSONSchemaV1 (jsonSchema converter) — no external deps needed.
+export interface VercelAISchema {
   readonly '~standard': {
     readonly version: 1;
     readonly vendor: string;
-    readonly validate: (value: unknown) => { readonly value: unknown };
+    readonly validate: (value: unknown) => { readonly value: unknown; readonly issues?: undefined };
+    readonly jsonSchema: {
+      readonly input: (options: { readonly target: string }) => Record<string, unknown>;
+      readonly output: (options: { readonly target: string }) => Record<string, unknown>;
+    };
   };
-}
-
-export interface VercelAISchema extends StandardSchemaV1 {
-  readonly jsonSchema: JsonSchema;
 }
 
 export interface VercelAIToolDefinition {
@@ -31,10 +31,12 @@ function wrapSchema(schema: JsonSchema): VercelAISchema {
     '~standard': {
       version: 1,
       vendor: 'ucp-client',
-      // pass-through — AI SDK validates via its own tool call parsing
       validate: (value) => ({ value }),
+      jsonSchema: {
+        input: () => schema as unknown as Record<string, unknown>,
+        output: () => schema as unknown as Record<string, unknown>,
+      },
     },
-    jsonSchema: schema,
   };
 }
 

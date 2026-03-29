@@ -72,13 +72,16 @@ describe('Vercel AI adapter types', () => {
     }>();
   });
 
-  it('VercelAISchema carries jsonSchema and ~standard', () => {
+  it('VercelAISchema carries ~standard with embedded jsonSchema', () => {
     expectTypeOf<VercelAISchema>().toMatchTypeOf<{
-      readonly jsonSchema: JsonSchema;
       readonly '~standard': {
         readonly version: 1;
         readonly vendor: string;
         readonly validate: (value: unknown) => { readonly value: unknown };
+        readonly jsonSchema: {
+          readonly input: (options: { readonly target: string }) => Record<string, unknown>;
+          readonly output: (options: { readonly target: string }) => Record<string, unknown>;
+        };
       };
     }>();
   });
