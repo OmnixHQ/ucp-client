@@ -19,7 +19,9 @@ function makeProfile(capabilities: string[] = ['dev.ucp.shopping.checkout']) {
     ucp: {
       version: '2026-01-23',
       services: {},
-      capabilities: capabilities.map((name) => ({ name, version: '2026-01-23' })),
+      capabilities: Object.fromEntries(
+        capabilities.map((name) => [name, [{ version: '2026-01-23' }]]),
+      ),
     },
   };
 }
@@ -471,7 +473,7 @@ describe('order capability', () => {
       ],
       fulfillment: {},
       totals: [{ type: 'total', amount: 5000 }],
-      ucp: { version: '2026-01-23', capabilities: [] },
+      ucp: { version: '2026-01-23', capabilities: {} },
     });
     const order = await client.order!.get('order/123');
 

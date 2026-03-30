@@ -171,43 +171,46 @@ const UCP_PROFILE = {
   ucp: {
     version: UCP_VERSION,
     services: {
-      'dev.ucp.shopping': {
-        version: UCP_VERSION,
-        spec: 'https://ucp.dev/specification/reference',
-        rest: {
+      'dev.ucp.shopping': [
+        {
+          version: UCP_VERSION,
+          spec: 'https://ucp.dev/specification/reference',
           schema: 'https://ucp.dev/services/shopping/rest.openapi.json',
-          endpoint: `http://localhost:${PORT}`,
         },
-      },
+      ],
     },
-    capabilities: [
-      {
-        name: 'dev.ucp.shopping.checkout',
-        version: UCP_VERSION,
-        spec: 'https://ucp.dev/specification/checkout',
-        schema: 'https://ucp.dev/schemas/shopping/checkout.json',
-      },
-      {
-        name: 'dev.ucp.shopping.fulfillment',
-        version: UCP_VERSION,
-        spec: 'https://ucp.dev/specification/fulfillment',
-        schema: 'https://ucp.dev/schemas/shopping/fulfillment.json',
-        extends: 'dev.ucp.shopping.checkout',
-      },
-      {
-        name: 'dev.ucp.shopping.discount',
-        version: UCP_VERSION,
-        spec: 'https://ucp.dev/specification/discount',
-        schema: 'https://ucp.dev/schemas/shopping/discount.json',
-        extends: 'dev.ucp.shopping.checkout',
-      },
-      {
-        name: 'dev.ucp.shopping.order',
-        version: UCP_VERSION,
-        spec: 'https://ucp.dev/specification/order',
-        schema: 'https://ucp.dev/schemas/shopping/order.json',
-      },
-    ],
+    capabilities: {
+      'dev.ucp.shopping.checkout': [
+        {
+          version: UCP_VERSION,
+          spec: 'https://ucp.dev/specification/checkout',
+          schema: 'https://ucp.dev/schemas/shopping/checkout.json',
+        },
+      ],
+      'dev.ucp.shopping.fulfillment': [
+        {
+          version: UCP_VERSION,
+          spec: 'https://ucp.dev/specification/fulfillment',
+          schema: 'https://ucp.dev/schemas/shopping/fulfillment.json',
+          extends: 'dev.ucp.shopping.checkout',
+        },
+      ],
+      'dev.ucp.shopping.discount': [
+        {
+          version: UCP_VERSION,
+          spec: 'https://ucp.dev/specification/discount',
+          schema: 'https://ucp.dev/schemas/shopping/discount.json',
+          extends: 'dev.ucp.shopping.checkout',
+        },
+      ],
+      'dev.ucp.shopping.order': [
+        {
+          version: UCP_VERSION,
+          spec: 'https://ucp.dev/specification/order',
+          schema: 'https://ucp.dev/schemas/shopping/order.json',
+        },
+      ],
+    },
   },
   // Spec-compliant: namespace-keyed map at top level (not array under payment.handlers)
   payment_handlers: {
@@ -251,11 +254,11 @@ function sessionToResponse(session: Session): object {
     ],
     ucp: {
       version: UCP_VERSION,
-      capabilities: [
-        { name: 'dev.ucp.shopping.checkout', version: UCP_VERSION },
-        { name: 'dev.ucp.shopping.fulfillment', version: UCP_VERSION },
-        { name: 'dev.ucp.shopping.discount', version: UCP_VERSION },
-      ],
+      capabilities: {
+        'dev.ucp.shopping.checkout': [{ version: UCP_VERSION }],
+        'dev.ucp.shopping.fulfillment': [{ version: UCP_VERSION }],
+        'dev.ucp.shopping.discount': [{ version: UCP_VERSION }],
+      },
     },
   };
 

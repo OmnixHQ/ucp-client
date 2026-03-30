@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { UcpDiscoveryProfile } from '@ucp-js/sdk';
+import type { UcpDiscoveryProfile } from '@omnixhq/ucp-js-sdk';
 import { HttpClient } from './http.js';
 import type { LogFn } from './http.js';
 import { UCPProfileSchema } from './schemas.js';
@@ -136,10 +136,8 @@ function validateConfig(config: UCPClientConfig): void {
 
 function extractCapabilityNames(profile: UCPProfile): Set<string> {
   const capabilities = profile.ucp?.capabilities;
-  if (!Array.isArray(capabilities)) return new Set();
-  return new Set(
-    capabilities.map((c: { name?: string }) => c.name).filter((n): n is string => n !== undefined),
-  );
+  if (typeof capabilities !== 'object' || capabilities === null) return new Set();
+  return new Set(Object.keys(capabilities));
 }
 
 const PaymentHandlerInstanceSchema = z

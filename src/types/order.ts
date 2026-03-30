@@ -1,4 +1,4 @@
-import type { Order } from '@ucp-js/sdk';
+import type { Order } from '@omnixhq/ucp-js-sdk';
 
 export type UCPSpecOrder = Order;
 

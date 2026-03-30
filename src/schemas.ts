@@ -25,7 +25,7 @@ import {
 
   // Order
   OrderSchema,
-} from '@ucp-js/sdk';
+} from '@omnixhq/ucp-js-sdk';
 
 // ─── Response validation ────────────────────────────────────────────────────
 // Used internally by UCPClient to validate gateway responses.

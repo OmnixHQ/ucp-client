@@ -223,6 +223,7 @@ describe('SDK sub-entity schemas are importable and functional', () => {
       type: 'error',
       code: 'OUT_OF_STOCK',
       content: 'Product is out of stock',
+      severity: 'recoverable',
     });
     expect(result.success).toBe(true);
   });
@@ -252,7 +253,7 @@ describe('SDK sub-entity schemas are importable and functional', () => {
     const result = ItemResponseSchema.safeParse({
       id: 'item-001',
       title: 'Shoes',
-      price: 49.99,
+      price: 4999,
     });
     expect(result.success).toBe(true);
   });
@@ -260,7 +261,7 @@ describe('SDK sub-entity schemas are importable and functional', () => {
   it('LineItemResponseSchema validates line items', () => {
     const result = LineItemResponseSchema.safeParse({
       id: 'li-001',
-      item: { id: 'item-001', title: 'Shoes', price: 49.99 },
+      item: { id: 'item-001', title: 'Shoes', price: 4999 },
       quantity: 2,
       totals: [],
     });
@@ -271,7 +272,7 @@ describe('SDK sub-entity schemas are importable and functional', () => {
     const result = PaymentHandlerResponseSchema.safeParse({
       id: 'handler_mock',
       name: 'Mock Payment',
-      version: '1.0',
+      version: '2026-01-23',
       config: {},
       config_schema: '{}',
       instrument_schemas: [],
@@ -288,7 +289,7 @@ describe('SDK sub-entity schemas are importable and functional', () => {
       totals: [],
       fulfillment: {},
       permalink_url: 'https://store.com/orders/001',
-      ucp: { version: '2026-01-23', capabilities: [] },
+      ucp: { version: '2026-01-23', capabilities: {} },
     });
     expect(result.success).toBe(true);
   });

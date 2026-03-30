@@ -20,7 +20,9 @@ function makeProfile(capabilities: string[] = ['dev.ucp.shopping.checkout']) {
     ucp: {
       version: '2026-01-23',
       services: {},
-      capabilities: capabilities.map((name) => ({ name, version: '2026-01-23' })),
+      capabilities: Object.fromEntries(
+        capabilities.map((name) => [name, [{ version: '2026-01-23' }]]),
+      ),
     },
   };
 }
@@ -288,7 +290,7 @@ describe('AgentTool.execute', () => {
       line_items: [],
       fulfillment: {},
       totals: [],
-      ucp: { version: '2026-01-23', capabilities: [] },
+      ucp: { version: '2026-01-23', capabilities: {} },
     });
     const result = (await findTool('get_order').execute({ id: 'ord_1' })) as Record<
       string,
