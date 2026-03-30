@@ -167,7 +167,30 @@ if (client.checkout) {
 
 console.log(Object.keys(client.paymentHandlers));
 // e.g., ['com.google.pay', 'dev.shopify.shop_pay']
+
+client.signingKeys; // JWK[] — EC P-256 keys for webhook verification
 ```
+
+## Webhook signature verification
+
+UCP businesses sign webhook POST requests with a detached JWS in the `Request-Signature` header (RFC 7797). Use `verifyRequestSignature` to verify them against the signing keys from the discovery profile.
+
+```typescript
+import { UCPClient, verifyRequestSignature } from '@omnixhq/ucp-client';
+
+const client = await UCPClient.connect(config);
+
+// In your webhook handler:
+const valid = await verifyRequestSignature(
+  rawBody, // string — raw request body
+  req.headers['request-signature'], // string — detached JWS header
+  client.signingKeys, // JWK[] — from discovery profile
+);
+
+if (!valid) throw new Error('Invalid webhook signature');
+```
+
+See [examples/webhook-verification.ts](./examples/webhook-verification.ts) for a complete HTTP server example.
 
 ## Framework adapters
 
