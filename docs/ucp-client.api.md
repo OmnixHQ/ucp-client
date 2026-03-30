@@ -4453,6 +4453,9 @@ export const CreateCheckoutRequestSchema: z.ZodObject<{
     }>>;
 }, z.ZodTypeAny, "passthrough">>;
 
+// @public
+export function createWebhookVerifier(gatewayUrl: string): WebhookVerifier;
+
 // @public (undocumented)
 export const DEFAULT_UCP_VERSION = "2026-01-23";
 
@@ -4542,24 +4545,9 @@ export interface JsonSchema {
 }
 
 // @public
-export interface JWK {
-    // (undocumented)
-    readonly [key: string]: unknown;
-    // (undocumented)
-    readonly alg?: string;
-    // (undocumented)
-    readonly crv?: string;
-    // (undocumented)
+export type JWK = JsonWebKey & {
     readonly kid?: string;
-    // (undocumented)
-    readonly kty: string;
-    // (undocumented)
-    readonly use?: string;
-    // (undocumented)
-    readonly x?: string;
-    // (undocumented)
-    readonly y?: string;
-}
+};
 
 // @public (undocumented)
 export const JWKSchema: z.ZodObject<{
@@ -6544,9 +6532,14 @@ export interface WebhookEvent {
     readonly event_id: string;
 }
 
+// @public
+export interface WebhookVerifier {
+    readonly verify: (body: string, signature: string) => Promise<boolean>;
+}
+
 // Warnings were encountered during analysis:
 //
-// src/types/checkout.ts:26:36 - (ae-forgotten-export) The symbol "LogFn" needs to be exported by the entry point index.d.ts
+// src/types/checkout.ts:15:18 - (ae-forgotten-export) The symbol "LogFn" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

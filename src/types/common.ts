@@ -23,14 +23,9 @@ export interface LocalizationContext {
   readonly postal_code?: string;
 }
 
-/** A JSON Web Key (RFC 7517). Used for webhook signature verification. */
-export interface JWK {
-  readonly kty: string;
-  readonly kid?: string;
-  readonly use?: string;
-  readonly alg?: string;
-  readonly crv?: string;
-  readonly x?: string;
-  readonly y?: string;
-  readonly [key: string]: unknown;
-}
+/**
+ * A JSON Web Key (RFC 7517).
+ * Extends the TypeScript stdlib `JsonWebKey` with the `kid` claim required by UCP for webhook
+ * signature verification (the stdlib definition omits `kid`).
+ */
+export type JWK = JsonWebKey & { readonly kid?: string };

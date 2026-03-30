@@ -2,8 +2,9 @@
  * Webhook signature verification — verify incoming order event webhooks.
  *
  * UCP businesses sign webhook POST requests with a detached JWS in the
- * `Request-Signature` header (RFC 7797). The signing keys are published in
- * the UCP discovery profile under `signing_keys`.
+ * `Request-Signature` header (RFC 7797). `createWebhookVerifier` handles
+ * fetching the business's signing keys from their discovery profile and
+ * caching them, including automatic re-fetch for key rotation.
  *
  * Usage:
  *   npx tsx examples/webhook-verification.ts
@@ -12,29 +13,16 @@
  */
 
 import { createServer } from 'node:http';
-import { UCPClient, verifyRequestSignature } from '../src/index.js';
-import type { JWK } from '../src/index.js';
+import { createWebhookVerifier } from '../src/index.js';
 
 const GATEWAY_URL = process.env['GATEWAY_URL'] ?? 'http://localhost:3000';
-const AGENT_PROFILE = process.env['AGENT_PROFILE'] ?? 'https://agent.example.com/.well-known/ucp';
 const WEBHOOK_PORT = Number(process.env['WEBHOOK_PORT'] ?? '4000');
 
 async function main() {
-  // 1. Connect once at startup — signing keys come from the discovery profile
-  const client = await UCPClient.connect({
-    gatewayUrl: GATEWAY_URL,
-    agentProfileUrl: AGENT_PROFILE,
-  });
+  // Verifier lazily fetches signing keys from <GATEWAY_URL>/.well-known/ucp
+  // on first call and caches them by kid. Re-fetches on kid miss (key rotation).
+  const verifier = createWebhookVerifier(GATEWAY_URL);
 
-  const signingKeys: readonly JWK[] = client.signingKeys;
-  console.log(`Loaded ${signingKeys.length} signing key(s) from discovery profile`);
-  for (const key of signingKeys) {
-    console.log(
-      `  kid=${key.kid ?? '(none)'} alg=${key.alg ?? '(none)'} crv=${key.crv ?? '(none)'}`,
-    );
-  }
-
-  // 2. HTTP server that accepts incoming webhook POSTs and verifies each one
   const server = createServer((req, res) => {
     if (req.method !== 'POST') {
       res.writeHead(405).end();
@@ -54,7 +42,7 @@ async function main() {
           return;
         }
 
-        const valid = await verifyRequestSignature(rawBody, signatureHeader, signingKeys);
+        const valid = await verifier.verify(rawBody, signatureHeader);
 
         if (!valid) {
           console.warn('Rejected: invalid signature');
@@ -66,14 +54,15 @@ async function main() {
         const event = JSON.parse(rawBody) as Record<string, unknown>;
         console.log('Verified webhook event:', JSON.stringify(event, null, 2));
 
+        // MUST respond quickly with 2xx — process asynchronously
         res.writeHead(200).end('OK');
       })();
     });
   });
 
   server.listen(WEBHOOK_PORT, () => {
-    console.log(`\nWebhook receiver listening on http://localhost:${WEBHOOK_PORT}`);
-    console.log('POST a signed order event to this endpoint.\n');
+    console.log(`Webhook receiver listening on http://localhost:${WEBHOOK_PORT}`);
+    console.log(`Signing keys fetched from ${GATEWAY_URL}/.well-known/ucp on first request.\n`);
   });
 }
 
