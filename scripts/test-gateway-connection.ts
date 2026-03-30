@@ -33,7 +33,7 @@ async function main() {
   console.log('UCP Version:', client.profile.ucp.version);
   console.log(
     'Capabilities:',
-    client.profile.ucp.capabilities.map((c) => c.name),
+    Object.keys(client.profile.ucp.capabilities ?? {}),
   );
   console.log('');
 
