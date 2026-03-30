@@ -102,4 +102,78 @@ describe('parseWebhookEvent', () => {
     expect(err).toBeInstanceOf(UCPError);
     expect((err as UCPError).code).toBe('INVALID_WEBHOOK_PAYLOAD');
   });
+
+  it('throws UCPError when body is a JSON array', () => {
+    let err: unknown;
+    try {
+      parseWebhookEvent('[]');
+    } catch (e) {
+      err = e;
+    }
+    expect(err).toBeInstanceOf(UCPError);
+    expect((err as UCPError).code).toBe('INVALID_WEBHOOK_PAYLOAD');
+  });
+
+  it('throws UCPError when body is JSON null', () => {
+    let err: unknown;
+    try {
+      parseWebhookEvent('null');
+    } catch (e) {
+      err = e;
+    }
+    expect(err).toBeInstanceOf(UCPError);
+    expect((err as UCPError).code).toBe('INVALID_WEBHOOK_PAYLOAD');
+  });
+
+  it('throws UCPError when body is a JSON number', () => {
+    let err: unknown;
+    try {
+      parseWebhookEvent('42');
+    } catch (e) {
+      err = e;
+    }
+    expect(err).toBeInstanceOf(UCPError);
+    expect((err as UCPError).code).toBe('INVALID_WEBHOOK_PAYLOAD');
+  });
+
+  it('throws UCPError when body is an empty string', () => {
+    let err: unknown;
+    try {
+      parseWebhookEvent('');
+    } catch (e) {
+      err = e;
+    }
+    expect(err).toBeInstanceOf(UCPError);
+    expect((err as UCPError).code).toBe('INVALID_WEBHOOK_PAYLOAD');
+  });
+
+  it('throws UCPError when order.permalink_url is not a valid URL', () => {
+    const body = JSON.stringify({
+      ...VALID_EVENT,
+      order: { ...MINIMAL_ORDER, permalink_url: 'not-a-url' },
+    });
+    let err: unknown;
+    try {
+      parseWebhookEvent(body);
+    } catch (e) {
+      err = e;
+    }
+    expect(err).toBeInstanceOf(UCPError);
+    expect((err as UCPError).code).toBe('INVALID_WEBHOOK_PAYLOAD');
+  });
+
+  it('throws UCPError when order.ucp.version is not in YYYY-MM-DD format', () => {
+    const body = JSON.stringify({
+      ...VALID_EVENT,
+      order: { ...MINIMAL_ORDER, ucp: { version: '1.0' } },
+    });
+    let err: unknown;
+    try {
+      parseWebhookEvent(body);
+    } catch (e) {
+      err = e;
+    }
+    expect(err).toBeInstanceOf(UCPError);
+    expect((err as UCPError).code).toBe('INVALID_WEBHOOK_PAYLOAD');
+  });
 });
