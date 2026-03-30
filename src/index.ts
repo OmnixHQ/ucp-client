@@ -17,14 +17,11 @@ export type { UCPMessage, MessageType, MessageSeverity, ContentType } from './er
 export { CheckoutCapability } from './capabilities/checkout.js';
 export { OrderCapability } from './capabilities/order.js';
 export { IdentityLinkingCapability } from './capabilities/identity-linking.js';
-export { ProductsCapability } from './capabilities/products.js';
 
 export {
   // Gateway-specific schemas
   CheckoutSessionSchema,
   UCPProfileSchema,
-  UCPProductSchema,
-  UCPOrderSchema,
   CreateCheckoutRequestSchema,
   UpdateCheckoutRequestSchema,
   CompleteCheckoutRequestSchema,
@@ -161,7 +158,6 @@ export {
 
 export type {
   UCPClientConfig,
-  SearchFilters,
   PostalAddress,
   BuyerConsent,
   LocalizationContext,
@@ -178,7 +174,6 @@ export type {
   PaymentHandlerInstance,
   PaymentHandlerMap,
   UCPSpecOrder,
-  UCPOrder,
   WebhookEvent,
   OAuthServerMetadata,
   AuthorizationParams,
@@ -186,7 +181,6 @@ export type {
   TokenExchangeParams,
   TokenRefreshParams,
   TokenRevokeParams,
-  UCPProduct,
 } from './types/index.js';
 
 export { UCP_CAPABILITIES, DEFAULT_UCP_VERSION } from './types/config.js';

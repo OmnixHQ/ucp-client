@@ -61,14 +61,11 @@ async function connectWithCapabilities(capabilities: string[] = ['dev.ucp.shoppi
 }
 
 describe('getAgentTools', () => {
-  it('returns product tools for any server', async () => {
+  it('returns empty tools when no capabilities declared', async () => {
     const client = await connectWithCapabilities([]);
     const tools = client.getAgentTools();
-    const names = tools.map((t) => t.name);
 
-    expect(names).toContain('search_products');
-    expect(names).toContain('get_product');
-    expect(tools).toHaveLength(2);
+    expect(tools).toHaveLength(0);
   });
 
   it('returns checkout tools when checkout is available', async () => {
@@ -112,6 +109,7 @@ describe('getAgentTools', () => {
     const names = client.getAgentTools().map((t) => t.name);
 
     expect(names).toContain('get_order');
+    expect(names).toContain('update_order');
   });
 
   it('does NOT return fulfillment/discount/order tools when not available', async () => {
@@ -175,18 +173,6 @@ describe('AgentTool.execute', () => {
   function findTool(name: string): AgentTool {
     return tools.find((t) => t.name === name)!;
   }
-
-  it('search_products calls products.search', async () => {
-    mockResponse({ products: [{ id: 'p1', title: 'Shoes' }] });
-    const result = await findTool('search_products').execute({ query: 'shoes', limit: 5 });
-    expect(Array.isArray(result)).toBe(true);
-  });
-
-  it('get_product calls products.get', async () => {
-    mockResponse({ id: 'p1', title: 'Shoes' });
-    const result = (await findTool('get_product').execute({ id: 'p1' })) as Record<string, unknown>;
-    expect(result['id']).toBe('p1');
-  });
 
   it('create_checkout calls checkout.create', async () => {
     mockResponse(makeSession());
@@ -296,6 +282,23 @@ describe('AgentTool.execute', () => {
       string,
       unknown
     >;
+    expect(result['id']).toBe('ord_1');
+  });
+
+  it('update_order calls order.update', async () => {
+    mockResponse({
+      id: 'ord_1',
+      checkout_id: 'chk_1',
+      permalink_url: 'https://store.example/orders/1',
+      line_items: [],
+      fulfillment: {},
+      totals: [],
+      ucp: { version: '2026-01-23', capabilities: {} },
+    });
+    const result = (await findTool('update_order').execute({
+      id: 'ord_1',
+      fulfillment: {},
+    })) as Record<string, unknown>;
     expect(result['id']).toBe('ord_1');
   });
 });
