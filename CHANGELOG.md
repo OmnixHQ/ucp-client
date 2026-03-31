@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0](https://github.com/OmnixHQ/ucp-client/compare/v2.2.0...v2.3.0) (2026-03-31)
+
+
+### Features
+
+* add OrderCapability tests and align ucp-js-sdk to 1.0.2 ([#31](https://github.com/OmnixHQ/ucp-client/issues/31)) ([a83d9df](https://github.com/OmnixHQ/ucp-client/commit/a83d9dfdbf423dad40b19449867b31a007260ab3))
+
+
+### Maintenance
+
+* expand npm keywords for discoverability ([#33](https://github.com/OmnixHQ/ucp-client/issues/33)) ([6f95a35](https://github.com/OmnixHQ/ucp-client/commit/6f95a35f4f42c3c53e5663f0e9c60dcc04ce42d4))
+
 ## [2.2.0](https://github.com/OmnixHQ/ucp-client/compare/v2.1.0...v2.2.0) (2026-03-30)
 
 
