@@ -1,8 +1,10 @@
-import type { CheckoutResponse, CheckoutResponseStatus } from '@omnixhq/ucp-js-sdk';
+import type { z } from 'zod';
+import type { CheckoutResponseStatus } from '@omnixhq/ucp-js-sdk';
+import type { CheckoutSessionSchema } from '../schemas.js';
 import type { BuyerConsent, LocalizationContext } from './common.js';
 import type { PaymentInstrument } from './payment.js';
 
-export type CheckoutSession = CheckoutResponse;
+export type CheckoutSession = z.output<typeof CheckoutSessionSchema>;
 export type CheckoutSessionStatus = CheckoutResponseStatus;
 
 export interface CheckoutExtensions {

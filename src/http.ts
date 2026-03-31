@@ -87,11 +87,14 @@ export class HttpClient {
     return data;
   }
 
-  validate<T>(data: unknown, schema: ZodType<T>): T {
+  validate<Output, Def extends import('zod').ZodTypeDef, Input>(
+    data: unknown,
+    schema: ZodType<Output, Def, Input>,
+  ): Output {
     const result = schema.safeParse(data);
     if (!result.success) {
       this.onValidationWarning('[UCPClient] Response validation failed:', result.error.message);
-      return data as T;
+      return data as Output;
     }
     return result.data;
   }

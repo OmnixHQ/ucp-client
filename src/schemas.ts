@@ -76,7 +76,7 @@ import {
   PaymentIdentitySchema,
   PaymentInstrumentResponseSchema,
   CardCredentialSchema,
-  CardPaymentInstrumentSchema,
+  CardPaymentInstrumentAvailableCardPaymentInstrumentSchema as CardPaymentInstrumentSchema,
   TokenCredentialSchema,
 
   // ─── Payment Handler (roles) ────────────────────────────────────────────────
@@ -106,7 +106,7 @@ import {
   UcpResponseCheckoutSchema,
   UcpResponseOrderSchema,
   UcpVersionSchema,
-  UcpReverseDomainNameSchema,
+  ReverseDomainNameSchema as UcpReverseDomainNameSchema,
 
   // ─── Capability / Service ───────────────────────────────────────────────────
   CapabilityBaseSchema,

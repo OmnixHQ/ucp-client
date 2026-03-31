@@ -1,5 +1,9 @@
 export type MessageType = 'error' | 'warning' | 'info';
-export type MessageSeverity = 'recoverable' | 'requires_buyer_input' | 'requires_buyer_review';
+export type MessageSeverity =
+  | 'recoverable'
+  | 'requires_buyer_input'
+  | 'requires_buyer_review'
+  | 'unrecoverable';
 export type ContentType = 'plain' | 'markdown';
 
 /** A single message from the gateway's `messages[]` array. */

@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import type { UcpDiscoveryProfile } from '@omnixhq/ucp-js-sdk';
 import { HttpClient } from './http.js';
 import type { LogFn } from './http.js';
 import { UCPProfileSchema, JWKSchema } from './schemas.js';
@@ -16,7 +15,7 @@ import { getAgentTools } from './agent-tools.js';
 import type { AgentTool } from './agent-tools.js';
 
 /** UCP discovery profile returned by `GET /.well-known/ucp`. */
-export type UCPProfile = UcpDiscoveryProfile;
+export type UCPProfile = z.output<typeof UCPProfileSchema>;
 
 /** Describes a single tool the agent can use with the connected server. */
 export interface ToolDescriptor {

@@ -146,9 +146,7 @@ describe('Checkout (base) schemas', () => {
   });
 
   it('CheckoutUpdateRequestSchema', () => {
-    expect(CheckoutUpdateRequestSchema.safeParse({ id: 'chk_1', line_items: [] }).success).toBe(
-      true,
-    );
+    expect(CheckoutUpdateRequestSchema.safeParse({ line_items: [] }).success).toBe(true);
   });
 
   it('CheckoutCompleteRequestSchema', () => {
