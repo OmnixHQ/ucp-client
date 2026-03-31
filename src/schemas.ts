@@ -27,6 +27,7 @@ import {
   CheckoutCreateRequestSchema,
   CheckoutUpdateRequestSchema,
   CheckoutCompleteRequestSchema,
+  CheckoutStatusEnumSchema,
 
   // ─── AP2 Mandate ────────────────────────────────────────────────────────────
   Ap2MandateAp2WithCheckoutMandateSchema,
@@ -42,6 +43,7 @@ import {
   // ─── Discount ───────────────────────────────────────────────────────────────
   DiscountAllocationSchema,
   DiscountAppliedDiscountSchema,
+  DiscountAppliedDiscountMethodEnumSchema,
   DiscountDiscountsObjectSchema,
 
   // ─── Fulfillment (core) ─────────────────────────────────────────────────────
@@ -50,8 +52,10 @@ import {
   FulfillmentGroupSchema,
   FulfillmentMethodSchema,
   FulfillmentAvailableMethodSchema,
+  FulfillmentAvailableMethodTypeEnumSchema,
   FulfillmentDestinationSchema,
   FulfillmentEventSchema,
+  FulfillmentMethodTypeEnumSchema,
 
   // ─── Fulfillment (extension) ────────────────────────────────────────────────
   FulfillmentExtensionFulfillmentSchema,
@@ -71,13 +75,18 @@ import {
   FulfillmentGroupUpdateRequestSchema,
 
   // ─── Payment ────────────────────────────────────────────────────────────────
+  AmountSchema,
   PaymentSchema,
   PaymentCredentialSchema,
   PaymentIdentitySchema,
   PaymentInstrumentResponseSchema,
+  AvailablePaymentInstrumentSchema,
   CardCredentialSchema,
+  CardCredentialCardNumberTypeEnumSchema,
   CardPaymentInstrumentAvailableCardPaymentInstrumentSchema as CardPaymentInstrumentSchema,
   TokenCredentialSchema,
+  SignedAmountSchema,
+  TotalsSchema,
 
   // ─── Payment Handler (roles) ────────────────────────────────────────────────
   PaymentHandlerBaseSchema,
@@ -87,6 +96,7 @@ import {
   // ─── Order (sub-entities) ───────────────────────────────────────────────────
   OrderConfirmationSchema,
   OrderLineItemSchema,
+  OrderLineItemStatusEnumSchema,
   OrderUpdateSchema,
 
   // ─── Item / LineItem ────────────────────────────────────────────────────────
@@ -96,16 +106,64 @@ import {
 
   // ─── Message ────────────────────────────────────────────────────────────────
   MessageInfoSchema,
+  MessageInfoContentTypeEnumSchema,
   MessageWarningSchema,
+  MessageWarningContentTypeEnumSchema,
+  MessageErrorContentTypeEnumSchema,
+  MessageErrorSeverityEnumSchema,
+
+  // ─── Error handling ─────────────────────────────────────────────────────────
+  ErrorResponseSchema,
+  ErrorCodeSchema,
+  InputCorrelationSchema,
+
+  // ─── Catalog ────────────────────────────────────────────────────────────────
+  CatalogSearchSchema,
+  CatalogLookupSchema,
+  ProductSchema,
+  VariantSchema,
+  CategorySchema,
+  ProductOptionSchema,
+  OptionValueSchema,
+  SelectedOptionSchema,
+  MediaSchema,
+  DescriptionSchema,
+  RatingSchema,
+  PriceSchema,
+  PriceRangeSchema,
+  PriceFilterSchema,
+  PaginationSchema,
+  SearchFiltersSchema,
+  SignalsSchema,
+
+  // ─── Cart ───────────────────────────────────────────────────────────────────
+  CartSchema,
+  CartCreateRequestSchema,
+  CartUpdateRequestSchema,
+
+  // ─── Identity Linking ───────────────────────────────────────────────────────
+  IdentityLinkingBusinessSchema,
+  IdentityLinkingPlatformSchema,
+  IdentityLinkingOauth2Schema,
+  IdentityLinkingMechanismSchema,
+  IdentityLinkingIdentityScopesSchema,
 
   // ─── UCP protocol ───────────────────────────────────────────────────────────
   UcpBaseSchema,
+  UcpBaseStatusEnumSchema,
   UcpBusinessSchema,
   UcpPlatformSchema,
   UcpEntitySchema,
+  UcpRequiresSchema,
+  UcpResponseCartSchema,
+  UcpResponseCatalogSchema,
   UcpResponseCheckoutSchema,
   UcpResponseOrderSchema,
   UcpVersionSchema,
+  UcpVersionConstraintSchema,
+  UcpSigningKeySchema,
+  UcpDiscoveryBusinessProfileSchema,
+  UcpDiscoveryPlatformProfileSchema,
   ReverseDomainNameSchema as UcpReverseDomainNameSchema,
 
   // ─── Capability / Service ───────────────────────────────────────────────────
@@ -114,17 +172,27 @@ import {
   CapabilityPlatformSchema,
   CapabilityResponseSchema,
   ServiceBaseSchema,
+  ServiceBaseTransportEnumSchema,
   ServiceBusinessSchema,
   ServicePlatformSchema,
   ServiceResponseSchema,
 
+  // ─── Profile ────────────────────────────────────────────────────────────────
+  ProfileSchemaBaseSchema,
+  ProfileSchemaBusinessProfileSchema,
+  ProfileSchemaPlatformProfileSchema,
+  ProfileSchemaSigningKeySchema,
+  ProfileSchemaSigningKeyUseEnumSchema,
+
   // ─── Misc ───────────────────────────────────────────────────────────────────
   AccountInfoSchema,
   AdjustmentSchema,
+  AdjustmentStatusEnumSchema,
   BindingSchema,
   ContextSchema,
   EmbeddedConfigSchema,
   ExpectationSchema,
+  ExpectationMethodTypeEnumSchema,
   LinkSchema,
   RetailLocationSchema,
   ShippingDestinationSchema,
@@ -171,6 +239,7 @@ export const PlatformConfigSchema = z
 export {
   // Enums / status
   CheckoutResponseStatusSchema,
+  CheckoutStatusEnumSchema,
 
   // Sub-entity schemas (checkout internals)
   BuyerSchema,
@@ -216,6 +285,7 @@ export {
   // ─── Discount ───────────────────────────────────────────────────────────────
   DiscountAllocationSchema,
   DiscountAppliedDiscountSchema,
+  DiscountAppliedDiscountMethodEnumSchema,
   DiscountDiscountsObjectSchema,
 
   // ─── Fulfillment (core) ─────────────────────────────────────────────────────
@@ -224,8 +294,10 @@ export {
   FulfillmentGroupSchema,
   FulfillmentMethodSchema,
   FulfillmentAvailableMethodSchema,
+  FulfillmentAvailableMethodTypeEnumSchema,
   FulfillmentDestinationSchema,
   FulfillmentEventSchema,
+  FulfillmentMethodTypeEnumSchema,
 
   // ─── Fulfillment (extension) ────────────────────────────────────────────────
   FulfillmentExtensionFulfillmentSchema,
@@ -245,13 +317,18 @@ export {
   FulfillmentGroupUpdateRequestSchema,
 
   // ─── Payment ────────────────────────────────────────────────────────────────
+  AmountSchema,
   PaymentSchema,
   PaymentCredentialSchema,
   PaymentIdentitySchema,
   PaymentInstrumentResponseSchema,
+  AvailablePaymentInstrumentSchema,
   CardCredentialSchema,
+  CardCredentialCardNumberTypeEnumSchema,
   CardPaymentInstrumentSchema,
   TokenCredentialSchema,
+  SignedAmountSchema,
+  TotalsSchema,
 
   // ─── Payment Handler (roles) ────────────────────────────────────────────────
   PaymentHandlerBaseSchema,
@@ -261,6 +338,7 @@ export {
   // ─── Order (sub-entities) ───────────────────────────────────────────────────
   OrderConfirmationSchema,
   OrderLineItemSchema,
+  OrderLineItemStatusEnumSchema,
   OrderUpdateSchema,
 
   // ─── Item / LineItem ────────────────────────────────────────────────────────
@@ -270,16 +348,64 @@ export {
 
   // ─── Message ────────────────────────────────────────────────────────────────
   MessageInfoSchema,
+  MessageInfoContentTypeEnumSchema,
   MessageWarningSchema,
+  MessageWarningContentTypeEnumSchema,
+  MessageErrorContentTypeEnumSchema,
+  MessageErrorSeverityEnumSchema,
+
+  // ─── Error handling ─────────────────────────────────────────────────────────
+  ErrorResponseSchema,
+  ErrorCodeSchema,
+  InputCorrelationSchema,
+
+  // ─── Catalog ────────────────────────────────────────────────────────────────
+  CatalogSearchSchema,
+  CatalogLookupSchema,
+  ProductSchema,
+  VariantSchema,
+  CategorySchema,
+  ProductOptionSchema,
+  OptionValueSchema,
+  SelectedOptionSchema,
+  MediaSchema,
+  DescriptionSchema,
+  RatingSchema,
+  PriceSchema,
+  PriceRangeSchema,
+  PriceFilterSchema,
+  PaginationSchema,
+  SearchFiltersSchema,
+  SignalsSchema,
+
+  // ─── Cart ───────────────────────────────────────────────────────────────────
+  CartSchema,
+  CartCreateRequestSchema,
+  CartUpdateRequestSchema,
+
+  // ─── Identity Linking ───────────────────────────────────────────────────────
+  IdentityLinkingBusinessSchema,
+  IdentityLinkingPlatformSchema,
+  IdentityLinkingOauth2Schema,
+  IdentityLinkingMechanismSchema,
+  IdentityLinkingIdentityScopesSchema,
 
   // ─── UCP protocol ───────────────────────────────────────────────────────────
   UcpBaseSchema,
+  UcpBaseStatusEnumSchema,
   UcpBusinessSchema,
   UcpPlatformSchema,
   UcpEntitySchema,
+  UcpRequiresSchema,
+  UcpResponseCartSchema,
+  UcpResponseCatalogSchema,
   UcpResponseCheckoutSchema,
   UcpResponseOrderSchema,
   UcpVersionSchema,
+  UcpVersionConstraintSchema,
+  UcpSigningKeySchema,
+  UcpDiscoveryBusinessProfileSchema,
+  UcpDiscoveryPlatformProfileSchema,
   UcpReverseDomainNameSchema,
 
   // ─── Capability / Service ───────────────────────────────────────────────────
@@ -288,17 +414,27 @@ export {
   CapabilityPlatformSchema,
   CapabilityResponseSchema,
   ServiceBaseSchema,
+  ServiceBaseTransportEnumSchema,
   ServiceBusinessSchema,
   ServicePlatformSchema,
   ServiceResponseSchema,
 
+  // ─── Profile ────────────────────────────────────────────────────────────────
+  ProfileSchemaBaseSchema,
+  ProfileSchemaBusinessProfileSchema,
+  ProfileSchemaPlatformProfileSchema,
+  ProfileSchemaSigningKeySchema,
+  ProfileSchemaSigningKeyUseEnumSchema,
+
   // ─── Misc ───────────────────────────────────────────────────────────────────
   AccountInfoSchema,
   AdjustmentSchema,
+  AdjustmentStatusEnumSchema,
   BindingSchema,
   ContextSchema,
   EmbeddedConfigSchema,
   ExpectationSchema,
+  ExpectationMethodTypeEnumSchema,
   LinkSchema,
   RetailLocationSchema,
   ShippingDestinationSchema,
