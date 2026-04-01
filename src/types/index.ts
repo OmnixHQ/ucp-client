@@ -27,17 +27,6 @@ export type {
 export type { UCPSpecOrder, OrderUpdate, WebhookEvent, LineItemUpdatePayload } from './order.js';
 
 export type {
-  Product,
-  Variant,
-  CatalogSearchResponse,
-  CatalogLookupResponse,
-  SearchFilters,
-  Pagination,
-} from './catalog.js';
-
-export type { Cart, CartCreatePayload, CartUpdatePayload } from './cart.js';
-
-export type {
   OAuthServerMetadata,
   AuthorizationParams,
   TokenResponse,

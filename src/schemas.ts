@@ -188,66 +188,6 @@ export const PlatformConfigSchema = z
   })
   .passthrough();
 
-// ─── Schemas not yet in stable SDK ──────────────────────────────────────────
-// Catalog, Cart, IdentityLinking and some payment/error schemas were in the
-// draft SDK but are not yet in the stable 1.1.0 release. Defined locally until
-// the SDK includes them.
-
-// Catalog — draft SDK had these as ZodRecord; keeping same output type
-export const CatalogSearchSchema = z.record(z.unknown());
-export const CatalogLookupSchema = z.record(z.unknown());
-export const ProductSchema = z.record(z.unknown());
-export const VariantSchema = z.record(z.unknown());
-export const CategorySchema = z.record(z.unknown());
-export const ProductOptionSchema = z.record(z.unknown());
-export const OptionValueSchema = z.record(z.unknown());
-export const SelectedOptionSchema = z.record(z.unknown());
-export const MediaSchema = z.record(z.unknown());
-export const DescriptionSchema = z.record(z.unknown());
-export const RatingSchema = z.record(z.unknown());
-export const PriceSchema = z.record(z.unknown());
-export const PriceRangeSchema = z.record(z.unknown());
-export const PriceFilterSchema = z.record(z.unknown());
-export const PaginationSchema = z.record(z.unknown());
-export const SearchFiltersSchema = z.record(z.unknown());
-export const SignalsSchema = z.record(z.unknown());
-
-// Cart
-export const CartSchema = z.record(z.unknown());
-export const CartCreateRequestSchema = z.record(z.unknown());
-export const CartUpdateRequestSchema = z.record(z.unknown());
-export const CartResponseSchema = CartSchema;
-
-// IdentityLinking
-export const IdentityLinkingBusinessSchema = z.record(z.unknown());
-export const IdentityLinkingPlatformSchema = z.record(z.unknown());
-export const IdentityLinkingOauth2Schema = z.record(z.unknown());
-export const IdentityLinkingMechanismSchema = z.record(z.unknown());
-export const IdentityLinkingIdentityScopesSchema = z.record(z.unknown());
-
-// Payment schemas removed in stable 1.1.0
-export const AmountSchema = z.object({ value: z.string(), currency: z.string() }).passthrough();
-export const SignedAmountSchema = z
-  .object({ value: z.string(), currency: z.string() })
-  .passthrough();
-export const AvailablePaymentInstrumentSchema = PaymentInstrumentSchema;
-/** @deprecated Renamed to TotalSchema in ucp-js-sdk 1.1.0. */
-export const TotalsSchema = TotalSchema;
-
-// UCP protocol schemas removed in stable 1.1.0
-export const UcpBaseStatusEnumSchema = z.string();
-export const UcpRequiresSchema = z.record(z.unknown());
-export const UcpResponseCartSchema = z.record(z.unknown());
-export const UcpResponseCatalogSchema = z.record(z.unknown());
-export const UcpVersionConstraintSchema = z.record(z.unknown());
-
-// Error schemas removed in stable 1.1.0
-export const ErrorResponseSchema = z
-  .object({ messages: z.array(z.unknown()), continue_url: z.string().optional() })
-  .passthrough();
-export const ErrorCodeSchema = z.string();
-export const InputCorrelationSchema = z.record(z.unknown());
-
 // ─── SDK re-exports ─────────────────────────────────────────────────────────
 // Re-export all SDK schemas so consumers can use them for tool definitions,
 // Zod-to-JSON-Schema conversion, validation, etc.

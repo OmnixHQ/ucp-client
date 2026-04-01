@@ -107,6 +107,7 @@ import { TokenCredential as TokenCredential_2 } from '@omnixhq/ucp-js-sdk';
 import { TokenCredentialSchema } from '@omnixhq/ucp-js-sdk';
 import { TotalResponseSchema } from '@omnixhq/ucp-js-sdk';
 import { TotalSchema } from '@omnixhq/ucp-js-sdk';
+import { TotalTypeEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { UcpBaseSchema } from '@omnixhq/ucp-js-sdk';
 import { UcpBusinessSchema } from '@omnixhq/ucp-js-sdk';
 import { UcpDiscoveryBusinessProfileSchema } from '@omnixhq/ucp-js-sdk';
@@ -147,18 +148,6 @@ export interface AgentTool {
     readonly parameters: JsonSchema;
 }
 
-// @public (undocumented)
-export const AmountSchema: z.ZodObject<{
-    value: z.ZodString;
-    currency: z.ZodString;
-}, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-    value: z.ZodString;
-    currency: z.ZodString;
-}, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-    value: z.ZodString;
-    currency: z.ZodString;
-}, z.ZodTypeAny, "passthrough">>;
-
 export { Ap2MandateAp2WithCheckoutMandateSchema }
 
 export { Ap2MandateAp2WithMerchantAuthorizationSchema }
@@ -180,138 +169,6 @@ export interface AuthorizationParams {
     // (undocumented)
     readonly state?: string;
 }
-
-// @public (undocumented)
-export const AvailablePaymentInstrumentSchema: z.ZodObject<{
-    id: z.ZodString;
-    handler_id: z.ZodString;
-    type: z.ZodString;
-    billing_address: z.ZodOptional<z.ZodObject<{
-        extended_address: z.ZodOptional<z.ZodString>;
-        street_address: z.ZodOptional<z.ZodString>;
-        address_locality: z.ZodOptional<z.ZodString>;
-        address_region: z.ZodOptional<z.ZodString>;
-        address_country: z.ZodOptional<z.ZodString>;
-        postal_code: z.ZodOptional<z.ZodString>;
-        first_name: z.ZodOptional<z.ZodString>;
-        last_name: z.ZodOptional<z.ZodString>;
-        phone_number: z.ZodOptional<z.ZodString>;
-    }, "strip", z.ZodTypeAny, {
-        first_name?: string | undefined;
-        last_name?: string | undefined;
-        phone_number?: string | undefined;
-        address_country?: string | undefined;
-        address_region?: string | undefined;
-        postal_code?: string | undefined;
-        extended_address?: string | undefined;
-        street_address?: string | undefined;
-        address_locality?: string | undefined;
-    }, {
-        first_name?: string | undefined;
-        last_name?: string | undefined;
-        phone_number?: string | undefined;
-        address_country?: string | undefined;
-        address_region?: string | undefined;
-        postal_code?: string | undefined;
-        extended_address?: string | undefined;
-        street_address?: string | undefined;
-        address_locality?: string | undefined;
-    }>>;
-    credential: z.ZodOptional<z.ZodObject<{
-        type: z.ZodString;
-    }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-        type: z.ZodString;
-    }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-        type: z.ZodString;
-    }, z.ZodTypeAny, "passthrough">>>;
-    display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-}, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-    id: z.ZodString;
-    handler_id: z.ZodString;
-    type: z.ZodString;
-    billing_address: z.ZodOptional<z.ZodObject<{
-        extended_address: z.ZodOptional<z.ZodString>;
-        street_address: z.ZodOptional<z.ZodString>;
-        address_locality: z.ZodOptional<z.ZodString>;
-        address_region: z.ZodOptional<z.ZodString>;
-        address_country: z.ZodOptional<z.ZodString>;
-        postal_code: z.ZodOptional<z.ZodString>;
-        first_name: z.ZodOptional<z.ZodString>;
-        last_name: z.ZodOptional<z.ZodString>;
-        phone_number: z.ZodOptional<z.ZodString>;
-    }, "strip", z.ZodTypeAny, {
-        first_name?: string | undefined;
-        last_name?: string | undefined;
-        phone_number?: string | undefined;
-        address_country?: string | undefined;
-        address_region?: string | undefined;
-        postal_code?: string | undefined;
-        extended_address?: string | undefined;
-        street_address?: string | undefined;
-        address_locality?: string | undefined;
-    }, {
-        first_name?: string | undefined;
-        last_name?: string | undefined;
-        phone_number?: string | undefined;
-        address_country?: string | undefined;
-        address_region?: string | undefined;
-        postal_code?: string | undefined;
-        extended_address?: string | undefined;
-        street_address?: string | undefined;
-        address_locality?: string | undefined;
-    }>>;
-    credential: z.ZodOptional<z.ZodObject<{
-        type: z.ZodString;
-    }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-        type: z.ZodString;
-    }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-        type: z.ZodString;
-    }, z.ZodTypeAny, "passthrough">>>;
-    display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-}, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-    id: z.ZodString;
-    handler_id: z.ZodString;
-    type: z.ZodString;
-    billing_address: z.ZodOptional<z.ZodObject<{
-        extended_address: z.ZodOptional<z.ZodString>;
-        street_address: z.ZodOptional<z.ZodString>;
-        address_locality: z.ZodOptional<z.ZodString>;
-        address_region: z.ZodOptional<z.ZodString>;
-        address_country: z.ZodOptional<z.ZodString>;
-        postal_code: z.ZodOptional<z.ZodString>;
-        first_name: z.ZodOptional<z.ZodString>;
-        last_name: z.ZodOptional<z.ZodString>;
-        phone_number: z.ZodOptional<z.ZodString>;
-    }, "strip", z.ZodTypeAny, {
-        first_name?: string | undefined;
-        last_name?: string | undefined;
-        phone_number?: string | undefined;
-        address_country?: string | undefined;
-        address_region?: string | undefined;
-        postal_code?: string | undefined;
-        extended_address?: string | undefined;
-        street_address?: string | undefined;
-        address_locality?: string | undefined;
-    }, {
-        first_name?: string | undefined;
-        last_name?: string | undefined;
-        phone_number?: string | undefined;
-        address_country?: string | undefined;
-        address_region?: string | undefined;
-        postal_code?: string | undefined;
-        extended_address?: string | undefined;
-        street_address?: string | undefined;
-        address_locality?: string | undefined;
-    }>>;
-    credential: z.ZodOptional<z.ZodObject<{
-        type: z.ZodString;
-    }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-        type: z.ZodString;
-    }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-        type: z.ZodString;
-    }, z.ZodTypeAny, "passthrough">>>;
-    display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-}, z.ZodTypeAny, "passthrough">>;
 
 export { BindingSchema }
 
@@ -352,67 +209,9 @@ export { CardCredentialSchema }
 
 export { CardPaymentInstrumentSchema }
 
-// @public (undocumented)
-export type Cart = z.output<typeof CartResponseSchema>;
-
-// @public
-export class CartCapability {
-    // Warning: (ae-forgotten-export) The symbol "HttpClient" needs to be exported by the entry point index.d.ts
-    constructor(http: HttpClient);
-    // (undocumented)
-    create(payload: CartCreatePayload): Promise<Cart>;
-    // (undocumented)
-    delete(id: string): Promise<void>;
-    // (undocumented)
-    get(id: string): Promise<Cart>;
-    // (undocumented)
-    update(id: string, payload: CartUpdatePayload): Promise<Cart>;
-}
-
-// @public (undocumented)
-export type CartCreatePayload = z.output<typeof CartCreateRequestSchema>;
-
-// @public (undocumented)
-export const CartCreateRequestSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export const CartResponseSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export const CartSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export type CartUpdatePayload = z.output<typeof CartUpdateRequestSchema>;
-
-// @public (undocumented)
-export const CartUpdateRequestSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public
-export class CatalogCapability {
-    constructor(http: HttpClient);
-    // (undocumented)
-    lookup(productId: string): Promise<CatalogLookupResponse>;
-    // (undocumented)
-    search(query: string, filters?: SearchFilters, pagination?: Pagination): Promise<CatalogSearchResponse>;
-}
-
-// @public (undocumented)
-export type CatalogLookupResponse = z.output<typeof CatalogLookupSchema>;
-
-// @public (undocumented)
-export const CatalogLookupSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export type CatalogSearchResponse = z.output<typeof CatalogSearchSchema>;
-
-// @public (undocumented)
-export const CatalogSearchSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export const CategorySchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
 // @public
 export class CheckoutCapability {
+    // Warning: (ae-forgotten-export) The symbol "HttpClient" needs to be exported by the entry point index.d.ts
     constructor(http: HttpClient, extensions: CheckoutExtensions);
     // (undocumented)
     applyDiscountCodes(id: string, codes: readonly string[]): Promise<CheckoutSession>;
@@ -2972,15 +2771,13 @@ export const CompleteCheckoutRequestSchema: z.ZodObject<{
     }>;
 }, z.ZodTypeAny, "passthrough">>;
 
-// @public
+// @public (undocumented)
 export function connect(config: UCPClientConfig, options?: {
     readonly onValidationWarning?: LogFn;
 }): Promise<ConnectedClient>;
 
 // @public
 export interface ConnectedClient {
-    readonly cart: CartCapability | null;
-    readonly catalog: CatalogCapability | null;
     readonly checkout: CheckoutCapability | null;
     describeTools(): readonly ToolDescriptor[];
     getAgentTools(): readonly AgentTool[];
@@ -3854,9 +3651,6 @@ export function createWebhookVerifier(gatewayUrl: string): WebhookVerifier;
 // @public (undocumented)
 export const DEFAULT_UCP_VERSION = "2026-01-23";
 
-// @public (undocumented)
-export const DescriptionSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
 export { DiscountAllocationSchema }
 
 export { DiscountAppliedDiscountMethodEnumSchema }
@@ -3866,21 +3660,6 @@ export { DiscountAppliedDiscountSchema }
 export { DiscountDiscountsObjectSchema }
 
 export { EmbeddedConfigSchema }
-
-// @public (undocumented)
-export const ErrorCodeSchema: z.ZodString;
-
-// @public (undocumented)
-export const ErrorResponseSchema: z.ZodObject<{
-    messages: z.ZodArray<z.ZodUnknown, "many">;
-    continue_url: z.ZodOptional<z.ZodString>;
-}, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-    messages: z.ZodArray<z.ZodUnknown, "many">;
-    continue_url: z.ZodOptional<z.ZodString>;
-}, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-    messages: z.ZodArray<z.ZodUnknown, "many">;
-    continue_url: z.ZodOptional<z.ZodString>;
-}, z.ZodTypeAny, "passthrough">>;
 
 export { ExpectationMethodTypeEnumSchema }
 
@@ -3948,9 +3727,6 @@ export { FulfillmentSchema }
 // @public
 export function getAgentTools(client: ConnectedClient): readonly AgentTool[];
 
-// @public (undocumented)
-export const IdentityLinkingBusinessSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
 // @public
 export class IdentityLinkingCapability {
     constructor(metadata: OAuthServerMetadata);
@@ -3964,21 +3740,6 @@ export class IdentityLinkingCapability {
     // (undocumented)
     revokeToken(params: TokenRevokeParams): Promise<void>;
 }
-
-// @public (undocumented)
-export const IdentityLinkingIdentityScopesSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export const IdentityLinkingMechanismSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export const IdentityLinkingOauth2Schema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export const IdentityLinkingPlatformSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export const InputCorrelationSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
 
 export { ItemResponseSchema }
 
@@ -4055,9 +3816,6 @@ export interface LocalizationContext {
     readonly postal_code?: string;
 }
 
-// @public (undocumented)
-export const MediaSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
 export { MerchantFulfillmentConfigSchema }
 
 export { MessageErrorContentTypeEnumSchema }
@@ -4104,9 +3862,6 @@ export interface OAuthServerMetadata {
     readonly token_endpoint_auth_methods_supported: readonly string[];
 }
 
-// @public (undocumented)
-export const OptionValueSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
 // @public
 export class OrderCapability {
     constructor(http: HttpClient);
@@ -4125,12 +3880,6 @@ export { OrderLineItemStatusEnumSchema }
 export type OrderUpdate = z.output<typeof OrderUpdateSchema>;
 
 export { OrderUpdateSchema }
-
-// @public (undocumented)
-export type Pagination = z.output<typeof PaginationSchema>;
-
-// @public (undocumented)
-export const PaginationSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
 
 // @public
 export function parseWebhookEvent(body: string): WebhookEvent;
@@ -4237,24 +3986,6 @@ export interface PostalAddress {
 
 export { PostalAddressSchema }
 
-// @public (undocumented)
-export const PriceFilterSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export const PriceRangeSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export const PriceSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export type Product = z.output<typeof ProductSchema>;
-
-// @public (undocumented)
-export const ProductOptionSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export const ProductSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
 export { ProfileSchemaBaseSchema }
 
 export { ProfileSchemaBusinessProfileSchema }
@@ -4265,19 +3996,7 @@ export { ProfileSchemaSigningKeySchema }
 
 export { ProfileSchemaSigningKeyUseEnumSchema }
 
-// @public (undocumented)
-export const RatingSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
 export { RetailLocationSchema }
-
-// @public (undocumented)
-export type SearchFilters = z.output<typeof SearchFiltersSchema>;
-
-// @public (undocumented)
-export const SearchFiltersSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export const SelectedOptionSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
 
 export { ServiceBaseSchema }
 
@@ -4290,21 +4009,6 @@ export { ServicePlatformSchema }
 export { ServiceResponseSchema }
 
 export { ShippingDestinationSchema }
-
-// @public (undocumented)
-export const SignalsSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export const SignedAmountSchema: z.ZodObject<{
-    value: z.ZodString;
-    currency: z.ZodString;
-}, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-    value: z.ZodString;
-    currency: z.ZodString;
-}, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-    value: z.ZodString;
-    currency: z.ZodString;
-}, z.ZodTypeAny, "passthrough">>;
 
 // @public (undocumented)
 export type TokenCredential = TokenCredential_2;
@@ -4381,20 +4085,7 @@ export { TotalResponseSchema }
 
 export { TotalSchema }
 
-// @public @deprecated (undocumented)
-export const TotalsSchema: z.ZodObject<{
-    type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-    display_text: z.ZodOptional<z.ZodString>;
-    amount: z.ZodNumber;
-}, "strip", z.ZodTypeAny, {
-    type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-    amount: number;
-    display_text?: string | undefined;
-}, {
-    type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-    amount: number;
-    display_text?: string | undefined;
-}>;
+export { TotalTypeEnumSchema }
 
 // @public (undocumented)
 export const UCP_CAPABILITIES: {
@@ -4403,20 +4094,15 @@ export const UCP_CAPABILITIES: {
     readonly DISCOUNT: "dev.ucp.shopping.discount";
     readonly BUYER_CONSENT: "dev.ucp.shopping.buyer_consent";
     readonly ORDER: "dev.ucp.shopping.order";
-    readonly CATALOG: "dev.ucp.shopping.catalog";
-    readonly CART: "dev.ucp.shopping.cart";
     readonly IDENTITY_LINKING: "dev.ucp.common.identity_linking";
     readonly AP2_MANDATE: "dev.ucp.shopping.ap2_mandate";
 };
 
 export { UcpBaseSchema }
 
-// @public (undocumented)
-export const UcpBaseStatusEnumSchema: z.ZodString;
-
 export { UcpBusinessSchema }
 
-// @public
+// @public (undocumented)
 export class UCPClient {
     // (undocumented)
     static connect: typeof connect;
@@ -4989,15 +4675,6 @@ export const UCPProfileSchema: z.ZodObject<{
     }>, "many">>;
 }, z.ZodTypeAny, "passthrough">>;
 
-// @public (undocumented)
-export const UcpRequiresSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export const UcpResponseCartSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
-// @public (undocumented)
-export const UcpResponseCatalogSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
-
 export { UcpResponseCheckoutSchema }
 
 export { UcpResponseOrderSchema }
@@ -5010,9 +4687,6 @@ export { UcpSigningKeySchema }
 export type UCPSpecOrder = z.output<typeof UCPSpecOrderSchema>;
 
 export { UCPSpecOrderSchema }
-
-// @public (undocumented)
-export const UcpVersionConstraintSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
 
 export { UcpVersionSchema }
 
@@ -5870,12 +5544,6 @@ export const UpdateCheckoutRequestSchema: z.ZodObject<{
         })[] | undefined;
     }>>;
 }, z.ZodTypeAny, "passthrough">>;
-
-// @public (undocumented)
-export type Variant = z.output<typeof VariantSchema>;
-
-// @public (undocumented)
-export const VariantSchema: z.ZodRecord<z.ZodString, z.ZodUnknown>;
 
 // @public
 export function verifyRequestSignature(body: string, signature: string, signingKeys: readonly JWK[]): Promise<boolean>;
@@ -10576,7 +10244,7 @@ export interface WebhookVerifier {
 
 // Warnings were encountered during analysis:
 //
-// src/schemas.ts:441:705360 - (ae-forgotten-export) The symbol "LogFn" needs to be exported by the entry point index.d.ts
+// src/UCPClient.ts:54:11 - (ae-forgotten-export) The symbol "LogFn" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 
