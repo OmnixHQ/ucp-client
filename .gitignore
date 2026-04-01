@@ -29,3 +29,8 @@ npm-debug.log*
 
 # api-extractor working files
 temp/
+
+# Local assets / scratch files
+brand/
+captcha*.png
+tasks/
