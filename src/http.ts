@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import type { ZodType } from 'zod';
 import { UCPError, UCPIdempotencyConflictError } from './errors.js';
-import type { UCPMessage, MessageType, MessageSeverity, ContentType } from './errors.js';
+import type { UCPMessage, MessageType } from './errors.js';
 import { MessageErrorSchema, MessageInfoSchema, MessageWarningSchema } from './schemas.js';
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
@@ -182,13 +182,6 @@ function parseMessages(rawMessages: unknown[]): UCPMessage[] {
       type,
       content: String(record['content'] ?? 'Unknown error'),
       ...(record['code'] !== undefined ? { code: String(record['code']) } : {}),
-      ...(record['severity'] !== undefined
-        ? { severity: String(record['severity']) as MessageSeverity }
-        : {}),
-      ...(record['path'] !== undefined ? { path: String(record['path']) } : {}),
-      ...(record['content_type'] !== undefined
-        ? { content_type: String(record['content_type']) as ContentType }
-        : {}),
     };
   });
 }

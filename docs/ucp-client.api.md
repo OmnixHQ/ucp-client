@@ -175,16 +175,7 @@ export { BindingSchema }
 export { BusinessFulfillmentConfigSchema }
 
 // @public (undocumented)
-export interface BuyerConsent {
-    // (undocumented)
-    readonly analytics?: boolean;
-    // (undocumented)
-    readonly marketing?: boolean;
-    // (undocumented)
-    readonly preferences?: boolean;
-    // (undocumented)
-    readonly sale_of_data?: boolean;
-}
+export type BuyerConsent = z.output<typeof BuyerConsentConsentSchema>;
 
 export { BuyerConsentBuyerSchema }
 
@@ -2986,14 +2977,7 @@ export { LineItemUpdateRequestSchema }
 export { LinkSchema }
 
 // @public (undocumented)
-export interface LocalizationContext {
-    // (undocumented)
-    readonly address_country?: string;
-    // (undocumented)
-    readonly address_region?: string;
-    // (undocumented)
-    readonly postal_code?: string;
-}
+export type LocalizationContext = z.output<typeof ContextSchema>;
 
 export { MerchantFulfillmentConfigSchema }
 
@@ -3073,18 +3057,7 @@ export { PaymentHandlerBaseSchema }
 export { PaymentHandlerBusinessSchema }
 
 // @public (undocumented)
-export interface PaymentHandlerInstance {
-    // (undocumented)
-    readonly config?: Readonly<Record<string, unknown>>;
-    // (undocumented)
-    readonly id: string;
-    // (undocumented)
-    readonly schema: string;
-    // (undocumented)
-    readonly spec: string;
-    // (undocumented)
-    readonly version: string;
-}
+export type PaymentHandlerInstance = z.output<typeof PaymentHandlerBaseSchema>;
 
 // @public (undocumented)
 export interface PaymentHandlerMap {
@@ -3133,26 +3106,7 @@ export { PaymentSchema }
 export { PlatformFulfillmentConfigSchema }
 
 // @public (undocumented)
-export interface PostalAddress {
-    // (undocumented)
-    readonly address_country?: string;
-    // (undocumented)
-    readonly address_locality?: string;
-    // (undocumented)
-    readonly address_region?: string;
-    // (undocumented)
-    readonly extended_address?: string;
-    // (undocumented)
-    readonly first_name?: string;
-    // (undocumented)
-    readonly last_name?: string;
-    // (undocumented)
-    readonly phone_number?: string;
-    // (undocumented)
-    readonly postal_code?: string;
-    // (undocumented)
-    readonly street_address?: string;
-}
+export type PostalAddress = z.output<typeof PostalAddressSchema>;
 
 export { PostalAddressSchema }
 

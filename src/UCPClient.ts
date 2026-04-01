@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { HttpClient } from './http.js';
 import type { LogFn } from './http.js';
-import { UCPProfileSchema, JWKSchema } from './schemas.js';
+import { UCPProfileSchema, JWKSchema, PaymentHandlerBaseSchema } from './schemas.js';
 import type { JWK } from './types/common.js';
 import { CheckoutCapability } from './capabilities/checkout.js';
 import { OrderCapability } from './capabilities/order.js';
@@ -112,17 +112,7 @@ function extractCapabilityNames(profile: UCPProfile): Set<string> {
   return new Set(Object.keys(capabilities));
 }
 
-const PaymentHandlerInstanceSchema = z
-  .object({
-    id: z.string(),
-    version: z.string(),
-    spec: z.string(),
-    schema: z.string(),
-    config: z.record(z.unknown()).optional(),
-  })
-  .passthrough();
-
-const PaymentHandlerMapSchema = z.record(z.array(PaymentHandlerInstanceSchema));
+const PaymentHandlerMapSchema = z.record(z.array(PaymentHandlerBaseSchema));
 
 function extractPaymentHandlers(profile: UCPProfile): PaymentHandlerMap {
   const raw = (profile as Record<string, unknown>)['payment_handlers'];

@@ -1,30 +1,14 @@
-export interface PostalAddress {
-  readonly first_name?: string;
-  readonly last_name?: string;
-  readonly street_address?: string;
-  readonly extended_address?: string;
-  readonly address_locality?: string;
-  readonly address_region?: string;
-  readonly address_country?: string;
-  readonly postal_code?: string;
-  readonly phone_number?: string;
-}
-
-export interface BuyerConsent {
-  readonly analytics?: boolean;
-  readonly preferences?: boolean;
-  readonly marketing?: boolean;
-  readonly sale_of_data?: boolean;
-}
-
-export interface LocalizationContext {
-  readonly address_country?: string;
-  readonly address_region?: string;
-  readonly postal_code?: string;
-}
-
 import type { z } from 'zod';
-import type { UcpSigningKeySchema } from '../schemas.js';
+import type {
+  PostalAddressSchema,
+  BuyerConsentConsentSchema,
+  ContextSchema,
+  UcpSigningKeySchema,
+} from '../schemas.js';
+
+export type PostalAddress = z.output<typeof PostalAddressSchema>;
+export type BuyerConsent = z.output<typeof BuyerConsentConsentSchema>;
+export type LocalizationContext = z.output<typeof ContextSchema>;
 
 /** A UCP signing key as defined by the SDK spec. */
 export type JWK = z.output<typeof UcpSigningKeySchema>;
