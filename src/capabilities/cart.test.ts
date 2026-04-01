@@ -121,7 +121,7 @@ describe('CartCapability.get', () => {
     const malformed = { id: 'cart_123', unexpected: 'shape' };
     mockOk(malformed);
     const cart = await capability.get('cart_123');
-    expect((cart as Record<string, unknown>)['id']).toBe('cart_123');
+    expect(cart['id']).toBe('cart_123');
   });
 
   it('throws UCPError on 404', async () => {
