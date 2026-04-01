@@ -194,3 +194,65 @@ describe('OrderCapability.update', () => {
     await expect(capability.update('ord_123', {})).rejects.toThrow('Failed to fetch');
   });
 });
+
+describe('OrderCapability.updateLineItem', () => {
+  it('sends PUT /orders/:id/line-items/:lineItemId and returns validated order', async () => {
+    mockOk(MINIMAL_ORDER);
+    const order = await capability.updateLineItem('ord_123', 'li_1', { id: 'li_1' });
+    expect(order.id).toBe('ord_123');
+    const [url, init] = mockFetch.mock.calls[0] as [string, RequestInit];
+    expect(url.endsWith('/orders/ord_123/line-items/li_1')).toBe(true);
+    expect(init.method).toBe('PUT');
+    const body = JSON.parse(init.body as string) as Record<string, unknown>;
+    expect(body['id']).toBe('li_1');
+  });
+
+  it('URL-encodes both order ID and line item ID', async () => {
+    mockOk({ ...MINIMAL_ORDER, id: 'ord/123' });
+    await capability.updateLineItem('ord/123', 'li/1', {});
+    const [url] = mockFetch.mock.calls[0] as [string];
+    expect(url).toContain('/orders/ord%2F123/line-items/li%2F1');
+  });
+
+  it('sends idempotency-key header on PUT', async () => {
+    mockOk(MINIMAL_ORDER);
+    await capability.updateLineItem('ord_123', 'li_1', {});
+    const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
+    const headers = init.headers as Record<string, string>;
+    expect(headers['idempotency-key']).toBeDefined();
+  });
+
+  it('sends parent_id in request body', async () => {
+    mockOk(MINIMAL_ORDER);
+    await capability.updateLineItem('ord_123', 'li_1', { parent_id: 'li_0' });
+    const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
+    const body = JSON.parse(init.body as string) as Record<string, unknown>;
+    expect(body['parent_id']).toBe('li_0');
+  });
+
+  it('throws UCPError on 404', async () => {
+    mockError(404);
+    await expect(capability.updateLineItem('ord_missing', 'li_1', {})).rejects.toBeInstanceOf(
+      UCPError,
+    );
+  });
+
+  it('throws UCPIdempotencyConflictError on 409', async () => {
+    mockError(409);
+    await expect(capability.updateLineItem('ord_123', 'li_1', {})).rejects.toBeInstanceOf(
+      UCPIdempotencyConflictError,
+    );
+  });
+
+  it('throws UCPError on 500', async () => {
+    mockError(500);
+    await expect(capability.updateLineItem('ord_123', 'li_1', {})).rejects.toBeInstanceOf(UCPError);
+  });
+
+  it('propagates network errors', async () => {
+    mockNetworkFailure();
+    await expect(capability.updateLineItem('ord_123', 'li_1', {})).rejects.toThrow(
+      'Failed to fetch',
+    );
+  });
+});

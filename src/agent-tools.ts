@@ -301,6 +301,88 @@ function fulfillmentTools(client: ConnectedClient): AgentTool[] {
           (params['fulfillment_type'] as string) ?? 'shipping',
         ),
     },
+    {
+      name: 'create_fulfillment_method',
+      description: 'Add a new fulfillment method (shipping or pickup) to a checkout session.',
+      parameters: {
+        type: 'object',
+        properties: {
+          id: { type: 'string', description: 'Checkout session ID' },
+          type: {
+            type: 'string',
+            enum: ['shipping', 'pickup'],
+            description: 'Fulfillment method type',
+          },
+          line_item_ids: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'Line item IDs to associate with this method (optional)',
+          },
+        },
+        required: ['id', 'type'],
+      },
+      execute: async (params) => {
+        const { id, ...payload } = params as { id: string; [key: string]: unknown };
+        return client.checkout!.createFulfillmentMethod(
+          id,
+          payload as Parameters<NonNullable<typeof client.checkout>['createFulfillmentMethod']>[1],
+        );
+      },
+    },
+    {
+      name: 'update_fulfillment_method',
+      description: 'Update an existing fulfillment method on a checkout session.',
+      parameters: {
+        type: 'object',
+        properties: {
+          id: { type: 'string', description: 'Checkout session ID' },
+          method_id: { type: 'string', description: 'Fulfillment method ID to update' },
+          type: {
+            type: 'string',
+            enum: ['shipping', 'pickup'],
+            description: 'Updated fulfillment method type (optional)',
+          },
+          line_item_ids: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'Updated line item IDs to associate with this method',
+          },
+        },
+        required: ['id', 'method_id', 'line_item_ids'],
+      },
+      execute: async (params) => {
+        const { id, method_id, ...payload } = params as {
+          id: string;
+          method_id: string;
+          [key: string]: unknown;
+        };
+        return client.checkout!.updateFulfillmentMethod(
+          id,
+          method_id,
+          payload as Parameters<NonNullable<typeof client.checkout>['updateFulfillmentMethod']>[2],
+        );
+      },
+    },
+    {
+      name: 'update_fulfillment_group',
+      description: 'Update a fulfillment group within a fulfillment method on a checkout session.',
+      parameters: {
+        type: 'object',
+        properties: {
+          id: { type: 'string', description: 'Checkout session ID' },
+          method_id: { type: 'string', description: 'Fulfillment method ID' },
+          group_id: { type: 'string', description: 'Fulfillment group ID to update' },
+        },
+        required: ['id', 'method_id', 'group_id'],
+      },
+      execute: async (params) =>
+        client.checkout!.updateFulfillmentGroup(
+          params['id'] as string,
+          params['method_id'] as string,
+          params['group_id'] as string,
+          { id: params['group_id'] as string },
+        ),
+    },
   ];
 }
 
@@ -364,6 +446,31 @@ function orderTools(client: ConnectedClient): AgentTool[] {
       execute: async (params) => {
         const { id, ...payload } = params as { id: string; [key: string]: unknown };
         return client.order!.update(id, payload);
+      },
+    },
+    {
+      name: 'update_order_line_item',
+      description:
+        'Update a line item within an order, such as setting a parent line item for grouping.',
+      parameters: {
+        type: 'object',
+        properties: {
+          id: { type: 'string', description: 'Order ID' },
+          line_item_id: { type: 'string', description: 'Line item ID to update' },
+          parent_id: {
+            type: 'string',
+            description: 'Parent line item ID for grouping (optional)',
+          },
+        },
+        required: ['id', 'line_item_id'],
+      },
+      execute: async (params) => {
+        const { id, line_item_id, ...payload } = params as {
+          id: string;
+          line_item_id: string;
+          [key: string]: unknown;
+        };
+        return client.order!.updateLineItem(id, line_item_id, payload);
       },
     },
   ];
@@ -520,6 +627,18 @@ function cartTools(client: ConnectedClient): AgentTool[] {
           payload as unknown as Parameters<NonNullable<typeof client.cart>['update']>[1],
         );
       },
+    },
+    {
+      name: 'delete_cart',
+      description: 'Delete a cart by ID. The cart cannot be used after deletion.',
+      parameters: {
+        type: 'object',
+        properties: {
+          id: { type: 'string', description: 'Cart ID' },
+        },
+        required: ['id'],
+      },
+      execute: async (params) => client.cart!.delete(params['id'] as string),
     },
   ];
 }

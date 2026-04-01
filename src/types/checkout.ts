@@ -1,6 +1,11 @@
 import type { z } from 'zod';
 import type { CheckoutResponseStatus } from '@omnixhq/ucp-js-sdk';
-import type { CheckoutSessionSchema } from '../schemas.js';
+import type {
+  CheckoutSessionSchema,
+  FulfillmentMethodCreateRequestSchema,
+  FulfillmentMethodUpdateRequestSchema,
+  FulfillmentGroupUpdateRequestSchema,
+} from '../schemas.js';
 import type { BuyerConsent, LocalizationContext } from './common.js';
 import type { PaymentInstrument } from './payment.js';
 
@@ -72,6 +77,10 @@ export interface UpdateCheckoutPayload {
   };
   readonly context?: LocalizationContext;
 }
+
+export type FulfillmentMethodCreatePayload = z.output<typeof FulfillmentMethodCreateRequestSchema>;
+export type FulfillmentMethodUpdatePayload = z.output<typeof FulfillmentMethodUpdateRequestSchema>;
+export type FulfillmentGroupUpdatePayload = z.output<typeof FulfillmentGroupUpdateRequestSchema>;
 
 export interface CompleteCheckoutPayload {
   readonly payment?: {

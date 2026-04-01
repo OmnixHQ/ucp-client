@@ -20,4 +20,8 @@ export class CartCapability {
     const data = await this.http.request('PUT', `/cart/${encodeURIComponent(id)}`, payload);
     return this.http.validate(data, CartResponseSchema);
   }
+
+  async delete(id: string): Promise<void> {
+    await this.http.request('DELETE', `/cart/${encodeURIComponent(id)}`);
+  }
 }

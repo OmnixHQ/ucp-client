@@ -1,6 +1,6 @@
 import type { HttpClient } from '../http.js';
 import { UCPSpecOrderSchema } from '../schemas.js';
-import type { UCPSpecOrder } from '../types/order.js';
+import type { UCPSpecOrder, LineItemUpdatePayload } from '../types/order.js';
 
 /** Order operations. Available when the server declares `dev.ucp.shopping.order`. */
 export class OrderCapability {
@@ -15,6 +15,20 @@ export class OrderCapability {
   /** Update an order with fulfillment events, adjustments, or status changes. */
   async update(id: string, payload: Record<string, unknown>): Promise<UCPSpecOrder> {
     const data = await this.http.request('PUT', `/orders/${encodeURIComponent(id)}`, payload);
+    return this.http.validate(data, UCPSpecOrderSchema);
+  }
+
+  /** Update a single line item within an order (e.g. set parent for grouping). */
+  async updateLineItem(
+    id: string,
+    lineItemId: string,
+    payload: LineItemUpdatePayload,
+  ): Promise<UCPSpecOrder> {
+    const data = await this.http.request(
+      'PUT',
+      `/orders/${encodeURIComponent(id)}/line-items/${encodeURIComponent(lineItemId)}`,
+      payload,
+    );
     return this.http.validate(data, UCPSpecOrderSchema);
   }
 }

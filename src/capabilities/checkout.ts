@@ -7,6 +7,9 @@ import type {
   CreateCheckoutPayload,
   UpdateCheckoutPayload,
   CompleteCheckoutPayload,
+  FulfillmentMethodCreatePayload,
+  FulfillmentMethodUpdatePayload,
+  FulfillmentGroupUpdatePayload,
 } from '../types/checkout.js';
 
 const DEFAULT_METHOD_ID = 'default';
@@ -127,6 +130,45 @@ export class CheckoutCapability {
       ...patch,
       discounts: { codes: [...codes] },
     });
+  }
+
+  async createFulfillmentMethod(
+    id: string,
+    payload: FulfillmentMethodCreatePayload,
+  ): Promise<CheckoutSession> {
+    const data = await this.http.request(
+      'POST',
+      `/checkout-sessions/${encodeURIComponent(id)}/fulfillment/methods`,
+      payload,
+    );
+    return this.validateSession(data);
+  }
+
+  async updateFulfillmentMethod(
+    id: string,
+    methodId: string,
+    payload: FulfillmentMethodUpdatePayload,
+  ): Promise<CheckoutSession> {
+    const data = await this.http.request(
+      'PUT',
+      `/checkout-sessions/${encodeURIComponent(id)}/fulfillment/methods/${encodeURIComponent(methodId)}`,
+      payload,
+    );
+    return this.validateSession(data);
+  }
+
+  async updateFulfillmentGroup(
+    id: string,
+    methodId: string,
+    groupId: string,
+    payload: FulfillmentGroupUpdatePayload,
+  ): Promise<CheckoutSession> {
+    const data = await this.http.request(
+      'PUT',
+      `/checkout-sessions/${encodeURIComponent(id)}/fulfillment/methods/${encodeURIComponent(methodId)}/groups/${encodeURIComponent(groupId)}`,
+      payload,
+    );
+    return this.validateSession(data);
   }
 
   private validateSession(data: unknown): CheckoutSession {

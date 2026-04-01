@@ -189,3 +189,43 @@ describe('CartCapability.update', () => {
     await expect(capability.update('cart_123', {})).rejects.toThrow('Failed to fetch');
   });
 });
+
+describe('CartCapability.delete', () => {
+  it('sends DELETE /cart/:id and returns void', async () => {
+    mockFetch.mockResolvedValueOnce({ ok: true, status: 204, json: () => Promise.resolve(null) });
+    await capability.delete('cart_123');
+    const [url, init] = mockFetch.mock.calls[0] as [string, RequestInit];
+    expect(url.endsWith('/cart/cart_123')).toBe(true);
+    expect(init.method).toBe('DELETE');
+  });
+
+  it('URL-encodes the cart ID on delete', async () => {
+    mockFetch.mockResolvedValueOnce({ ok: true, status: 204, json: () => Promise.resolve(null) });
+    await capability.delete('cart/123');
+    const [url] = mockFetch.mock.calls[0] as [string];
+    expect(url).toContain('/cart/cart%2F123');
+  });
+
+  it('does not send idempotency-key on DELETE', async () => {
+    mockFetch.mockResolvedValueOnce({ ok: true, status: 204, json: () => Promise.resolve(null) });
+    await capability.delete('cart_123');
+    const [, init] = mockFetch.mock.calls[0] as [string, RequestInit];
+    const headers = init.headers as Record<string, string>;
+    expect(headers['idempotency-key']).toBeUndefined();
+  });
+
+  it('throws UCPError on 404', async () => {
+    mockError(404);
+    await expect(capability.delete('cart_missing')).rejects.toBeInstanceOf(UCPError);
+  });
+
+  it('throws UCPError on 500', async () => {
+    mockError(500);
+    await expect(capability.delete('cart_123')).rejects.toBeInstanceOf(UCPError);
+  });
+
+  it('propagates network errors', async () => {
+    mockNetworkFailure();
+    await expect(capability.delete('cart_123')).rejects.toThrow('Failed to fetch');
+  });
+});

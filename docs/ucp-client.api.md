@@ -259,6 +259,8 @@ export class CartCapability {
     // (undocumented)
     create(payload: CartCreatePayload): Promise<Cart>;
     // (undocumented)
+    delete(id: string): Promise<void>;
+    // (undocumented)
     get(id: string): Promise<Cart>;
     // (undocumented)
     update(id: string, payload: CartUpdatePayload): Promise<Cart>;
@@ -1476,6 +1478,8 @@ export class CheckoutCapability {
     complete(id: string, payload: CompleteCheckoutPayload): Promise<CheckoutSession>;
     // (undocumented)
     create(payload: CreateCheckoutPayload): Promise<CheckoutSession>;
+    // (undocumented)
+    createFulfillmentMethod(id: string, payload: FulfillmentMethodCreatePayload): Promise<CheckoutSession>;
     readonly extensions: CheckoutExtensions;
     // (undocumented)
     get(id: string): Promise<CheckoutSession>;
@@ -1489,6 +1493,10 @@ export class CheckoutCapability {
     setFulfillment(id: string, type: string, patch?: FulfillmentPatch): Promise<CheckoutSession>;
     // (undocumented)
     update(id: string, patch: UpdateCheckoutPayload): Promise<CheckoutSession>;
+    // (undocumented)
+    updateFulfillmentGroup(id: string, methodId: string, groupId: string, payload: FulfillmentGroupUpdatePayload): Promise<CheckoutSession>;
+    // (undocumented)
+    updateFulfillmentMethod(id: string, methodId: string, payload: FulfillmentMethodUpdatePayload): Promise<CheckoutSession>;
 }
 
 export { CheckoutCompleteRequestSchema }
@@ -5447,7 +5455,13 @@ export { FulfillmentExtensionFulfillmentSchema }
 
 export { FulfillmentGroupSchema }
 
+// @public (undocumented)
+export type FulfillmentGroupUpdatePayload = z.output<typeof FulfillmentGroupUpdateRequestSchema>;
+
 export { FulfillmentGroupUpdateRequestSchema }
+
+// @public (undocumented)
+export type FulfillmentMethodCreatePayload = z.output<typeof FulfillmentMethodCreateRequestSchema>;
 
 export { FulfillmentMethodCreateRequestSchema }
 
@@ -5456,6 +5470,9 @@ export { FulfillmentMethodResponseSchema }
 export { FulfillmentMethodSchema }
 
 export { FulfillmentMethodTypeEnumSchema }
+
+// @public (undocumented)
+export type FulfillmentMethodUpdatePayload = z.output<typeof FulfillmentMethodUpdateRequestSchema>;
 
 export { FulfillmentMethodUpdateRequestSchema }
 
@@ -5552,6 +5569,9 @@ export { LineItemResponseSchema }
 
 export { LineItemSchema }
 
+// @public (undocumented)
+export type LineItemUpdatePayload = z.output<typeof LineItemUpdateRequestSchema>;
+
 export { LineItemUpdateRequestSchema }
 
 export { LinkSchema }
@@ -5621,6 +5641,7 @@ export class OrderCapability {
     constructor(http: HttpClient);
     get(id: string): Promise<UCPSpecOrder>;
     update(id: string, payload: Record<string, unknown>): Promise<UCPSpecOrder>;
+    updateLineItem(id: string, lineItemId: string, payload: LineItemUpdatePayload): Promise<UCPSpecOrder>;
 }
 
 export { OrderConfirmationSchema }
