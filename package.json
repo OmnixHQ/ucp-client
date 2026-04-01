@@ -167,7 +167,7 @@
     "test:types": "vitest run --typecheck.only"
   },
   "dependencies": {
-    "@omnixhq/ucp-js-sdk": "1.0.2",
+    "@omnixhq/ucp-js-sdk": "1.1.0",
     "zod": "^3.23.0"
   },
   "devDependencies": {

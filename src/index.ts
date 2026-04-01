@@ -35,6 +35,7 @@ export {
 
   // Enums / status
   CheckoutResponseStatusSchema,
+  CheckoutStatusEnumSchema,
 
   // Sub-entity schemas (checkout internals)
   BuyerSchema,
@@ -51,7 +52,7 @@ export {
   ItemResponseSchema,
   UCPSpecOrderSchema,
 
-  // Checkout (base)
+  // Checkout
   CheckoutSchema,
   CheckoutResponseSchema,
   CheckoutCreateRequestSchema,
@@ -72,6 +73,7 @@ export {
   // Discount
   DiscountAllocationSchema,
   DiscountAppliedDiscountSchema,
+  DiscountAppliedDiscountMethodEnumSchema,
   DiscountDiscountsObjectSchema,
 
   // Fulfillment (core)
@@ -80,8 +82,10 @@ export {
   FulfillmentGroupSchema,
   FulfillmentMethodSchema,
   FulfillmentAvailableMethodSchema,
+  FulfillmentAvailableMethodTypeEnumSchema,
   FulfillmentDestinationSchema,
   FulfillmentEventSchema,
+  FulfillmentMethodTypeEnumSchema,
 
   // Fulfillment (extension)
   FulfillmentExtensionFulfillmentSchema,
@@ -103,10 +107,10 @@ export {
   // Payment
   PaymentSchema,
   PaymentCredentialSchema,
-  ExtendedPaymentCredentialSchema,
   PaymentIdentitySchema,
   PaymentInstrumentResponseSchema,
   CardCredentialSchema,
+  CardCredentialCardNumberTypeEnumSchema,
   CardPaymentInstrumentSchema,
   TokenCredentialSchema,
 
@@ -118,6 +122,7 @@ export {
   // Order (sub-entities)
   OrderConfirmationSchema,
   OrderLineItemSchema,
+  OrderLineItemStatusEnumSchema,
   OrderUpdateSchema,
 
   // Item / LineItem
@@ -127,7 +132,11 @@ export {
 
   // Message
   MessageInfoSchema,
+  MessageInfoContentTypeEnumSchema,
   MessageWarningSchema,
+  MessageWarningContentTypeEnumSchema,
+  MessageErrorContentTypeEnumSchema,
+  MessageErrorSeverityEnumSchema,
 
   // UCP protocol
   UcpBaseSchema,
@@ -137,6 +146,9 @@ export {
   UcpResponseCheckoutSchema,
   UcpResponseOrderSchema,
   UcpVersionSchema,
+  UcpSigningKeySchema,
+  UcpDiscoveryBusinessProfileSchema,
+  UcpDiscoveryPlatformProfileSchema,
   UcpReverseDomainNameSchema,
 
   // Capability / Service
@@ -145,22 +157,32 @@ export {
   CapabilityPlatformSchema,
   CapabilityResponseSchema,
   ServiceBaseSchema,
+  ServiceBaseTransportEnumSchema,
   ServiceBusinessSchema,
   ServicePlatformSchema,
   ServiceResponseSchema,
 
+  // Profile
+  ProfileSchemaBaseSchema,
+  ProfileSchemaBusinessProfileSchema,
+  ProfileSchemaPlatformProfileSchema,
+  ProfileSchemaSigningKeySchema,
+  ProfileSchemaSigningKeyUseEnumSchema,
+
   // Misc
   AccountInfoSchema,
   AdjustmentSchema,
+  AdjustmentStatusEnumSchema,
   BindingSchema,
   ContextSchema,
   EmbeddedConfigSchema,
   ExpectationSchema,
+  ExpectationMethodTypeEnumSchema,
   LinkSchema,
-  PlatformConfigSchema,
   RetailLocationSchema,
   ShippingDestinationSchema,
   TotalSchema,
+  TotalTypeEnumSchema,
 } from './schemas.js';
 
 export type {
@@ -175,6 +197,9 @@ export type {
   CreateCheckoutPayload,
   UpdateCheckoutPayload,
   CompleteCheckoutPayload,
+  FulfillmentMethodCreatePayload,
+  FulfillmentMethodUpdatePayload,
+  FulfillmentGroupUpdatePayload,
   TokenCredential,
   CardCredential,
   PaymentCredential,
@@ -182,7 +207,9 @@ export type {
   PaymentHandlerInstance,
   PaymentHandlerMap,
   UCPSpecOrder,
+  OrderUpdate,
   WebhookEvent,
+  LineItemUpdatePayload,
   OAuthServerMetadata,
   AuthorizationParams,
   TokenResponse,

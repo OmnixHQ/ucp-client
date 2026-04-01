@@ -16,9 +16,25 @@ Every AI agent that wants to buy something from a UCP store needs to discover ca
 
 ## Install
 
+Two release channels track the two UCP spec tracks:
+
+### Stable (recommended)
+
+Based on the stable UCP spec (`@omnixhq/ucp-js-sdk@latest`). Supports checkout, fulfillment, discount, order, and identity linking.
+
 ```bash
 npm install @omnixhq/ucp-client
 ```
+
+### Draft
+
+Based on the draft UCP spec (`@omnixhq/ucp-js-sdk@next`). Includes everything in stable plus capabilities still being finalized in the spec (catalog, cart, and others as they land).
+
+```bash
+npm install @omnixhq/ucp-client@next
+```
+
+> **Note:** Draft builds track the spec draft and may have breaking changes between releases. Use stable in production.
 
 ## Quick Start
 
@@ -137,13 +153,13 @@ All five adapters (`openai`, `anthropic`, `mcp`, `vercel-ai`, `langchain`) suppo
 
 The tools you get depend on what the server declares:
 
-| Server declares                   | Tools you get                                                                                |
-| --------------------------------- | -------------------------------------------------------------------------------------------- |
-| `dev.ucp.shopping.checkout`       | `create_checkout`, `get_checkout`, `update_checkout`, `complete_checkout`, `cancel_checkout` |
-| `dev.ucp.shopping.fulfillment`    | + `set_fulfillment`, `select_destination`, `select_fulfillment_option`                       |
-| `dev.ucp.shopping.discount`       | + `apply_discount_codes`                                                                     |
-| `dev.ucp.shopping.order`          | + `get_order`, `update_order`                                                                |
-| `dev.ucp.common.identity_linking` | + `get_authorization_url`, `exchange_auth_code`, `refresh_access_token`, `revoke_token`      |
+| Server declares                   | Tools you get                                                                                                                                                |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `dev.ucp.shopping.checkout`       | `create_checkout`, `get_checkout`, `update_checkout`, `complete_checkout`, `cancel_checkout`                                                                 |
+| `dev.ucp.shopping.fulfillment`    | + `set_fulfillment`, `select_destination`, `select_fulfillment_option`, `create_fulfillment_method`, `update_fulfillment_method`, `update_fulfillment_group` |
+| `dev.ucp.shopping.discount`       | + `apply_discount_codes`                                                                                                                                     |
+| `dev.ucp.shopping.order`          | + `get_order`, `update_order`, `update_order_line_item`                                                                                                      |
+| `dev.ucp.common.identity_linking` | + `get_authorization_url`, `exchange_auth_code`, `refresh_access_token`, `revoke_token`                                                                      |
 
 Connect to a different server → get different tools. Your agent code stays the same.
 
@@ -200,7 +216,23 @@ const client = await UCPClient.connect(config);
 const valid = await verifyRequestSignature(rawBody, signature, client.signingKeys);
 ```
 
-See [examples/webhook-verification.ts](./examples/webhook-verification.ts) for a complete HTTP server example.
+### Parsing webhook payloads
+
+After verifying the signature, parse the raw body into a typed `WebhookEvent` with `parseWebhookEvent`. Throws `UCPError` with code `INVALID_WEBHOOK_PAYLOAD` if the body is not valid JSON or doesn't match the UCP order event schema.
+
+```typescript
+import { createWebhookVerifier, parseWebhookEvent } from '@omnixhq/ucp-client';
+
+const verifier = createWebhookVerifier('https://store.example.com');
+
+// In your webhook handler:
+const valid = await verifier.verify(rawBody, req.headers['request-signature']);
+if (!valid) return res.status(401).send('Invalid signature');
+
+const event = parseWebhookEvent(rawBody);
+// event.event_id, event.created_time, event.order
+console.log(event.order.id);
+```
 
 ## Framework adapters
 

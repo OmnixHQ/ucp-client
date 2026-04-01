@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import type { ZodType } from 'zod';
 import { UCPError, UCPIdempotencyConflictError } from './errors.js';
-import type { UCPMessage, MessageType, MessageSeverity, ContentType } from './errors.js';
+import type { UCPMessage, MessageType } from './errors.js';
 import { MessageErrorSchema, MessageInfoSchema, MessageWarningSchema } from './schemas.js';
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
@@ -87,34 +87,36 @@ export class HttpClient {
     return data;
   }
 
-  validate<T>(data: unknown, schema: ZodType<T>): T {
+  validate<Output, Def extends import('zod').ZodTypeDef, Input>(
+    data: unknown,
+    schema: ZodType<Output, Def, Input>,
+  ): Output {
     const result = schema.safeParse(data);
     if (!result.success) {
       this.onValidationWarning('[UCPClient] Response validation failed:', result.error.message);
-      return data as T;
+      return data as Output;
     }
     return result.data;
   }
 
   private throwFromResponse(data: unknown, statusCode: number): never {
-    if (typeof data !== 'object' || data === null) {
-      if (statusCode === 409) throw new UCPIdempotencyConflictError();
-      throw new UCPError('HTTP_ERROR', `Gateway returned ${statusCode}`, 'error', statusCode);
-    }
+    if (
+      typeof data === 'object' &&
+      data !== null &&
+      Array.isArray((data as Record<string, unknown>)['messages'])
+    ) {
+      const rawMessages = (data as Record<string, unknown>)['messages'] as unknown[];
+      if (rawMessages.length > 0) {
+        const allMessages = parseMessages(rawMessages);
+        const first = allMessages[0]!;
+        const code = first.code ?? 'UNKNOWN';
 
-    const body = data as Record<string, unknown>;
-    const rawMessages = body['messages'];
-
-    if (Array.isArray(rawMessages) && rawMessages.length > 0) {
-      const allMessages = parseMessages(rawMessages);
-      const first = allMessages[0]!;
-      const code = first.code ?? 'UNKNOWN';
-
-      throw new UCPError(code, first.content, first.type, statusCode, {
-        ...(first.path !== undefined ? { path: first.path } : {}),
-        ...(first.content_type !== undefined ? { contentType: first.content_type } : {}),
-        messages: allMessages,
-      });
+        throw new UCPError(code, first.content, first.type, statusCode, {
+          ...(first.path !== undefined ? { path: first.path } : {}),
+          ...(first.content_type !== undefined ? { contentType: first.content_type } : {}),
+          messages: allMessages,
+        });
+      }
     }
 
     if (statusCode === 409) throw new UCPIdempotencyConflictError();
@@ -180,13 +182,6 @@ function parseMessages(rawMessages: unknown[]): UCPMessage[] {
       type,
       content: String(record['content'] ?? 'Unknown error'),
       ...(record['code'] !== undefined ? { code: String(record['code']) } : {}),
-      ...(record['severity'] !== undefined
-        ? { severity: String(record['severity']) as MessageSeverity }
-        : {}),
-      ...(record['path'] !== undefined ? { path: String(record['path']) } : {}),
-      ...(record['content_type'] !== undefined
-        ? { content_type: String(record['content_type']) as ContentType }
-        : {}),
     };
   });
 }

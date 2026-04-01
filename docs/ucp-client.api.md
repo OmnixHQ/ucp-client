@@ -6,6 +6,7 @@
 
 import { AccountInfoSchema } from '@omnixhq/ucp-js-sdk';
 import { AdjustmentSchema } from '@omnixhq/ucp-js-sdk';
+import { AdjustmentStatusEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { Ap2MandateAp2WithCheckoutMandateSchema } from '@omnixhq/ucp-js-sdk';
 import { Ap2MandateAp2WithMerchantAuthorizationSchema } from '@omnixhq/ucp-js-sdk';
 import { Ap2MandateCheckoutMandateSchema } from '@omnixhq/ucp-js-sdk';
@@ -21,23 +22,27 @@ import { CapabilityBusinessSchema } from '@omnixhq/ucp-js-sdk';
 import { CapabilityPlatformSchema } from '@omnixhq/ucp-js-sdk';
 import { CapabilityResponseSchema } from '@omnixhq/ucp-js-sdk';
 import { CardCredential as CardCredential_2 } from '@omnixhq/ucp-js-sdk';
+import { CardCredentialCardNumberTypeEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { CardCredentialSchema } from '@omnixhq/ucp-js-sdk';
 import { CardPaymentInstrumentSchema } from '@omnixhq/ucp-js-sdk';
 import { CheckoutCompleteRequestSchema } from '@omnixhq/ucp-js-sdk';
 import { CheckoutCreateRequestSchema } from '@omnixhq/ucp-js-sdk';
-import { CheckoutResponse } from '@omnixhq/ucp-js-sdk';
 import { CheckoutResponseSchema } from '@omnixhq/ucp-js-sdk';
 import { CheckoutResponseStatus } from '@omnixhq/ucp-js-sdk';
 import { CheckoutResponseStatusSchema } from '@omnixhq/ucp-js-sdk';
 import { CheckoutSchema } from '@omnixhq/ucp-js-sdk';
+import { CheckoutStatusEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { CheckoutUpdateRequestSchema } from '@omnixhq/ucp-js-sdk';
 import { ContextSchema } from '@omnixhq/ucp-js-sdk';
 import { DiscountAllocationSchema } from '@omnixhq/ucp-js-sdk';
+import { DiscountAppliedDiscountMethodEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { DiscountAppliedDiscountSchema } from '@omnixhq/ucp-js-sdk';
 import { DiscountDiscountsObjectSchema } from '@omnixhq/ucp-js-sdk';
 import { EmbeddedConfigSchema } from '@omnixhq/ucp-js-sdk';
+import { ExpectationMethodTypeEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { ExpectationSchema } from '@omnixhq/ucp-js-sdk';
 import { FulfillmentAvailableMethodSchema } from '@omnixhq/ucp-js-sdk';
+import { FulfillmentAvailableMethodTypeEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { FulfillmentDestinationSchema } from '@omnixhq/ucp-js-sdk';
 import { FulfillmentEventSchema } from '@omnixhq/ucp-js-sdk';
 import { FulfillmentExtensionFulfillmentAvailableMethodSchema } from '@omnixhq/ucp-js-sdk';
@@ -50,6 +55,7 @@ import { FulfillmentGroupUpdateRequestSchema } from '@omnixhq/ucp-js-sdk';
 import { FulfillmentMethodCreateRequestSchema } from '@omnixhq/ucp-js-sdk';
 import { FulfillmentMethodResponseSchema } from '@omnixhq/ucp-js-sdk';
 import { FulfillmentMethodSchema } from '@omnixhq/ucp-js-sdk';
+import { FulfillmentMethodTypeEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { FulfillmentMethodUpdateRequestSchema } from '@omnixhq/ucp-js-sdk';
 import { FulfillmentOptionSchema } from '@omnixhq/ucp-js-sdk';
 import { FulfillmentResponseSchema } from '@omnixhq/ucp-js-sdk';
@@ -61,13 +67,17 @@ import { LineItemSchema } from '@omnixhq/ucp-js-sdk';
 import { LineItemUpdateRequestSchema } from '@omnixhq/ucp-js-sdk';
 import { LinkSchema } from '@omnixhq/ucp-js-sdk';
 import { MerchantFulfillmentConfigSchema } from '@omnixhq/ucp-js-sdk';
+import { MessageErrorContentTypeEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { MessageErrorSchema } from '@omnixhq/ucp-js-sdk';
+import { MessageErrorSeverityEnumSchema } from '@omnixhq/ucp-js-sdk';
+import { MessageInfoContentTypeEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { MessageInfoSchema } from '@omnixhq/ucp-js-sdk';
 import { MessageSchema } from '@omnixhq/ucp-js-sdk';
+import { MessageWarningContentTypeEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { MessageWarningSchema } from '@omnixhq/ucp-js-sdk';
-import { Order } from '@omnixhq/ucp-js-sdk';
 import { OrderConfirmationSchema } from '@omnixhq/ucp-js-sdk';
 import { OrderLineItemSchema } from '@omnixhq/ucp-js-sdk';
+import { OrderLineItemStatusEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { OrderUpdateSchema } from '@omnixhq/ucp-js-sdk';
 import { PaymentCredentialSchema } from '@omnixhq/ucp-js-sdk';
 import { PaymentHandlerBaseSchema } from '@omnixhq/ucp-js-sdk';
@@ -81,8 +91,14 @@ import { PaymentResponseSchema } from '@omnixhq/ucp-js-sdk';
 import { PaymentSchema } from '@omnixhq/ucp-js-sdk';
 import { PlatformFulfillmentConfigSchema } from '@omnixhq/ucp-js-sdk';
 import { PostalAddressSchema } from '@omnixhq/ucp-js-sdk';
+import { ProfileSchemaBaseSchema } from '@omnixhq/ucp-js-sdk';
+import { ProfileSchemaBusinessProfileSchema } from '@omnixhq/ucp-js-sdk';
+import { ProfileSchemaPlatformProfileSchema } from '@omnixhq/ucp-js-sdk';
+import { ProfileSchemaSigningKeySchema } from '@omnixhq/ucp-js-sdk';
+import { ProfileSchemaSigningKeyUseEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { RetailLocationSchema } from '@omnixhq/ucp-js-sdk';
 import { ServiceBaseSchema } from '@omnixhq/ucp-js-sdk';
+import { ServiceBaseTransportEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { ServiceBusinessSchema } from '@omnixhq/ucp-js-sdk';
 import { ServicePlatformSchema } from '@omnixhq/ucp-js-sdk';
 import { ServiceResponseSchema } from '@omnixhq/ucp-js-sdk';
@@ -91,17 +107,21 @@ import { TokenCredential as TokenCredential_2 } from '@omnixhq/ucp-js-sdk';
 import { TokenCredentialSchema } from '@omnixhq/ucp-js-sdk';
 import { TotalResponseSchema } from '@omnixhq/ucp-js-sdk';
 import { TotalSchema } from '@omnixhq/ucp-js-sdk';
+import { TotalTypeEnumSchema } from '@omnixhq/ucp-js-sdk';
 import { UcpBaseSchema } from '@omnixhq/ucp-js-sdk';
 import { UcpBusinessSchema } from '@omnixhq/ucp-js-sdk';
-import { UcpDiscoveryProfile } from '@omnixhq/ucp-js-sdk';
+import { UcpDiscoveryBusinessProfileSchema } from '@omnixhq/ucp-js-sdk';
+import { UcpDiscoveryPlatformProfileSchema } from '@omnixhq/ucp-js-sdk';
 import { UcpEntitySchema } from '@omnixhq/ucp-js-sdk';
 import { UcpPlatformSchema } from '@omnixhq/ucp-js-sdk';
 import { UcpResponseCheckoutSchema } from '@omnixhq/ucp-js-sdk';
 import { UcpResponseOrderSchema } from '@omnixhq/ucp-js-sdk';
 import { UcpReverseDomainNameSchema } from '@omnixhq/ucp-js-sdk';
+import { UcpSigningKeySchema } from '@omnixhq/ucp-js-sdk';
 import { OrderSchema as UCPSpecOrderSchema } from '@omnixhq/ucp-js-sdk';
 import { UcpVersionSchema } from '@omnixhq/ucp-js-sdk';
 import { z } from 'zod';
+import * as zod0 from 'zod';
 import { ZodType } from 'zod';
 
 export { AccountInfoSchema }
@@ -113,6 +133,8 @@ export interface AdapterOptions {
 }
 
 export { AdjustmentSchema }
+
+export { AdjustmentStatusEnumSchema }
 
 // @public
 export interface AgentTool {
@@ -153,16 +175,7 @@ export { BindingSchema }
 export { BusinessFulfillmentConfigSchema }
 
 // @public (undocumented)
-export interface BuyerConsent {
-    // (undocumented)
-    readonly analytics?: boolean;
-    // (undocumented)
-    readonly marketing?: boolean;
-    // (undocumented)
-    readonly preferences?: boolean;
-    // (undocumented)
-    readonly sale_of_data?: boolean;
-}
+export type BuyerConsent = z.output<typeof BuyerConsentConsentSchema>;
 
 export { BuyerConsentBuyerSchema }
 
@@ -181,6 +194,8 @@ export { CapabilityResponseSchema }
 // @public (undocumented)
 export type CardCredential = CardCredential_2;
 
+export { CardCredentialCardNumberTypeEnumSchema }
+
 export { CardCredentialSchema }
 
 export { CardPaymentInstrumentSchema }
@@ -190,26 +205,30 @@ export class CheckoutCapability {
     // Warning: (ae-forgotten-export) The symbol "HttpClient" needs to be exported by the entry point index.d.ts
     constructor(http: HttpClient, extensions: CheckoutExtensions);
     // (undocumented)
-    applyDiscountCodes(id: string, codes: readonly string[], patch?: FulfillmentPatch): Promise<CheckoutSession>;
+    applyDiscountCodes(id: string, codes: readonly string[]): Promise<CheckoutSession>;
     // (undocumented)
     cancel(id: string): Promise<CheckoutSession>;
     // (undocumented)
     complete(id: string, payload: CompleteCheckoutPayload): Promise<CheckoutSession>;
     // (undocumented)
     create(payload: CreateCheckoutPayload): Promise<CheckoutSession>;
+    // (undocumented)
+    createFulfillmentMethod(id: string, payload: FulfillmentMethodCreatePayload): Promise<CheckoutSession>;
     readonly extensions: CheckoutExtensions;
     // (undocumented)
     get(id: string): Promise<CheckoutSession>;
     // (undocumented)
-    selectDestination(id: string, destinationId: string, fulfillmentType?: string, patch?: FulfillmentPatch): Promise<CheckoutSession>;
+    selectDestination(id: string, destinationId: string, fulfillmentType?: string): Promise<CheckoutSession>;
     // (undocumented)
-    selectFulfillmentOption(id: string, optionId: string, destinationId?: string, fulfillmentType?: string, patch?: FulfillmentPatch): Promise<CheckoutSession>;
-    // Warning: (ae-forgotten-export) The symbol "FulfillmentPatch" needs to be exported by the entry point index.d.ts
-    //
+    selectFulfillmentOption(id: string, optionId: string, destinationId?: string, fulfillmentType?: string): Promise<CheckoutSession>;
     // (undocumented)
-    setFulfillment(id: string, type: string, patch?: FulfillmentPatch): Promise<CheckoutSession>;
+    setFulfillment(id: string, type: string): Promise<CheckoutSession>;
     // (undocumented)
     update(id: string, patch: UpdateCheckoutPayload): Promise<CheckoutSession>;
+    // (undocumented)
+    updateFulfillmentGroup(id: string, methodId: string, groupId: string, payload: FulfillmentGroupUpdatePayload): Promise<CheckoutSession>;
+    // (undocumented)
+    updateFulfillmentMethod(id: string, methodId: string, payload: FulfillmentMethodUpdatePayload): Promise<CheckoutSession>;
 }
 
 export { CheckoutCompleteRequestSchema }
@@ -235,7 +254,7 @@ export { CheckoutResponseStatusSchema }
 export { CheckoutSchema }
 
 // @public (undocumented)
-export type CheckoutSession = CheckoutResponse;
+export type CheckoutSession = z.output<typeof CheckoutSessionSchema>;
 
 // @public (undocumented)
 export const CheckoutSessionSchema: z.ZodObject<{
@@ -249,15 +268,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
@@ -277,15 +296,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             extends: z.ZodOptional<z.ZodString>;
@@ -302,24 +321,24 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
     }, "strip", z.ZodTypeAny, {
         version: string;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -327,27 +346,27 @@ export const CheckoutSessionSchema: z.ZodObject<{
         })[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
         })[]> | undefined;
         payment_handlers?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]> | undefined;
     }, {
         version: string;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -355,18 +374,18 @@ export const CheckoutSessionSchema: z.ZodObject<{
         })[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
         })[]> | undefined;
         payment_handlers?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]> | undefined;
     }>, z.ZodObject<{
@@ -378,15 +397,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
@@ -443,15 +462,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             extends: z.ZodOptional<z.ZodString>;
@@ -468,30 +487,30 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>;
     }, "strip", z.ZodTypeAny, {
         payment_handlers: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]>;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -510,9 +529,9 @@ export const CheckoutSessionSchema: z.ZodObject<{
         }))[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
@@ -520,16 +539,16 @@ export const CheckoutSessionSchema: z.ZodObject<{
     }, {
         payment_handlers: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]>;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -548,9 +567,9 @@ export const CheckoutSessionSchema: z.ZodObject<{
         }))[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
@@ -697,25 +716,25 @@ export const CheckoutSessionSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -740,25 +759,25 @@ export const CheckoutSessionSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -783,25 +802,25 @@ export const CheckoutSessionSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -824,15 +843,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectOutputType<{
                 type: z.ZodString;
@@ -849,15 +868,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectInputType<{
                 type: z.ZodString;
@@ -890,15 +909,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
@@ -918,15 +937,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             extends: z.ZodOptional<z.ZodString>;
@@ -943,24 +962,24 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
     }, "strip", z.ZodTypeAny, {
         version: string;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -968,27 +987,27 @@ export const CheckoutSessionSchema: z.ZodObject<{
         })[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
         })[]> | undefined;
         payment_handlers?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]> | undefined;
     }, {
         version: string;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -996,18 +1015,18 @@ export const CheckoutSessionSchema: z.ZodObject<{
         })[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
         })[]> | undefined;
         payment_handlers?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]> | undefined;
     }>, z.ZodObject<{
@@ -1019,15 +1038,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
@@ -1084,15 +1103,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             extends: z.ZodOptional<z.ZodString>;
@@ -1109,30 +1128,30 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>;
     }, "strip", z.ZodTypeAny, {
         payment_handlers: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]>;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -1151,9 +1170,9 @@ export const CheckoutSessionSchema: z.ZodObject<{
         }))[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
@@ -1161,16 +1180,16 @@ export const CheckoutSessionSchema: z.ZodObject<{
     }, {
         payment_handlers: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]>;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -1189,9 +1208,9 @@ export const CheckoutSessionSchema: z.ZodObject<{
         }))[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
@@ -1338,25 +1357,25 @@ export const CheckoutSessionSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -1381,25 +1400,25 @@ export const CheckoutSessionSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -1424,25 +1443,25 @@ export const CheckoutSessionSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -1465,15 +1484,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectOutputType<{
                 type: z.ZodString;
@@ -1490,15 +1509,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectInputType<{
                 type: z.ZodString;
@@ -1531,15 +1550,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
@@ -1559,15 +1578,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             extends: z.ZodOptional<z.ZodString>;
@@ -1584,24 +1603,24 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
     }, "strip", z.ZodTypeAny, {
         version: string;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -1609,27 +1628,27 @@ export const CheckoutSessionSchema: z.ZodObject<{
         })[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
         })[]> | undefined;
         payment_handlers?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]> | undefined;
     }, {
         version: string;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -1637,18 +1656,18 @@ export const CheckoutSessionSchema: z.ZodObject<{
         })[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
         })[]> | undefined;
         payment_handlers?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]> | undefined;
     }>, z.ZodObject<{
@@ -1660,15 +1679,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
@@ -1725,15 +1744,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             extends: z.ZodOptional<z.ZodString>;
@@ -1750,30 +1769,30 @@ export const CheckoutSessionSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>;
     }, "strip", z.ZodTypeAny, {
         payment_handlers: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]>;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -1792,9 +1811,9 @@ export const CheckoutSessionSchema: z.ZodObject<{
         }))[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
@@ -1802,16 +1821,16 @@ export const CheckoutSessionSchema: z.ZodObject<{
     }, {
         payment_handlers: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]>;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -1830,9 +1849,9 @@ export const CheckoutSessionSchema: z.ZodObject<{
         }))[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
@@ -1979,25 +1998,25 @@ export const CheckoutSessionSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -2022,25 +2041,25 @@ export const CheckoutSessionSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -2065,25 +2084,25 @@ export const CheckoutSessionSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -2106,15 +2125,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectOutputType<{
                 type: z.ZodString;
@@ -2131,15 +2150,15 @@ export const CheckoutSessionSchema: z.ZodObject<{
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectInputType<{
                 type: z.ZodString;
@@ -2166,23 +2185,12 @@ export const CheckoutSessionSchema: z.ZodObject<{
 // @public (undocumented)
 export type CheckoutSessionStatus = CheckoutResponseStatus;
 
+export { CheckoutStatusEnumSchema }
+
 export { CheckoutUpdateRequestSchema }
 
 // @public (undocumented)
-export interface CompleteCheckoutPayload {
-    // (undocumented)
-    readonly ap2?: {
-        readonly checkout_mandate?: string;
-    };
-    // (undocumented)
-    readonly payment?: {
-        readonly instruments: ReadonlyArray<PaymentInstrument>;
-    };
-    // (undocumented)
-    readonly payment_data?: PaymentInstrument;
-    // (undocumented)
-    readonly risk_signals?: Readonly<Record<string, unknown>>;
-}
+export type CompleteCheckoutPayload = z.output<typeof CheckoutCompleteRequestSchema>;
 
 // @public (undocumented)
 export const CompleteCheckoutRequestSchema: z.ZodObject<{
@@ -2202,25 +2210,25 @@ export const CompleteCheckoutRequestSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -2245,25 +2253,25 @@ export const CompleteCheckoutRequestSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -2288,25 +2296,25 @@ export const CompleteCheckoutRequestSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -2329,15 +2337,15 @@ export const CompleteCheckoutRequestSchema: z.ZodObject<{
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectOutputType<{
                 type: z.ZodString;
@@ -2354,15 +2362,15 @@ export const CompleteCheckoutRequestSchema: z.ZodObject<{
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectInputType<{
                 type: z.ZodString;
@@ -2374,159 +2382,22 @@ export const CompleteCheckoutRequestSchema: z.ZodObject<{
             selected?: boolean | undefined;
         })[] | undefined;
     }>;
-}, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-    payment: z.ZodObject<{
-        instruments: z.ZodOptional<z.ZodArray<z.ZodIntersection<z.ZodObject<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, z.ZodTypeAny, "passthrough">>, z.ZodObject<{
-            selected: z.ZodOptional<z.ZodBoolean>;
-        }, "strip", z.ZodTypeAny, {
-            selected?: boolean | undefined;
-        }, {
-            selected?: boolean | undefined;
-        }>>, "many">>;
-    }, "strip", z.ZodTypeAny, {
+}, "strict", z.ZodTypeAny, {
+    payment: {
         instruments?: ({
             id: string;
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectOutputType<{
                 type: z.ZodString;
@@ -2537,21 +2408,23 @@ export const CompleteCheckoutRequestSchema: z.ZodObject<{
         } & {
             selected?: boolean | undefined;
         })[] | undefined;
-    }, {
+    };
+}, {
+    payment: {
         instruments?: ({
             id: string;
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectInputType<{
                 type: z.ZodString;
@@ -2562,199 +2435,10 @@ export const CompleteCheckoutRequestSchema: z.ZodObject<{
         } & {
             selected?: boolean | undefined;
         })[] | undefined;
-    }>;
-}, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-    payment: z.ZodObject<{
-        instruments: z.ZodOptional<z.ZodArray<z.ZodIntersection<z.ZodObject<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, z.ZodTypeAny, "passthrough">>, z.ZodObject<{
-            selected: z.ZodOptional<z.ZodBoolean>;
-        }, "strip", z.ZodTypeAny, {
-            selected?: boolean | undefined;
-        }, {
-            selected?: boolean | undefined;
-        }>>, "many">>;
-    }, "strip", z.ZodTypeAny, {
-        instruments?: ({
-            id: string;
-            type: string;
-            handler_id: string;
-            billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            } | undefined;
-            credential?: z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough"> | undefined;
-            display?: Record<string, unknown> | undefined;
-        } & {
-            [k: string]: unknown;
-        } & {
-            selected?: boolean | undefined;
-        })[] | undefined;
-    }, {
-        instruments?: ({
-            id: string;
-            type: string;
-            handler_id: string;
-            billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            } | undefined;
-            credential?: z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough"> | undefined;
-            display?: Record<string, unknown> | undefined;
-        } & {
-            [k: string]: unknown;
-        } & {
-            selected?: boolean | undefined;
-        })[] | undefined;
-    }>;
-}, z.ZodTypeAny, "passthrough">>;
+    };
+}>;
 
-// @public
+// @public (undocumented)
 export function connect(config: UCPClientConfig, options?: {
     readonly onValidationWarning?: LogFn;
 }): Promise<ConnectedClient>;
@@ -2777,32 +2461,7 @@ export type ContentType = 'plain' | 'markdown';
 export { ContextSchema }
 
 // @public (undocumented)
-export interface CreateCheckoutPayload {
-    // (undocumented)
-    readonly buyer?: {
-        readonly first_name?: string;
-        readonly last_name?: string;
-        readonly email?: string;
-        readonly phone_number?: string;
-        readonly consent?: BuyerConsent;
-    };
-    // (undocumented)
-    readonly context?: LocalizationContext;
-    // (undocumented)
-    readonly currency?: string;
-    // (undocumented)
-    readonly line_items: ReadonlyArray<{
-        readonly item: {
-            readonly id: string;
-        };
-        readonly quantity: number;
-    }>;
-    // (undocumented)
-    readonly payment?: {
-        readonly instruments?: readonly unknown[];
-        readonly handlers?: readonly unknown[];
-    };
-}
+export type CreateCheckoutPayload = z.output<typeof CheckoutCreateRequestSchema>;
 
 // @public (undocumented)
 export const CreateCheckoutRequestSchema: z.ZodObject<{
@@ -2915,25 +2574,25 @@ export const CreateCheckoutRequestSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -2958,25 +2617,25 @@ export const CreateCheckoutRequestSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -3001,25 +2660,25 @@ export const CreateCheckoutRequestSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -3042,15 +2701,15 @@ export const CreateCheckoutRequestSchema: z.ZodObject<{
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectOutputType<{
                 type: z.ZodString;
@@ -3067,15 +2726,15 @@ export const CreateCheckoutRequestSchema: z.ZodObject<{
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectInputType<{
                 type: z.ZodString;
@@ -3087,41 +2746,8 @@ export const CreateCheckoutRequestSchema: z.ZodObject<{
             selected?: boolean | undefined;
         })[] | undefined;
     }>>;
-}, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-    line_items: z.ZodArray<z.ZodObject<{
-        id: z.ZodString;
-        item: z.ZodObject<{
-            id: z.ZodString;
-            title: z.ZodString;
-            price: z.ZodNumber;
-            image_url: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
-            id: string;
-            title: string;
-            price: number;
-            image_url?: string | undefined;
-        }, {
-            id: string;
-            title: string;
-            price: number;
-            image_url?: string | undefined;
-        }>;
-        quantity: z.ZodNumber;
-        totals: z.ZodArray<z.ZodObject<{
-            type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-            display_text: z.ZodOptional<z.ZodString>;
-            amount: z.ZodNumber;
-        }, "strip", z.ZodTypeAny, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }>, "many">;
-        parent_id: z.ZodOptional<z.ZodString>;
-    }, "strip", z.ZodTypeAny, {
+}, "strict", z.ZodTypeAny, {
+    line_items: {
         id: string;
         item: {
             id: string;
@@ -3136,203 +2762,33 @@ export const CreateCheckoutRequestSchema: z.ZodObject<{
             display_text?: string | undefined;
         }[];
         parent_id?: string | undefined;
-    }, {
-        id: string;
-        item: {
-            id: string;
-            title: string;
-            price: number;
-            image_url?: string | undefined;
-        };
-        quantity: number;
-        totals: {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }[];
-        parent_id?: string | undefined;
-    }>, "many">;
-    buyer: z.ZodOptional<z.ZodObject<{
+    }[];
+    buyer?: z.objectOutputType<{
         first_name: z.ZodOptional<z.ZodString>;
         last_name: z.ZodOptional<z.ZodString>;
         email: z.ZodOptional<z.ZodString>;
         phone_number: z.ZodOptional<z.ZodString>;
-    }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-        first_name: z.ZodOptional<z.ZodString>;
-        last_name: z.ZodOptional<z.ZodString>;
-        email: z.ZodOptional<z.ZodString>;
-        phone_number: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-        first_name: z.ZodOptional<z.ZodString>;
-        last_name: z.ZodOptional<z.ZodString>;
-        email: z.ZodOptional<z.ZodString>;
-        phone_number: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">>>;
-    context: z.ZodOptional<z.ZodObject<{
+    }, z.ZodTypeAny, "passthrough"> | undefined;
+    context?: z.objectOutputType<{
         address_country: z.ZodOptional<z.ZodString>;
         address_region: z.ZodOptional<z.ZodString>;
         postal_code: z.ZodOptional<z.ZodString>;
-    }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-        address_country: z.ZodOptional<z.ZodString>;
-        address_region: z.ZodOptional<z.ZodString>;
-        postal_code: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-        address_country: z.ZodOptional<z.ZodString>;
-        address_region: z.ZodOptional<z.ZodString>;
-        postal_code: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">>>;
-    payment: z.ZodOptional<z.ZodObject<{
-        instruments: z.ZodOptional<z.ZodArray<z.ZodIntersection<z.ZodObject<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, z.ZodTypeAny, "passthrough">>, z.ZodObject<{
-            selected: z.ZodOptional<z.ZodBoolean>;
-        }, "strip", z.ZodTypeAny, {
-            selected?: boolean | undefined;
-        }, {
-            selected?: boolean | undefined;
-        }>>, "many">>;
-    }, "strip", z.ZodTypeAny, {
+    }, z.ZodTypeAny, "passthrough"> | undefined;
+    payment?: {
         instruments?: ({
             id: string;
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectOutputType<{
                 type: z.ZodString;
@@ -3343,67 +2799,9 @@ export const CreateCheckoutRequestSchema: z.ZodObject<{
         } & {
             selected?: boolean | undefined;
         })[] | undefined;
-    }, {
-        instruments?: ({
-            id: string;
-            type: string;
-            handler_id: string;
-            billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            } | undefined;
-            credential?: z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough"> | undefined;
-            display?: Record<string, unknown> | undefined;
-        } & {
-            [k: string]: unknown;
-        } & {
-            selected?: boolean | undefined;
-        })[] | undefined;
-    }>>;
-}, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-    line_items: z.ZodArray<z.ZodObject<{
-        id: z.ZodString;
-        item: z.ZodObject<{
-            id: z.ZodString;
-            title: z.ZodString;
-            price: z.ZodNumber;
-            image_url: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
-            id: string;
-            title: string;
-            price: number;
-            image_url?: string | undefined;
-        }, {
-            id: string;
-            title: string;
-            price: number;
-            image_url?: string | undefined;
-        }>;
-        quantity: z.ZodNumber;
-        totals: z.ZodArray<z.ZodObject<{
-            type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-            display_text: z.ZodOptional<z.ZodString>;
-            amount: z.ZodNumber;
-        }, "strip", z.ZodTypeAny, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }>, "many">;
-        parent_id: z.ZodOptional<z.ZodString>;
-    }, "strip", z.ZodTypeAny, {
+    } | undefined;
+}, {
+    line_items: {
         id: string;
         item: {
             id: string;
@@ -3418,228 +2816,33 @@ export const CreateCheckoutRequestSchema: z.ZodObject<{
             display_text?: string | undefined;
         }[];
         parent_id?: string | undefined;
-    }, {
-        id: string;
-        item: {
-            id: string;
-            title: string;
-            price: number;
-            image_url?: string | undefined;
-        };
-        quantity: number;
-        totals: {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }[];
-        parent_id?: string | undefined;
-    }>, "many">;
-    buyer: z.ZodOptional<z.ZodObject<{
+    }[];
+    buyer?: z.objectInputType<{
         first_name: z.ZodOptional<z.ZodString>;
         last_name: z.ZodOptional<z.ZodString>;
         email: z.ZodOptional<z.ZodString>;
         phone_number: z.ZodOptional<z.ZodString>;
-    }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-        first_name: z.ZodOptional<z.ZodString>;
-        last_name: z.ZodOptional<z.ZodString>;
-        email: z.ZodOptional<z.ZodString>;
-        phone_number: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-        first_name: z.ZodOptional<z.ZodString>;
-        last_name: z.ZodOptional<z.ZodString>;
-        email: z.ZodOptional<z.ZodString>;
-        phone_number: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">>>;
-    context: z.ZodOptional<z.ZodObject<{
+    }, z.ZodTypeAny, "passthrough"> | undefined;
+    context?: z.objectInputType<{
         address_country: z.ZodOptional<z.ZodString>;
         address_region: z.ZodOptional<z.ZodString>;
         postal_code: z.ZodOptional<z.ZodString>;
-    }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-        address_country: z.ZodOptional<z.ZodString>;
-        address_region: z.ZodOptional<z.ZodString>;
-        postal_code: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-        address_country: z.ZodOptional<z.ZodString>;
-        address_region: z.ZodOptional<z.ZodString>;
-        postal_code: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">>>;
-    payment: z.ZodOptional<z.ZodObject<{
-        instruments: z.ZodOptional<z.ZodArray<z.ZodIntersection<z.ZodObject<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, z.ZodTypeAny, "passthrough">>, z.ZodObject<{
-            selected: z.ZodOptional<z.ZodBoolean>;
-        }, "strip", z.ZodTypeAny, {
-            selected?: boolean | undefined;
-        }, {
-            selected?: boolean | undefined;
-        }>>, "many">>;
-    }, "strip", z.ZodTypeAny, {
+    }, z.ZodTypeAny, "passthrough"> | undefined;
+    payment?: {
         instruments?: ({
             id: string;
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
-            } | undefined;
-            credential?: z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough"> | undefined;
-            display?: Record<string, unknown> | undefined;
-        } & {
-            [k: string]: unknown;
-        } & {
-            selected?: boolean | undefined;
-        })[] | undefined;
-    }, {
-        instruments?: ({
-            id: string;
-            type: string;
-            handler_id: string;
-            billing_address?: {
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
                 extended_address?: string | undefined;
                 street_address?: string | undefined;
                 address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
             } | undefined;
             credential?: z.objectInputType<{
                 type: z.ZodString;
@@ -3650,8 +2853,8 @@ export const CreateCheckoutRequestSchema: z.ZodObject<{
         } & {
             selected?: boolean | undefined;
         })[] | undefined;
-    }>>;
-}, z.ZodTypeAny, "passthrough">>;
+    } | undefined;
+}>;
 
 // @public
 export function createWebhookVerifier(gatewayUrl: string): WebhookVerifier;
@@ -3661,27 +2864,21 @@ export const DEFAULT_UCP_VERSION = "2026-01-23";
 
 export { DiscountAllocationSchema }
 
+export { DiscountAppliedDiscountMethodEnumSchema }
+
 export { DiscountAppliedDiscountSchema }
 
 export { DiscountDiscountsObjectSchema }
 
 export { EmbeddedConfigSchema }
 
+export { ExpectationMethodTypeEnumSchema }
+
 export { ExpectationSchema }
 
-// @public @deprecated (undocumented)
-export const ExtendedPaymentCredentialSchema: z.ZodObject<{
-    type: z.ZodString;
-    token: z.ZodOptional<z.ZodString>;
-}, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-    type: z.ZodString;
-    token: z.ZodOptional<z.ZodString>;
-}, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-    type: z.ZodString;
-    token: z.ZodOptional<z.ZodString>;
-}, z.ZodTypeAny, "passthrough">>;
-
 export { FulfillmentAvailableMethodSchema }
+
+export { FulfillmentAvailableMethodTypeEnumSchema }
 
 export { FulfillmentDestinationSchema }
 
@@ -3699,13 +2896,24 @@ export { FulfillmentExtensionFulfillmentSchema }
 
 export { FulfillmentGroupSchema }
 
+// @public (undocumented)
+export type FulfillmentGroupUpdatePayload = z.output<typeof FulfillmentGroupUpdateRequestSchema>;
+
 export { FulfillmentGroupUpdateRequestSchema }
+
+// @public (undocumented)
+export type FulfillmentMethodCreatePayload = z.output<typeof FulfillmentMethodCreateRequestSchema>;
 
 export { FulfillmentMethodCreateRequestSchema }
 
 export { FulfillmentMethodResponseSchema }
 
 export { FulfillmentMethodSchema }
+
+export { FulfillmentMethodTypeEnumSchema }
+
+// @public (undocumented)
+export type FulfillmentMethodUpdatePayload = z.output<typeof FulfillmentMethodUpdateRequestSchema>;
 
 export { FulfillmentMethodUpdateRequestSchema }
 
@@ -3755,68 +2963,43 @@ export interface JsonSchema {
 }
 
 // @public
-export type JWK = JsonWebKey & {
-    readonly kid?: string;
-};
-
-// @public (undocumented)
-export const JWKSchema: z.ZodObject<{
-    kty: z.ZodString;
-    kid: z.ZodOptional<z.ZodString>;
-    use: z.ZodOptional<z.ZodString>;
-    alg: z.ZodOptional<z.ZodString>;
-    crv: z.ZodOptional<z.ZodString>;
-    x: z.ZodOptional<z.ZodString>;
-    y: z.ZodOptional<z.ZodString>;
-}, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-    kty: z.ZodString;
-    kid: z.ZodOptional<z.ZodString>;
-    use: z.ZodOptional<z.ZodString>;
-    alg: z.ZodOptional<z.ZodString>;
-    crv: z.ZodOptional<z.ZodString>;
-    x: z.ZodOptional<z.ZodString>;
-    y: z.ZodOptional<z.ZodString>;
-}, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-    kty: z.ZodString;
-    kid: z.ZodOptional<z.ZodString>;
-    use: z.ZodOptional<z.ZodString>;
-    alg: z.ZodOptional<z.ZodString>;
-    crv: z.ZodOptional<z.ZodString>;
-    x: z.ZodOptional<z.ZodString>;
-    y: z.ZodOptional<z.ZodString>;
-}, z.ZodTypeAny, "passthrough">>;
+export type JWK = z.output<typeof UcpSigningKeySchema>;
 
 export { LineItemResponseSchema }
 
 export { LineItemSchema }
+
+// @public (undocumented)
+export type LineItemUpdatePayload = z.output<typeof LineItemUpdateRequestSchema>;
 
 export { LineItemUpdateRequestSchema }
 
 export { LinkSchema }
 
 // @public (undocumented)
-export interface LocalizationContext {
-    // (undocumented)
-    readonly address_country?: string;
-    // (undocumented)
-    readonly address_region?: string;
-    // (undocumented)
-    readonly postal_code?: string;
-}
+export type LocalizationContext = z.output<typeof ContextSchema>;
 
 export { MerchantFulfillmentConfigSchema }
 
+export { MessageErrorContentTypeEnumSchema }
+
 export { MessageErrorSchema }
+
+export { MessageErrorSeverityEnumSchema }
+
+export { MessageInfoContentTypeEnumSchema }
 
 export { MessageInfoSchema }
 
 export { MessageSchema }
 
 // @public (undocumented)
-export type MessageSeverity = 'recoverable' | 'requires_buyer_input' | 'requires_buyer_review';
+export type MessageSeverity = 'recoverable' | 'requires_buyer_input' | 'requires_buyer_review' | 'unrecoverable';
 
 // @public (undocumented)
 export type MessageType = 'error' | 'warning' | 'info';
+
+export { MessageWarningContentTypeEnumSchema }
 
 export { MessageWarningSchema }
 
@@ -3846,12 +3029,18 @@ export interface OAuthServerMetadata {
 export class OrderCapability {
     constructor(http: HttpClient);
     get(id: string): Promise<UCPSpecOrder>;
-    update(id: string, payload: Record<string, unknown>): Promise<UCPSpecOrder>;
+    update(id: string, payload: Record<string, unknown>): Promise<OrderUpdate>;
+    updateLineItem(id: string, lineItemId: string, payload: LineItemUpdatePayload): Promise<OrderUpdate>;
 }
 
 export { OrderConfirmationSchema }
 
 export { OrderLineItemSchema }
+
+export { OrderLineItemStatusEnumSchema }
+
+// @public (undocumented)
+export type OrderUpdate = z.output<typeof OrderUpdateSchema>;
 
 export { OrderUpdateSchema }
 
@@ -3868,18 +3057,7 @@ export { PaymentHandlerBaseSchema }
 export { PaymentHandlerBusinessSchema }
 
 // @public (undocumented)
-export interface PaymentHandlerInstance {
-    // (undocumented)
-    readonly config?: Readonly<Record<string, unknown>>;
-    // (undocumented)
-    readonly id: string;
-    // (undocumented)
-    readonly schema: string;
-    // (undocumented)
-    readonly spec: string;
-    // (undocumented)
-    readonly version: string;
-}
+export type PaymentHandlerInstance = z.output<typeof PaymentHandlerBaseSchema>;
 
 // @public (undocumented)
 export interface PaymentHandlerMap {
@@ -3925,44 +3103,28 @@ export { PaymentResponseSchema }
 
 export { PaymentSchema }
 
-// @public @deprecated (undocumented)
-export const PlatformConfigSchema: z.ZodObject<{
-    webhook_url: z.ZodOptional<z.ZodString>;
-}, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-    webhook_url: z.ZodOptional<z.ZodString>;
-}, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-    webhook_url: z.ZodOptional<z.ZodString>;
-}, z.ZodTypeAny, "passthrough">>;
-
 export { PlatformFulfillmentConfigSchema }
 
 // @public (undocumented)
-export interface PostalAddress {
-    // (undocumented)
-    readonly address_country?: string;
-    // (undocumented)
-    readonly address_locality?: string;
-    // (undocumented)
-    readonly address_region?: string;
-    // (undocumented)
-    readonly extended_address?: string;
-    // (undocumented)
-    readonly first_name?: string;
-    // (undocumented)
-    readonly last_name?: string;
-    // (undocumented)
-    readonly phone_number?: string;
-    // (undocumented)
-    readonly postal_code?: string;
-    // (undocumented)
-    readonly street_address?: string;
-}
+export type PostalAddress = z.output<typeof PostalAddressSchema>;
 
 export { PostalAddressSchema }
+
+export { ProfileSchemaBaseSchema }
+
+export { ProfileSchemaBusinessProfileSchema }
+
+export { ProfileSchemaPlatformProfileSchema }
+
+export { ProfileSchemaSigningKeySchema }
+
+export { ProfileSchemaSigningKeyUseEnumSchema }
 
 export { RetailLocationSchema }
 
 export { ServiceBaseSchema }
+
+export { ServiceBaseTransportEnumSchema }
 
 export { ServiceBusinessSchema }
 
@@ -4047,6 +3209,8 @@ export { TotalResponseSchema }
 
 export { TotalSchema }
 
+export { TotalTypeEnumSchema }
+
 // @public (undocumented)
 export const UCP_CAPABILITIES: {
     readonly CHECKOUT: "dev.ucp.shopping.checkout";
@@ -4062,7 +3226,7 @@ export { UcpBaseSchema }
 
 export { UcpBusinessSchema }
 
-// @public
+// @public (undocumented)
 export class UCPClient {
     // (undocumented)
     static connect: typeof connect;
@@ -4079,6 +3243,10 @@ export interface UCPClientConfig {
     // (undocumented)
     readonly ucpVersion?: string;
 }
+
+export { UcpDiscoveryBusinessProfileSchema }
+
+export { UcpDiscoveryPlatformProfileSchema }
 
 export { UcpEntitySchema }
 
@@ -4137,7 +3305,7 @@ export class UCPOAuthError extends Error {
 export { UcpPlatformSchema }
 
 // @public
-export type UCPProfile = UcpDiscoveryProfile;
+export type UCPProfile = z.output<typeof UCPProfileSchema>;
 
 // @public (undocumented)
 export const UCPProfileSchema: z.ZodObject<{
@@ -4151,15 +3319,15 @@ export const UCPProfileSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
@@ -4179,15 +3347,15 @@ export const UCPProfileSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             extends: z.ZodOptional<z.ZodString>;
@@ -4204,24 +3372,24 @@ export const UCPProfileSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
     }, "strip", z.ZodTypeAny, {
         version: string;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -4229,27 +3397,27 @@ export const UCPProfileSchema: z.ZodObject<{
         })[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
         })[]> | undefined;
         payment_handlers?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]> | undefined;
     }, {
         version: string;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -4257,18 +3425,18 @@ export const UCPProfileSchema: z.ZodObject<{
         })[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
         })[]> | undefined;
         payment_handlers?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]> | undefined;
     }>;
@@ -4314,15 +3482,15 @@ export const UCPProfileSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
@@ -4342,15 +3510,15 @@ export const UCPProfileSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             extends: z.ZodOptional<z.ZodString>;
@@ -4367,24 +3535,24 @@ export const UCPProfileSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
     }, "strip", z.ZodTypeAny, {
         version: string;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -4392,27 +3560,27 @@ export const UCPProfileSchema: z.ZodObject<{
         })[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
         })[]> | undefined;
         payment_handlers?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]> | undefined;
     }, {
         version: string;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -4420,18 +3588,18 @@ export const UCPProfileSchema: z.ZodObject<{
         })[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
         })[]> | undefined;
         payment_handlers?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]> | undefined;
     }>;
@@ -4477,15 +3645,15 @@ export const UCPProfileSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
@@ -4505,15 +3673,15 @@ export const UCPProfileSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodObject<{
             extends: z.ZodOptional<z.ZodString>;
@@ -4530,24 +3698,24 @@ export const UCPProfileSchema: z.ZodObject<{
             config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }, {
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
     }, "strip", z.ZodTypeAny, {
         version: string;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -4555,27 +3723,27 @@ export const UCPProfileSchema: z.ZodObject<{
         })[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
         })[]> | undefined;
         payment_handlers?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]> | undefined;
     }, {
         version: string;
         services?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -4583,18 +3751,18 @@ export const UCPProfileSchema: z.ZodObject<{
         })[]> | undefined;
         capabilities?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & {
             extends?: string | undefined;
         })[]> | undefined;
         payment_handlers?: Record<string, ({
             version: string;
-            id?: string | undefined;
             spec?: string | undefined;
             schema?: string | undefined;
+            id?: string | undefined;
             config?: Record<string, unknown> | undefined;
         } & Record<string, unknown>)[]> | undefined;
     }>;
@@ -4637,57 +3805,18 @@ export { UcpResponseOrderSchema }
 
 export { UcpReverseDomainNameSchema }
 
+export { UcpSigningKeySchema as JWKSchema }
+export { UcpSigningKeySchema }
+
 // @public (undocumented)
-export type UCPSpecOrder = Order;
+export type UCPSpecOrder = z.output<typeof UCPSpecOrderSchema>;
 
 export { UCPSpecOrderSchema }
 
 export { UcpVersionSchema }
 
 // @public (undocumented)
-export interface UpdateCheckoutPayload {
-    // (undocumented)
-    readonly buyer?: {
-        readonly first_name?: string;
-        readonly last_name?: string;
-        readonly email?: string;
-        readonly phone_number?: string;
-        readonly consent?: BuyerConsent;
-    };
-    // (undocumented)
-    readonly context?: LocalizationContext;
-    // (undocumented)
-    readonly discounts?: {
-        readonly codes?: readonly string[];
-    };
-    // (undocumented)
-    readonly fulfillment?: {
-        readonly destinations?: ReadonlyArray<{
-            readonly id: string;
-            readonly address: {
-                readonly street_address?: string;
-                readonly address_locality?: string;
-                readonly address_region?: string;
-                readonly postal_code?: string;
-                readonly address_country?: string;
-            };
-        }>;
-        readonly methods?: ReadonlyArray<{
-            readonly id: string;
-            readonly type: string;
-            readonly line_item_ids?: readonly string[];
-            readonly selected_destination_id?: string;
-            readonly groups?: ReadonlyArray<{
-                readonly id: string;
-                readonly selected_option_id?: string;
-            }>;
-        }>;
-    };
-    // (undocumented)
-    readonly payment?: {
-        readonly instruments?: ReadonlyArray<PaymentInstrument>;
-    };
-}
+export type UpdateCheckoutPayload = z.output<typeof CheckoutUpdateRequestSchema>;
 
 // @public (undocumented)
 export const UpdateCheckoutRequestSchema: z.ZodObject<{
@@ -4801,25 +3930,25 @@ export const UpdateCheckoutRequestSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -4844,25 +3973,25 @@ export const UpdateCheckoutRequestSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -4887,25 +4016,25 @@ export const UpdateCheckoutRequestSchema: z.ZodObject<{
                 last_name: z.ZodOptional<z.ZodString>;
                 phone_number: z.ZodOptional<z.ZodString>;
             }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             }>>;
             credential: z.ZodOptional<z.ZodObject<{
                 type: z.ZodString;
@@ -4928,15 +4057,15 @@ export const UpdateCheckoutRequestSchema: z.ZodObject<{
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectOutputType<{
                 type: z.ZodString;
@@ -4953,15 +4082,15 @@ export const UpdateCheckoutRequestSchema: z.ZodObject<{
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectInputType<{
                 type: z.ZodString;
@@ -4973,42 +4102,9 @@ export const UpdateCheckoutRequestSchema: z.ZodObject<{
             selected?: boolean | undefined;
         })[] | undefined;
     }>>;
-}, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-    id: z.ZodString;
-    line_items: z.ZodArray<z.ZodObject<{
-        id: z.ZodString;
-        item: z.ZodObject<{
-            id: z.ZodString;
-            title: z.ZodString;
-            price: z.ZodNumber;
-            image_url: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
-            id: string;
-            title: string;
-            price: number;
-            image_url?: string | undefined;
-        }, {
-            id: string;
-            title: string;
-            price: number;
-            image_url?: string | undefined;
-        }>;
-        quantity: z.ZodNumber;
-        totals: z.ZodArray<z.ZodObject<{
-            type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-            display_text: z.ZodOptional<z.ZodString>;
-            amount: z.ZodNumber;
-        }, "strip", z.ZodTypeAny, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }>, "many">;
-        parent_id: z.ZodOptional<z.ZodString>;
-    }, "strip", z.ZodTypeAny, {
+}, "strict", z.ZodTypeAny, {
+    id: string;
+    line_items: {
         id: string;
         item: {
             id: string;
@@ -5023,203 +4119,33 @@ export const UpdateCheckoutRequestSchema: z.ZodObject<{
             display_text?: string | undefined;
         }[];
         parent_id?: string | undefined;
-    }, {
-        id: string;
-        item: {
-            id: string;
-            title: string;
-            price: number;
-            image_url?: string | undefined;
-        };
-        quantity: number;
-        totals: {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }[];
-        parent_id?: string | undefined;
-    }>, "many">;
-    buyer: z.ZodOptional<z.ZodObject<{
+    }[];
+    buyer?: z.objectOutputType<{
         first_name: z.ZodOptional<z.ZodString>;
         last_name: z.ZodOptional<z.ZodString>;
         email: z.ZodOptional<z.ZodString>;
         phone_number: z.ZodOptional<z.ZodString>;
-    }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-        first_name: z.ZodOptional<z.ZodString>;
-        last_name: z.ZodOptional<z.ZodString>;
-        email: z.ZodOptional<z.ZodString>;
-        phone_number: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-        first_name: z.ZodOptional<z.ZodString>;
-        last_name: z.ZodOptional<z.ZodString>;
-        email: z.ZodOptional<z.ZodString>;
-        phone_number: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">>>;
-    context: z.ZodOptional<z.ZodObject<{
+    }, z.ZodTypeAny, "passthrough"> | undefined;
+    context?: z.objectOutputType<{
         address_country: z.ZodOptional<z.ZodString>;
         address_region: z.ZodOptional<z.ZodString>;
         postal_code: z.ZodOptional<z.ZodString>;
-    }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-        address_country: z.ZodOptional<z.ZodString>;
-        address_region: z.ZodOptional<z.ZodString>;
-        postal_code: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-        address_country: z.ZodOptional<z.ZodString>;
-        address_region: z.ZodOptional<z.ZodString>;
-        postal_code: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">>>;
-    payment: z.ZodOptional<z.ZodObject<{
-        instruments: z.ZodOptional<z.ZodArray<z.ZodIntersection<z.ZodObject<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, z.ZodTypeAny, "passthrough">>, z.ZodObject<{
-            selected: z.ZodOptional<z.ZodBoolean>;
-        }, "strip", z.ZodTypeAny, {
-            selected?: boolean | undefined;
-        }, {
-            selected?: boolean | undefined;
-        }>>, "many">>;
-    }, "strip", z.ZodTypeAny, {
+    }, z.ZodTypeAny, "passthrough"> | undefined;
+    payment?: {
         instruments?: ({
             id: string;
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
+                extended_address?: string | undefined;
+                street_address?: string | undefined;
+                address_locality?: string | undefined;
             } | undefined;
             credential?: z.objectOutputType<{
                 type: z.ZodString;
@@ -5230,68 +4156,10 @@ export const UpdateCheckoutRequestSchema: z.ZodObject<{
         } & {
             selected?: boolean | undefined;
         })[] | undefined;
-    }, {
-        instruments?: ({
-            id: string;
-            type: string;
-            handler_id: string;
-            billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            } | undefined;
-            credential?: z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough"> | undefined;
-            display?: Record<string, unknown> | undefined;
-        } & {
-            [k: string]: unknown;
-        } & {
-            selected?: boolean | undefined;
-        })[] | undefined;
-    }>>;
-}, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-    id: z.ZodString;
-    line_items: z.ZodArray<z.ZodObject<{
-        id: z.ZodString;
-        item: z.ZodObject<{
-            id: z.ZodString;
-            title: z.ZodString;
-            price: z.ZodNumber;
-            image_url: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
-            id: string;
-            title: string;
-            price: number;
-            image_url?: string | undefined;
-        }, {
-            id: string;
-            title: string;
-            price: number;
-            image_url?: string | undefined;
-        }>;
-        quantity: z.ZodNumber;
-        totals: z.ZodArray<z.ZodObject<{
-            type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-            display_text: z.ZodOptional<z.ZodString>;
-            amount: z.ZodNumber;
-        }, "strip", z.ZodTypeAny, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }>, "many">;
-        parent_id: z.ZodOptional<z.ZodString>;
-    }, "strip", z.ZodTypeAny, {
+    } | undefined;
+}, {
+    id: string;
+    line_items: {
         id: string;
         item: {
             id: string;
@@ -5306,228 +4174,33 @@ export const UpdateCheckoutRequestSchema: z.ZodObject<{
             display_text?: string | undefined;
         }[];
         parent_id?: string | undefined;
-    }, {
-        id: string;
-        item: {
-            id: string;
-            title: string;
-            price: number;
-            image_url?: string | undefined;
-        };
-        quantity: number;
-        totals: {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }[];
-        parent_id?: string | undefined;
-    }>, "many">;
-    buyer: z.ZodOptional<z.ZodObject<{
+    }[];
+    buyer?: z.objectInputType<{
         first_name: z.ZodOptional<z.ZodString>;
         last_name: z.ZodOptional<z.ZodString>;
         email: z.ZodOptional<z.ZodString>;
         phone_number: z.ZodOptional<z.ZodString>;
-    }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-        first_name: z.ZodOptional<z.ZodString>;
-        last_name: z.ZodOptional<z.ZodString>;
-        email: z.ZodOptional<z.ZodString>;
-        phone_number: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-        first_name: z.ZodOptional<z.ZodString>;
-        last_name: z.ZodOptional<z.ZodString>;
-        email: z.ZodOptional<z.ZodString>;
-        phone_number: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">>>;
-    context: z.ZodOptional<z.ZodObject<{
+    }, z.ZodTypeAny, "passthrough"> | undefined;
+    context?: z.objectInputType<{
         address_country: z.ZodOptional<z.ZodString>;
         address_region: z.ZodOptional<z.ZodString>;
         postal_code: z.ZodOptional<z.ZodString>;
-    }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-        address_country: z.ZodOptional<z.ZodString>;
-        address_region: z.ZodOptional<z.ZodString>;
-        postal_code: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-        address_country: z.ZodOptional<z.ZodString>;
-        address_region: z.ZodOptional<z.ZodString>;
-        postal_code: z.ZodOptional<z.ZodString>;
-    }, z.ZodTypeAny, "passthrough">>>;
-    payment: z.ZodOptional<z.ZodObject<{
-        instruments: z.ZodOptional<z.ZodArray<z.ZodIntersection<z.ZodObject<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-            id: z.ZodString;
-            handler_id: z.ZodString;
-            type: z.ZodString;
-            billing_address: z.ZodOptional<z.ZodObject<{
-                extended_address: z.ZodOptional<z.ZodString>;
-                street_address: z.ZodOptional<z.ZodString>;
-                address_locality: z.ZodOptional<z.ZodString>;
-                address_region: z.ZodOptional<z.ZodString>;
-                address_country: z.ZodOptional<z.ZodString>;
-                postal_code: z.ZodOptional<z.ZodString>;
-                first_name: z.ZodOptional<z.ZodString>;
-                last_name: z.ZodOptional<z.ZodString>;
-                phone_number: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }, {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
-            }>>;
-            credential: z.ZodOptional<z.ZodObject<{
-                type: z.ZodString;
-            }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough">>>;
-            display: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, z.ZodTypeAny, "passthrough">>, z.ZodObject<{
-            selected: z.ZodOptional<z.ZodBoolean>;
-        }, "strip", z.ZodTypeAny, {
-            selected?: boolean | undefined;
-        }, {
-            selected?: boolean | undefined;
-        }>>, "many">>;
-    }, "strip", z.ZodTypeAny, {
+    }, z.ZodTypeAny, "passthrough"> | undefined;
+    payment?: {
         instruments?: ({
             id: string;
             type: string;
             handler_id: string;
             billing_address?: {
-                extended_address?: string | undefined;
-                street_address?: string | undefined;
-                address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
                 first_name?: string | undefined;
                 last_name?: string | undefined;
                 phone_number?: string | undefined;
-            } | undefined;
-            credential?: z.objectOutputType<{
-                type: z.ZodString;
-            }, z.ZodTypeAny, "passthrough"> | undefined;
-            display?: Record<string, unknown> | undefined;
-        } & {
-            [k: string]: unknown;
-        } & {
-            selected?: boolean | undefined;
-        })[] | undefined;
-    }, {
-        instruments?: ({
-            id: string;
-            type: string;
-            handler_id: string;
-            billing_address?: {
+                address_country?: string | undefined;
+                address_region?: string | undefined;
+                postal_code?: string | undefined;
                 extended_address?: string | undefined;
                 street_address?: string | undefined;
                 address_locality?: string | undefined;
-                address_region?: string | undefined;
-                address_country?: string | undefined;
-                postal_code?: string | undefined;
-                first_name?: string | undefined;
-                last_name?: string | undefined;
-                phone_number?: string | undefined;
             } | undefined;
             credential?: z.objectInputType<{
                 type: z.ZodString;
@@ -5538,8 +4211,8 @@ export const UpdateCheckoutRequestSchema: z.ZodObject<{
         } & {
             selected?: boolean | undefined;
         })[] | undefined;
-    }>>;
-}, z.ZodTypeAny, "passthrough">>;
+    } | undefined;
+}>;
 
 // @public
 export function verifyRequestSignature(body: string, signature: string, signingKeys: readonly JWK[]): Promise<boolean>;
@@ -5571,15 +4244,15 @@ export const WebhookEventSchema: z.ZodObject<{
                 config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
             }, "strip", z.ZodTypeAny, {
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             }, {
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             }>, z.ZodObject<{
                 transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
@@ -5599,15 +4272,15 @@ export const WebhookEventSchema: z.ZodObject<{
                 config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
             }, "strip", z.ZodTypeAny, {
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             }, {
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             }>, z.ZodObject<{
                 extends: z.ZodOptional<z.ZodString>;
@@ -5624,24 +4297,24 @@ export const WebhookEventSchema: z.ZodObject<{
                 config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
             }, "strip", z.ZodTypeAny, {
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             }, {
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
         }, "strip", z.ZodTypeAny, {
             version: string;
             services?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -5649,27 +4322,27 @@ export const WebhookEventSchema: z.ZodObject<{
             })[]> | undefined;
             capabilities?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 extends?: string | undefined;
             })[]> | undefined;
             payment_handlers?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & Record<string, unknown>)[]> | undefined;
         }, {
             version: string;
             services?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -5677,18 +4350,18 @@ export const WebhookEventSchema: z.ZodObject<{
             })[]> | undefined;
             capabilities?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 extends?: string | undefined;
             })[]> | undefined;
             payment_handlers?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & Record<string, unknown>)[]> | undefined;
         }>, z.ZodObject<{
@@ -5700,15 +4373,15 @@ export const WebhookEventSchema: z.ZodObject<{
                 config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
             }, "strip", z.ZodTypeAny, {
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             }, {
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             }>, z.ZodObject<{
                 extends: z.ZodOptional<z.ZodString>;
@@ -5720,9 +4393,9 @@ export const WebhookEventSchema: z.ZodObject<{
         }, "strip", z.ZodTypeAny, {
             capabilities?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 extends?: string | undefined;
@@ -5730,9 +4403,9 @@ export const WebhookEventSchema: z.ZodObject<{
         }, {
             capabilities?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 extends?: string | undefined;
@@ -5848,25 +4521,25 @@ export const WebhookEventSchema: z.ZodObject<{
                     last_name: z.ZodOptional<z.ZodString>;
                     phone_number: z.ZodOptional<z.ZodString>;
                 }, "strip", z.ZodTypeAny, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
                     first_name?: string | undefined;
                     last_name?: string | undefined;
                     phone_number?: string | undefined;
+                    address_country?: string | undefined;
+                    address_region?: string | undefined;
+                    postal_code?: string | undefined;
+                    extended_address?: string | undefined;
+                    street_address?: string | undefined;
+                    address_locality?: string | undefined;
                 }, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
                     first_name?: string | undefined;
                     last_name?: string | undefined;
                     phone_number?: string | undefined;
+                    address_country?: string | undefined;
+                    address_region?: string | undefined;
+                    postal_code?: string | undefined;
+                    extended_address?: string | undefined;
+                    street_address?: string | undefined;
+                    address_locality?: string | undefined;
                 }>;
                 description: z.ZodOptional<z.ZodString>;
                 fulfillable_on: z.ZodOptional<z.ZodString>;
@@ -5878,15 +4551,15 @@ export const WebhookEventSchema: z.ZodObject<{
                 }[];
                 method_type: "shipping" | "pickup" | "digital";
                 destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
                     first_name?: string | undefined;
                     last_name?: string | undefined;
                     phone_number?: string | undefined;
+                    address_country?: string | undefined;
+                    address_region?: string | undefined;
+                    postal_code?: string | undefined;
+                    extended_address?: string | undefined;
+                    street_address?: string | undefined;
+                    address_locality?: string | undefined;
                 };
                 description?: string | undefined;
                 fulfillable_on?: string | undefined;
@@ -5898,15 +4571,15 @@ export const WebhookEventSchema: z.ZodObject<{
                 }[];
                 method_type: "shipping" | "pickup" | "digital";
                 destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
                     first_name?: string | undefined;
                     last_name?: string | undefined;
                     phone_number?: string | undefined;
+                    address_country?: string | undefined;
+                    address_region?: string | undefined;
+                    postal_code?: string | undefined;
+                    extended_address?: string | undefined;
+                    street_address?: string | undefined;
+                    address_locality?: string | undefined;
                 };
                 description?: string | undefined;
                 fulfillable_on?: string | undefined;
@@ -5963,15 +4636,15 @@ export const WebhookEventSchema: z.ZodObject<{
                 }[];
                 method_type: "shipping" | "pickup" | "digital";
                 destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
                     first_name?: string | undefined;
                     last_name?: string | undefined;
                     phone_number?: string | undefined;
+                    address_country?: string | undefined;
+                    address_region?: string | undefined;
+                    postal_code?: string | undefined;
+                    extended_address?: string | undefined;
+                    street_address?: string | undefined;
+                    address_locality?: string | undefined;
                 };
                 description?: string | undefined;
                 fulfillable_on?: string | undefined;
@@ -5998,15 +4671,15 @@ export const WebhookEventSchema: z.ZodObject<{
                 }[];
                 method_type: "shipping" | "pickup" | "digital";
                 destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
                     first_name?: string | undefined;
                     last_name?: string | undefined;
                     phone_number?: string | undefined;
+                    address_country?: string | undefined;
+                    address_region?: string | undefined;
+                    postal_code?: string | undefined;
+                    extended_address?: string | undefined;
+                    street_address?: string | undefined;
+                    address_locality?: string | undefined;
                 };
                 description?: string | undefined;
                 fulfillable_on?: string | undefined;
@@ -6048,22 +4721,22 @@ export const WebhookEventSchema: z.ZodObject<{
             status: "completed" | "pending" | "failed";
             occurred_at: string;
             amount?: number | undefined;
-            description?: string | undefined;
             line_items?: {
                 id: string;
                 quantity: number;
             }[] | undefined;
+            description?: string | undefined;
         }, {
             id: string;
             type: string;
             status: "completed" | "pending" | "failed";
             occurred_at: string;
             amount?: number | undefined;
-            description?: string | undefined;
             line_items?: {
                 id: string;
                 quantity: number;
             }[] | undefined;
+            description?: string | undefined;
         }>, "many">>;
         totals: z.ZodArray<z.ZodObject<{
             type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
@@ -6078,88 +4751,15 @@ export const WebhookEventSchema: z.ZodObject<{
             amount: number;
             display_text?: string | undefined;
         }>, "many">;
-    }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-        ucp: z.ZodIntersection<z.ZodObject<{
-            version: z.ZodString;
-            services: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
-                endpoint: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }>>, "many">>>;
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-            payment_handlers: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
+    }, "strip", z.ZodTypeAny, {
+        id: string;
+        ucp: {
             version: string;
             services?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -6167,142 +4767,73 @@ export const WebhookEventSchema: z.ZodObject<{
             })[]> | undefined;
             capabilities?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 extends?: string | undefined;
             })[]> | undefined;
             payment_handlers?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & Record<string, unknown>)[]> | undefined;
-        }, {
-            version: string;
-            services?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            })[]> | undefined;
+        } & {
             capabilities?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 extends?: string | undefined;
             })[]> | undefined;
-            payment_handlers?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & Record<string, unknown>)[]> | undefined;
-        }>, z.ZodObject<{
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }>>;
-        id: z.ZodString;
-        checkout_id: z.ZodString;
-        permalink_url: z.ZodString;
-        line_items: z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            item: z.ZodObject<{
-                id: z.ZodString;
-                title: z.ZodString;
-                price: z.ZodNumber;
-                image_url: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
+        };
+        fulfillment: {
+            expectations?: {
                 id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }, {
+                line_items: {
+                    id: string;
+                    quantity: number;
+                }[];
+                method_type: "shipping" | "pickup" | "digital";
+                destination: {
+                    first_name?: string | undefined;
+                    last_name?: string | undefined;
+                    phone_number?: string | undefined;
+                    address_country?: string | undefined;
+                    address_region?: string | undefined;
+                    postal_code?: string | undefined;
+                    extended_address?: string | undefined;
+                    street_address?: string | undefined;
+                    address_locality?: string | undefined;
+                };
+                description?: string | undefined;
+                fulfillable_on?: string | undefined;
+            }[] | undefined;
+            events?: {
                 id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }>;
-            quantity: z.ZodObject<{
-                total: z.ZodNumber;
-                fulfilled: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                total: number;
-                fulfilled: number;
-            }, {
-                total: number;
-                fulfilled: number;
-            }>;
-            totals: z.ZodArray<z.ZodObject<{
-                type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-                display_text: z.ZodOptional<z.ZodString>;
-                amount: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }>, "many">;
-            status: z.ZodEnum<["processing", "partial", "fulfilled"]>;
-            parent_id: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
+                type: string;
+                line_items: {
+                    id: string;
+                    quantity: number;
+                }[];
+                occurred_at: string;
+                description?: string | undefined;
+                carrier?: string | undefined;
+                tracking_number?: string | undefined;
+                tracking_url?: string | undefined;
+            }[] | undefined;
+        };
+        totals: {
+            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
+            amount: number;
+            display_text?: string | undefined;
+        }[];
+        line_items: {
             id: string;
             status: "fulfilled" | "processing" | "partial";
             item: {
@@ -6321,363 +4852,30 @@ export const WebhookEventSchema: z.ZodObject<{
                 display_text?: string | undefined;
             }[];
             parent_id?: string | undefined;
-        }, {
-            id: string;
-            status: "fulfilled" | "processing" | "partial";
-            item: {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            };
-            quantity: {
-                total: number;
-                fulfilled: number;
-            };
-            totals: {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }[];
-            parent_id?: string | undefined;
-        }>, "many">;
-        fulfillment: z.ZodObject<{
-            expectations: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                method_type: z.ZodEnum<["shipping", "pickup", "digital"]>;
-                destination: z.ZodObject<{
-                    extended_address: z.ZodOptional<z.ZodString>;
-                    street_address: z.ZodOptional<z.ZodString>;
-                    address_locality: z.ZodOptional<z.ZodString>;
-                    address_region: z.ZodOptional<z.ZodString>;
-                    address_country: z.ZodOptional<z.ZodString>;
-                    postal_code: z.ZodOptional<z.ZodString>;
-                    first_name: z.ZodOptional<z.ZodString>;
-                    last_name: z.ZodOptional<z.ZodString>;
-                    phone_number: z.ZodOptional<z.ZodString>;
-                }, "strip", z.ZodTypeAny, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }>;
-                description: z.ZodOptional<z.ZodString>;
-                fulfillable_on: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }>, "many">>;
-            events: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                occurred_at: z.ZodString;
-                type: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                tracking_number: z.ZodOptional<z.ZodString>;
-                tracking_url: z.ZodOptional<z.ZodString>;
-                carrier: z.ZodOptional<z.ZodString>;
-                description: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }>, "many">>;
-        }, "strip", z.ZodTypeAny, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }>;
-        adjustments: z.ZodOptional<z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            type: z.ZodString;
-            occurred_at: z.ZodString;
-            status: z.ZodEnum<["pending", "completed", "failed"]>;
-            line_items: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                quantity: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                quantity: number;
-            }, {
-                id: string;
-                quantity: number;
-            }>, "many">>;
-            amount: z.ZodOptional<z.ZodNumber>;
-            description: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
+        }[];
+        permalink_url: string;
+        checkout_id: string;
+        adjustments?: {
             id: string;
             type: string;
             status: "completed" | "pending" | "failed";
             occurred_at: string;
             amount?: number | undefined;
-            description?: string | undefined;
             line_items?: {
                 id: string;
                 quantity: number;
             }[] | undefined;
-        }, {
-            id: string;
-            type: string;
-            status: "completed" | "pending" | "failed";
-            occurred_at: string;
-            amount?: number | undefined;
             description?: string | undefined;
-            line_items?: {
-                id: string;
-                quantity: number;
-            }[] | undefined;
-        }>, "many">>;
-        totals: z.ZodArray<z.ZodObject<{
-            type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-            display_text: z.ZodOptional<z.ZodString>;
-            amount: z.ZodNumber;
-        }, "strip", z.ZodTypeAny, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }>, "many">;
-    }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-        ucp: z.ZodIntersection<z.ZodObject<{
-            version: z.ZodString;
-            services: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
-                endpoint: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }>>, "many">>>;
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-            payment_handlers: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
+        }[] | undefined;
+    }, {
+        id: string;
+        ucp: {
             version: string;
             services?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -6685,27 +4883,117 @@ export const WebhookEventSchema: z.ZodObject<{
             })[]> | undefined;
             capabilities?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 extends?: string | undefined;
             })[]> | undefined;
             payment_handlers?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & Record<string, unknown>)[]> | undefined;
-        }, {
+        } & {
+            capabilities?: Record<string, ({
+                version: string;
+                spec?: string | undefined;
+                schema?: string | undefined;
+                id?: string | undefined;
+                config?: Record<string, unknown> | undefined;
+            } & {
+                extends?: string | undefined;
+            })[]> | undefined;
+        };
+        fulfillment: {
+            expectations?: {
+                id: string;
+                line_items: {
+                    id: string;
+                    quantity: number;
+                }[];
+                method_type: "shipping" | "pickup" | "digital";
+                destination: {
+                    first_name?: string | undefined;
+                    last_name?: string | undefined;
+                    phone_number?: string | undefined;
+                    address_country?: string | undefined;
+                    address_region?: string | undefined;
+                    postal_code?: string | undefined;
+                    extended_address?: string | undefined;
+                    street_address?: string | undefined;
+                    address_locality?: string | undefined;
+                };
+                description?: string | undefined;
+                fulfillable_on?: string | undefined;
+            }[] | undefined;
+            events?: {
+                id: string;
+                type: string;
+                line_items: {
+                    id: string;
+                    quantity: number;
+                }[];
+                occurred_at: string;
+                description?: string | undefined;
+                carrier?: string | undefined;
+                tracking_number?: string | undefined;
+                tracking_url?: string | undefined;
+            }[] | undefined;
+        };
+        totals: {
+            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
+            amount: number;
+            display_text?: string | undefined;
+        }[];
+        line_items: {
+            id: string;
+            status: "fulfilled" | "processing" | "partial";
+            item: {
+                id: string;
+                title: string;
+                price: number;
+                image_url?: string | undefined;
+            };
+            quantity: {
+                total: number;
+                fulfilled: number;
+            };
+            totals: {
+                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
+                amount: number;
+                display_text?: string | undefined;
+            }[];
+            parent_id?: string | undefined;
+        }[];
+        permalink_url: string;
+        checkout_id: string;
+        adjustments?: {
+            id: string;
+            type: string;
+            status: "completed" | "pending" | "failed";
+            occurred_at: string;
+            amount?: number | undefined;
+            line_items?: {
+                id: string;
+                quantity: number;
+            }[] | undefined;
+            description?: string | undefined;
+        }[] | undefined;
+    }>;
+}, "strip", z.ZodTypeAny, {
+    order: {
+        id: string;
+        ucp: {
             version: string;
             services?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -6713,114 +5001,73 @@ export const WebhookEventSchema: z.ZodObject<{
             })[]> | undefined;
             capabilities?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 extends?: string | undefined;
             })[]> | undefined;
             payment_handlers?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & Record<string, unknown>)[]> | undefined;
-        }>, z.ZodObject<{
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
+        } & {
             capabilities?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 extends?: string | undefined;
             })[]> | undefined;
-        }, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }>>;
-        id: z.ZodString;
-        checkout_id: z.ZodString;
-        permalink_url: z.ZodString;
-        line_items: z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            item: z.ZodObject<{
-                id: z.ZodString;
-                title: z.ZodString;
-                price: z.ZodNumber;
-                image_url: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
+        };
+        fulfillment: {
+            expectations?: {
                 id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }, {
+                line_items: {
+                    id: string;
+                    quantity: number;
+                }[];
+                method_type: "shipping" | "pickup" | "digital";
+                destination: {
+                    first_name?: string | undefined;
+                    last_name?: string | undefined;
+                    phone_number?: string | undefined;
+                    address_country?: string | undefined;
+                    address_region?: string | undefined;
+                    postal_code?: string | undefined;
+                    extended_address?: string | undefined;
+                    street_address?: string | undefined;
+                    address_locality?: string | undefined;
+                };
+                description?: string | undefined;
+                fulfillable_on?: string | undefined;
+            }[] | undefined;
+            events?: {
                 id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }>;
-            quantity: z.ZodObject<{
-                total: z.ZodNumber;
-                fulfilled: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                total: number;
-                fulfilled: number;
-            }, {
-                total: number;
-                fulfilled: number;
-            }>;
-            totals: z.ZodArray<z.ZodObject<{
-                type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-                display_text: z.ZodOptional<z.ZodString>;
-                amount: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }>, "many">;
-            status: z.ZodEnum<["processing", "partial", "fulfilled"]>;
-            parent_id: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
+                type: string;
+                line_items: {
+                    id: string;
+                    quantity: number;
+                }[];
+                occurred_at: string;
+                description?: string | undefined;
+                carrier?: string | undefined;
+                tracking_number?: string | undefined;
+                tracking_url?: string | undefined;
+            }[] | undefined;
+        };
+        totals: {
+            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
+            amount: number;
+            display_text?: string | undefined;
+        }[];
+        line_items: {
             id: string;
             status: "fulfilled" | "processing" | "partial";
             item: {
@@ -6839,367 +5086,34 @@ export const WebhookEventSchema: z.ZodObject<{
                 display_text?: string | undefined;
             }[];
             parent_id?: string | undefined;
-        }, {
-            id: string;
-            status: "fulfilled" | "processing" | "partial";
-            item: {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            };
-            quantity: {
-                total: number;
-                fulfilled: number;
-            };
-            totals: {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }[];
-            parent_id?: string | undefined;
-        }>, "many">;
-        fulfillment: z.ZodObject<{
-            expectations: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                method_type: z.ZodEnum<["shipping", "pickup", "digital"]>;
-                destination: z.ZodObject<{
-                    extended_address: z.ZodOptional<z.ZodString>;
-                    street_address: z.ZodOptional<z.ZodString>;
-                    address_locality: z.ZodOptional<z.ZodString>;
-                    address_region: z.ZodOptional<z.ZodString>;
-                    address_country: z.ZodOptional<z.ZodString>;
-                    postal_code: z.ZodOptional<z.ZodString>;
-                    first_name: z.ZodOptional<z.ZodString>;
-                    last_name: z.ZodOptional<z.ZodString>;
-                    phone_number: z.ZodOptional<z.ZodString>;
-                }, "strip", z.ZodTypeAny, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }>;
-                description: z.ZodOptional<z.ZodString>;
-                fulfillable_on: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }>, "many">>;
-            events: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                occurred_at: z.ZodString;
-                type: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                tracking_number: z.ZodOptional<z.ZodString>;
-                tracking_url: z.ZodOptional<z.ZodString>;
-                carrier: z.ZodOptional<z.ZodString>;
-                description: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }>, "many">>;
-        }, "strip", z.ZodTypeAny, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }>;
-        adjustments: z.ZodOptional<z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            type: z.ZodString;
-            occurred_at: z.ZodString;
-            status: z.ZodEnum<["pending", "completed", "failed"]>;
-            line_items: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                quantity: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                quantity: number;
-            }, {
-                id: string;
-                quantity: number;
-            }>, "many">>;
-            amount: z.ZodOptional<z.ZodNumber>;
-            description: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
+        }[];
+        permalink_url: string;
+        checkout_id: string;
+        adjustments?: {
             id: string;
             type: string;
             status: "completed" | "pending" | "failed";
             occurred_at: string;
             amount?: number | undefined;
-            description?: string | undefined;
             line_items?: {
                 id: string;
                 quantity: number;
             }[] | undefined;
-        }, {
-            id: string;
-            type: string;
-            status: "completed" | "pending" | "failed";
-            occurred_at: string;
-            amount?: number | undefined;
             description?: string | undefined;
-            line_items?: {
-                id: string;
-                quantity: number;
-            }[] | undefined;
-        }>, "many">>;
-        totals: z.ZodArray<z.ZodObject<{
-            type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-            display_text: z.ZodOptional<z.ZodString>;
-            amount: z.ZodNumber;
-        }, "strip", z.ZodTypeAny, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }>, "many">;
-    }, z.ZodTypeAny, "passthrough">>;
-}, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-    event_id: z.ZodString;
-    created_time: z.ZodString;
-    order: z.ZodObject<{
-        ucp: z.ZodIntersection<z.ZodObject<{
-            version: z.ZodString;
-            services: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
-                endpoint: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }>>, "many">>>;
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-            payment_handlers: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
+        }[] | undefined;
+    };
+    event_id: string;
+    created_time: string;
+}, {
+    order: {
+        id: string;
+        ucp: {
             version: string;
             services?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 transport: "rest" | "mcp" | "a2a" | "embedded";
@@ -7207,142 +5121,73 @@ export const WebhookEventSchema: z.ZodObject<{
             })[]> | undefined;
             capabilities?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 extends?: string | undefined;
             })[]> | undefined;
             payment_handlers?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & Record<string, unknown>)[]> | undefined;
-        }, {
-            version: string;
-            services?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            })[]> | undefined;
+        } & {
             capabilities?: Record<string, ({
                 version: string;
-                id?: string | undefined;
                 spec?: string | undefined;
                 schema?: string | undefined;
+                id?: string | undefined;
                 config?: Record<string, unknown> | undefined;
             } & {
                 extends?: string | undefined;
             })[]> | undefined;
-            payment_handlers?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & Record<string, unknown>)[]> | undefined;
-        }>, z.ZodObject<{
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }>>;
-        id: z.ZodString;
-        checkout_id: z.ZodString;
-        permalink_url: z.ZodString;
-        line_items: z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            item: z.ZodObject<{
-                id: z.ZodString;
-                title: z.ZodString;
-                price: z.ZodNumber;
-                image_url: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
+        };
+        fulfillment: {
+            expectations?: {
                 id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }, {
+                line_items: {
+                    id: string;
+                    quantity: number;
+                }[];
+                method_type: "shipping" | "pickup" | "digital";
+                destination: {
+                    first_name?: string | undefined;
+                    last_name?: string | undefined;
+                    phone_number?: string | undefined;
+                    address_country?: string | undefined;
+                    address_region?: string | undefined;
+                    postal_code?: string | undefined;
+                    extended_address?: string | undefined;
+                    street_address?: string | undefined;
+                    address_locality?: string | undefined;
+                };
+                description?: string | undefined;
+                fulfillable_on?: string | undefined;
+            }[] | undefined;
+            events?: {
                 id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }>;
-            quantity: z.ZodObject<{
-                total: z.ZodNumber;
-                fulfilled: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                total: number;
-                fulfilled: number;
-            }, {
-                total: number;
-                fulfilled: number;
-            }>;
-            totals: z.ZodArray<z.ZodObject<{
-                type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-                display_text: z.ZodOptional<z.ZodString>;
-                amount: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }>, "many">;
-            status: z.ZodEnum<["processing", "partial", "fulfilled"]>;
-            parent_id: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
+                type: string;
+                line_items: {
+                    id: string;
+                    quantity: number;
+                }[];
+                occurred_at: string;
+                description?: string | undefined;
+                carrier?: string | undefined;
+                tracking_number?: string | undefined;
+                tracking_url?: string | undefined;
+            }[] | undefined;
+        };
+        totals: {
+            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
+            amount: number;
+            display_text?: string | undefined;
+        }[];
+        line_items: {
             id: string;
             status: "fulfilled" | "processing" | "partial";
             item: {
@@ -7361,2877 +5206,25 @@ export const WebhookEventSchema: z.ZodObject<{
                 display_text?: string | undefined;
             }[];
             parent_id?: string | undefined;
-        }, {
-            id: string;
-            status: "fulfilled" | "processing" | "partial";
-            item: {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            };
-            quantity: {
-                total: number;
-                fulfilled: number;
-            };
-            totals: {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }[];
-            parent_id?: string | undefined;
-        }>, "many">;
-        fulfillment: z.ZodObject<{
-            expectations: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                method_type: z.ZodEnum<["shipping", "pickup", "digital"]>;
-                destination: z.ZodObject<{
-                    extended_address: z.ZodOptional<z.ZodString>;
-                    street_address: z.ZodOptional<z.ZodString>;
-                    address_locality: z.ZodOptional<z.ZodString>;
-                    address_region: z.ZodOptional<z.ZodString>;
-                    address_country: z.ZodOptional<z.ZodString>;
-                    postal_code: z.ZodOptional<z.ZodString>;
-                    first_name: z.ZodOptional<z.ZodString>;
-                    last_name: z.ZodOptional<z.ZodString>;
-                    phone_number: z.ZodOptional<z.ZodString>;
-                }, "strip", z.ZodTypeAny, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }>;
-                description: z.ZodOptional<z.ZodString>;
-                fulfillable_on: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }>, "many">>;
-            events: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                occurred_at: z.ZodString;
-                type: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                tracking_number: z.ZodOptional<z.ZodString>;
-                tracking_url: z.ZodOptional<z.ZodString>;
-                carrier: z.ZodOptional<z.ZodString>;
-                description: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }>, "many">>;
-        }, "strip", z.ZodTypeAny, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }>;
-        adjustments: z.ZodOptional<z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            type: z.ZodString;
-            occurred_at: z.ZodString;
-            status: z.ZodEnum<["pending", "completed", "failed"]>;
-            line_items: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                quantity: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                quantity: number;
-            }, {
-                id: string;
-                quantity: number;
-            }>, "many">>;
-            amount: z.ZodOptional<z.ZodNumber>;
-            description: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
+        }[];
+        permalink_url: string;
+        checkout_id: string;
+        adjustments?: {
             id: string;
             type: string;
             status: "completed" | "pending" | "failed";
             occurred_at: string;
             amount?: number | undefined;
-            description?: string | undefined;
             line_items?: {
                 id: string;
                 quantity: number;
             }[] | undefined;
-        }, {
-            id: string;
-            type: string;
-            status: "completed" | "pending" | "failed";
-            occurred_at: string;
-            amount?: number | undefined;
             description?: string | undefined;
-            line_items?: {
-                id: string;
-                quantity: number;
-            }[] | undefined;
-        }>, "many">>;
-        totals: z.ZodArray<z.ZodObject<{
-            type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-            display_text: z.ZodOptional<z.ZodString>;
-            amount: z.ZodNumber;
-        }, "strip", z.ZodTypeAny, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }>, "many">;
-    }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-        ucp: z.ZodIntersection<z.ZodObject<{
-            version: z.ZodString;
-            services: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
-                endpoint: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }>>, "many">>>;
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-            payment_handlers: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
-            version: string;
-            services?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            })[]> | undefined;
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-            payment_handlers?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & Record<string, unknown>)[]> | undefined;
-        }, {
-            version: string;
-            services?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            })[]> | undefined;
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-            payment_handlers?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & Record<string, unknown>)[]> | undefined;
-        }>, z.ZodObject<{
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }>>;
-        id: z.ZodString;
-        checkout_id: z.ZodString;
-        permalink_url: z.ZodString;
-        line_items: z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            item: z.ZodObject<{
-                id: z.ZodString;
-                title: z.ZodString;
-                price: z.ZodNumber;
-                image_url: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }, {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }>;
-            quantity: z.ZodObject<{
-                total: z.ZodNumber;
-                fulfilled: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                total: number;
-                fulfilled: number;
-            }, {
-                total: number;
-                fulfilled: number;
-            }>;
-            totals: z.ZodArray<z.ZodObject<{
-                type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-                display_text: z.ZodOptional<z.ZodString>;
-                amount: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }>, "many">;
-            status: z.ZodEnum<["processing", "partial", "fulfilled"]>;
-            parent_id: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
-            id: string;
-            status: "fulfilled" | "processing" | "partial";
-            item: {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            };
-            quantity: {
-                total: number;
-                fulfilled: number;
-            };
-            totals: {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }[];
-            parent_id?: string | undefined;
-        }, {
-            id: string;
-            status: "fulfilled" | "processing" | "partial";
-            item: {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            };
-            quantity: {
-                total: number;
-                fulfilled: number;
-            };
-            totals: {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }[];
-            parent_id?: string | undefined;
-        }>, "many">;
-        fulfillment: z.ZodObject<{
-            expectations: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                method_type: z.ZodEnum<["shipping", "pickup", "digital"]>;
-                destination: z.ZodObject<{
-                    extended_address: z.ZodOptional<z.ZodString>;
-                    street_address: z.ZodOptional<z.ZodString>;
-                    address_locality: z.ZodOptional<z.ZodString>;
-                    address_region: z.ZodOptional<z.ZodString>;
-                    address_country: z.ZodOptional<z.ZodString>;
-                    postal_code: z.ZodOptional<z.ZodString>;
-                    first_name: z.ZodOptional<z.ZodString>;
-                    last_name: z.ZodOptional<z.ZodString>;
-                    phone_number: z.ZodOptional<z.ZodString>;
-                }, "strip", z.ZodTypeAny, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }>;
-                description: z.ZodOptional<z.ZodString>;
-                fulfillable_on: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }>, "many">>;
-            events: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                occurred_at: z.ZodString;
-                type: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                tracking_number: z.ZodOptional<z.ZodString>;
-                tracking_url: z.ZodOptional<z.ZodString>;
-                carrier: z.ZodOptional<z.ZodString>;
-                description: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }>, "many">>;
-        }, "strip", z.ZodTypeAny, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }>;
-        adjustments: z.ZodOptional<z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            type: z.ZodString;
-            occurred_at: z.ZodString;
-            status: z.ZodEnum<["pending", "completed", "failed"]>;
-            line_items: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                quantity: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                quantity: number;
-            }, {
-                id: string;
-                quantity: number;
-            }>, "many">>;
-            amount: z.ZodOptional<z.ZodNumber>;
-            description: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
-            id: string;
-            type: string;
-            status: "completed" | "pending" | "failed";
-            occurred_at: string;
-            amount?: number | undefined;
-            description?: string | undefined;
-            line_items?: {
-                id: string;
-                quantity: number;
-            }[] | undefined;
-        }, {
-            id: string;
-            type: string;
-            status: "completed" | "pending" | "failed";
-            occurred_at: string;
-            amount?: number | undefined;
-            description?: string | undefined;
-            line_items?: {
-                id: string;
-                quantity: number;
-            }[] | undefined;
-        }>, "many">>;
-        totals: z.ZodArray<z.ZodObject<{
-            type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-            display_text: z.ZodOptional<z.ZodString>;
-            amount: z.ZodNumber;
-        }, "strip", z.ZodTypeAny, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }>, "many">;
-    }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-        ucp: z.ZodIntersection<z.ZodObject<{
-            version: z.ZodString;
-            services: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
-                endpoint: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }>>, "many">>>;
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-            payment_handlers: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
-            version: string;
-            services?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            })[]> | undefined;
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-            payment_handlers?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & Record<string, unknown>)[]> | undefined;
-        }, {
-            version: string;
-            services?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            })[]> | undefined;
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-            payment_handlers?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & Record<string, unknown>)[]> | undefined;
-        }>, z.ZodObject<{
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }>>;
-        id: z.ZodString;
-        checkout_id: z.ZodString;
-        permalink_url: z.ZodString;
-        line_items: z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            item: z.ZodObject<{
-                id: z.ZodString;
-                title: z.ZodString;
-                price: z.ZodNumber;
-                image_url: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }, {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }>;
-            quantity: z.ZodObject<{
-                total: z.ZodNumber;
-                fulfilled: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                total: number;
-                fulfilled: number;
-            }, {
-                total: number;
-                fulfilled: number;
-            }>;
-            totals: z.ZodArray<z.ZodObject<{
-                type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-                display_text: z.ZodOptional<z.ZodString>;
-                amount: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }>, "many">;
-            status: z.ZodEnum<["processing", "partial", "fulfilled"]>;
-            parent_id: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
-            id: string;
-            status: "fulfilled" | "processing" | "partial";
-            item: {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            };
-            quantity: {
-                total: number;
-                fulfilled: number;
-            };
-            totals: {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }[];
-            parent_id?: string | undefined;
-        }, {
-            id: string;
-            status: "fulfilled" | "processing" | "partial";
-            item: {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            };
-            quantity: {
-                total: number;
-                fulfilled: number;
-            };
-            totals: {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }[];
-            parent_id?: string | undefined;
-        }>, "many">;
-        fulfillment: z.ZodObject<{
-            expectations: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                method_type: z.ZodEnum<["shipping", "pickup", "digital"]>;
-                destination: z.ZodObject<{
-                    extended_address: z.ZodOptional<z.ZodString>;
-                    street_address: z.ZodOptional<z.ZodString>;
-                    address_locality: z.ZodOptional<z.ZodString>;
-                    address_region: z.ZodOptional<z.ZodString>;
-                    address_country: z.ZodOptional<z.ZodString>;
-                    postal_code: z.ZodOptional<z.ZodString>;
-                    first_name: z.ZodOptional<z.ZodString>;
-                    last_name: z.ZodOptional<z.ZodString>;
-                    phone_number: z.ZodOptional<z.ZodString>;
-                }, "strip", z.ZodTypeAny, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }>;
-                description: z.ZodOptional<z.ZodString>;
-                fulfillable_on: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }>, "many">>;
-            events: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                occurred_at: z.ZodString;
-                type: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                tracking_number: z.ZodOptional<z.ZodString>;
-                tracking_url: z.ZodOptional<z.ZodString>;
-                carrier: z.ZodOptional<z.ZodString>;
-                description: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }>, "many">>;
-        }, "strip", z.ZodTypeAny, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }>;
-        adjustments: z.ZodOptional<z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            type: z.ZodString;
-            occurred_at: z.ZodString;
-            status: z.ZodEnum<["pending", "completed", "failed"]>;
-            line_items: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                quantity: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                quantity: number;
-            }, {
-                id: string;
-                quantity: number;
-            }>, "many">>;
-            amount: z.ZodOptional<z.ZodNumber>;
-            description: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
-            id: string;
-            type: string;
-            status: "completed" | "pending" | "failed";
-            occurred_at: string;
-            amount?: number | undefined;
-            description?: string | undefined;
-            line_items?: {
-                id: string;
-                quantity: number;
-            }[] | undefined;
-        }, {
-            id: string;
-            type: string;
-            status: "completed" | "pending" | "failed";
-            occurred_at: string;
-            amount?: number | undefined;
-            description?: string | undefined;
-            line_items?: {
-                id: string;
-                quantity: number;
-            }[] | undefined;
-        }>, "many">>;
-        totals: z.ZodArray<z.ZodObject<{
-            type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-            display_text: z.ZodOptional<z.ZodString>;
-            amount: z.ZodNumber;
-        }, "strip", z.ZodTypeAny, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }>, "many">;
-    }, z.ZodTypeAny, "passthrough">>;
-}, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-    event_id: z.ZodString;
-    created_time: z.ZodString;
-    order: z.ZodObject<{
-        ucp: z.ZodIntersection<z.ZodObject<{
-            version: z.ZodString;
-            services: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
-                endpoint: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }>>, "many">>>;
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-            payment_handlers: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
-            version: string;
-            services?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            })[]> | undefined;
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-            payment_handlers?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & Record<string, unknown>)[]> | undefined;
-        }, {
-            version: string;
-            services?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            })[]> | undefined;
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-            payment_handlers?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & Record<string, unknown>)[]> | undefined;
-        }>, z.ZodObject<{
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }>>;
-        id: z.ZodString;
-        checkout_id: z.ZodString;
-        permalink_url: z.ZodString;
-        line_items: z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            item: z.ZodObject<{
-                id: z.ZodString;
-                title: z.ZodString;
-                price: z.ZodNumber;
-                image_url: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }, {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }>;
-            quantity: z.ZodObject<{
-                total: z.ZodNumber;
-                fulfilled: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                total: number;
-                fulfilled: number;
-            }, {
-                total: number;
-                fulfilled: number;
-            }>;
-            totals: z.ZodArray<z.ZodObject<{
-                type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-                display_text: z.ZodOptional<z.ZodString>;
-                amount: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }>, "many">;
-            status: z.ZodEnum<["processing", "partial", "fulfilled"]>;
-            parent_id: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
-            id: string;
-            status: "fulfilled" | "processing" | "partial";
-            item: {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            };
-            quantity: {
-                total: number;
-                fulfilled: number;
-            };
-            totals: {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }[];
-            parent_id?: string | undefined;
-        }, {
-            id: string;
-            status: "fulfilled" | "processing" | "partial";
-            item: {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            };
-            quantity: {
-                total: number;
-                fulfilled: number;
-            };
-            totals: {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }[];
-            parent_id?: string | undefined;
-        }>, "many">;
-        fulfillment: z.ZodObject<{
-            expectations: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                method_type: z.ZodEnum<["shipping", "pickup", "digital"]>;
-                destination: z.ZodObject<{
-                    extended_address: z.ZodOptional<z.ZodString>;
-                    street_address: z.ZodOptional<z.ZodString>;
-                    address_locality: z.ZodOptional<z.ZodString>;
-                    address_region: z.ZodOptional<z.ZodString>;
-                    address_country: z.ZodOptional<z.ZodString>;
-                    postal_code: z.ZodOptional<z.ZodString>;
-                    first_name: z.ZodOptional<z.ZodString>;
-                    last_name: z.ZodOptional<z.ZodString>;
-                    phone_number: z.ZodOptional<z.ZodString>;
-                }, "strip", z.ZodTypeAny, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }>;
-                description: z.ZodOptional<z.ZodString>;
-                fulfillable_on: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }>, "many">>;
-            events: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                occurred_at: z.ZodString;
-                type: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                tracking_number: z.ZodOptional<z.ZodString>;
-                tracking_url: z.ZodOptional<z.ZodString>;
-                carrier: z.ZodOptional<z.ZodString>;
-                description: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }>, "many">>;
-        }, "strip", z.ZodTypeAny, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }>;
-        adjustments: z.ZodOptional<z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            type: z.ZodString;
-            occurred_at: z.ZodString;
-            status: z.ZodEnum<["pending", "completed", "failed"]>;
-            line_items: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                quantity: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                quantity: number;
-            }, {
-                id: string;
-                quantity: number;
-            }>, "many">>;
-            amount: z.ZodOptional<z.ZodNumber>;
-            description: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
-            id: string;
-            type: string;
-            status: "completed" | "pending" | "failed";
-            occurred_at: string;
-            amount?: number | undefined;
-            description?: string | undefined;
-            line_items?: {
-                id: string;
-                quantity: number;
-            }[] | undefined;
-        }, {
-            id: string;
-            type: string;
-            status: "completed" | "pending" | "failed";
-            occurred_at: string;
-            amount?: number | undefined;
-            description?: string | undefined;
-            line_items?: {
-                id: string;
-                quantity: number;
-            }[] | undefined;
-        }>, "many">>;
-        totals: z.ZodArray<z.ZodObject<{
-            type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-            display_text: z.ZodOptional<z.ZodString>;
-            amount: z.ZodNumber;
-        }, "strip", z.ZodTypeAny, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }>, "many">;
-    }, "passthrough", z.ZodTypeAny, z.objectOutputType<{
-        ucp: z.ZodIntersection<z.ZodObject<{
-            version: z.ZodString;
-            services: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
-                endpoint: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }>>, "many">>>;
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-            payment_handlers: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
-            version: string;
-            services?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            })[]> | undefined;
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-            payment_handlers?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & Record<string, unknown>)[]> | undefined;
-        }, {
-            version: string;
-            services?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            })[]> | undefined;
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-            payment_handlers?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & Record<string, unknown>)[]> | undefined;
-        }>, z.ZodObject<{
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }>>;
-        id: z.ZodString;
-        checkout_id: z.ZodString;
-        permalink_url: z.ZodString;
-        line_items: z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            item: z.ZodObject<{
-                id: z.ZodString;
-                title: z.ZodString;
-                price: z.ZodNumber;
-                image_url: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }, {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }>;
-            quantity: z.ZodObject<{
-                total: z.ZodNumber;
-                fulfilled: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                total: number;
-                fulfilled: number;
-            }, {
-                total: number;
-                fulfilled: number;
-            }>;
-            totals: z.ZodArray<z.ZodObject<{
-                type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-                display_text: z.ZodOptional<z.ZodString>;
-                amount: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }>, "many">;
-            status: z.ZodEnum<["processing", "partial", "fulfilled"]>;
-            parent_id: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
-            id: string;
-            status: "fulfilled" | "processing" | "partial";
-            item: {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            };
-            quantity: {
-                total: number;
-                fulfilled: number;
-            };
-            totals: {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }[];
-            parent_id?: string | undefined;
-        }, {
-            id: string;
-            status: "fulfilled" | "processing" | "partial";
-            item: {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            };
-            quantity: {
-                total: number;
-                fulfilled: number;
-            };
-            totals: {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }[];
-            parent_id?: string | undefined;
-        }>, "many">;
-        fulfillment: z.ZodObject<{
-            expectations: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                method_type: z.ZodEnum<["shipping", "pickup", "digital"]>;
-                destination: z.ZodObject<{
-                    extended_address: z.ZodOptional<z.ZodString>;
-                    street_address: z.ZodOptional<z.ZodString>;
-                    address_locality: z.ZodOptional<z.ZodString>;
-                    address_region: z.ZodOptional<z.ZodString>;
-                    address_country: z.ZodOptional<z.ZodString>;
-                    postal_code: z.ZodOptional<z.ZodString>;
-                    first_name: z.ZodOptional<z.ZodString>;
-                    last_name: z.ZodOptional<z.ZodString>;
-                    phone_number: z.ZodOptional<z.ZodString>;
-                }, "strip", z.ZodTypeAny, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }>;
-                description: z.ZodOptional<z.ZodString>;
-                fulfillable_on: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }>, "many">>;
-            events: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                occurred_at: z.ZodString;
-                type: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                tracking_number: z.ZodOptional<z.ZodString>;
-                tracking_url: z.ZodOptional<z.ZodString>;
-                carrier: z.ZodOptional<z.ZodString>;
-                description: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }>, "many">>;
-        }, "strip", z.ZodTypeAny, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }>;
-        adjustments: z.ZodOptional<z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            type: z.ZodString;
-            occurred_at: z.ZodString;
-            status: z.ZodEnum<["pending", "completed", "failed"]>;
-            line_items: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                quantity: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                quantity: number;
-            }, {
-                id: string;
-                quantity: number;
-            }>, "many">>;
-            amount: z.ZodOptional<z.ZodNumber>;
-            description: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
-            id: string;
-            type: string;
-            status: "completed" | "pending" | "failed";
-            occurred_at: string;
-            amount?: number | undefined;
-            description?: string | undefined;
-            line_items?: {
-                id: string;
-                quantity: number;
-            }[] | undefined;
-        }, {
-            id: string;
-            type: string;
-            status: "completed" | "pending" | "failed";
-            occurred_at: string;
-            amount?: number | undefined;
-            description?: string | undefined;
-            line_items?: {
-                id: string;
-                quantity: number;
-            }[] | undefined;
-        }>, "many">>;
-        totals: z.ZodArray<z.ZodObject<{
-            type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-            display_text: z.ZodOptional<z.ZodString>;
-            amount: z.ZodNumber;
-        }, "strip", z.ZodTypeAny, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }>, "many">;
-    }, z.ZodTypeAny, "passthrough">, z.objectInputType<{
-        ucp: z.ZodIntersection<z.ZodObject<{
-            version: z.ZodString;
-            services: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                transport: z.ZodEnum<["rest", "mcp", "a2a", "embedded"]>;
-                endpoint: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }, {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            }>>, "many">>>;
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-            payment_handlers: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodRecord<z.ZodString, z.ZodUnknown>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
-            version: string;
-            services?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            })[]> | undefined;
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-            payment_handlers?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & Record<string, unknown>)[]> | undefined;
-        }, {
-            version: string;
-            services?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                transport: "rest" | "mcp" | "a2a" | "embedded";
-                endpoint?: string | undefined;
-            })[]> | undefined;
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-            payment_handlers?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & Record<string, unknown>)[]> | undefined;
-        }>, z.ZodObject<{
-            capabilities: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodArray<z.ZodIntersection<z.ZodObject<{
-                version: z.ZodString;
-                spec: z.ZodOptional<z.ZodString>;
-                schema: z.ZodOptional<z.ZodString>;
-                id: z.ZodOptional<z.ZodString>;
-                config: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-            }, "strip", z.ZodTypeAny, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }, {
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            }>, z.ZodObject<{
-                extends: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                extends?: string | undefined;
-            }, {
-                extends?: string | undefined;
-            }>>, "many">>>;
-        }, "strip", z.ZodTypeAny, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }, {
-            capabilities?: Record<string, ({
-                version: string;
-                id?: string | undefined;
-                spec?: string | undefined;
-                schema?: string | undefined;
-                config?: Record<string, unknown> | undefined;
-            } & {
-                extends?: string | undefined;
-            })[]> | undefined;
-        }>>;
-        id: z.ZodString;
-        checkout_id: z.ZodString;
-        permalink_url: z.ZodString;
-        line_items: z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            item: z.ZodObject<{
-                id: z.ZodString;
-                title: z.ZodString;
-                price: z.ZodNumber;
-                image_url: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }, {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            }>;
-            quantity: z.ZodObject<{
-                total: z.ZodNumber;
-                fulfilled: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                total: number;
-                fulfilled: number;
-            }, {
-                total: number;
-                fulfilled: number;
-            }>;
-            totals: z.ZodArray<z.ZodObject<{
-                type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-                display_text: z.ZodOptional<z.ZodString>;
-                amount: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }, {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }>, "many">;
-            status: z.ZodEnum<["processing", "partial", "fulfilled"]>;
-            parent_id: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
-            id: string;
-            status: "fulfilled" | "processing" | "partial";
-            item: {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            };
-            quantity: {
-                total: number;
-                fulfilled: number;
-            };
-            totals: {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }[];
-            parent_id?: string | undefined;
-        }, {
-            id: string;
-            status: "fulfilled" | "processing" | "partial";
-            item: {
-                id: string;
-                title: string;
-                price: number;
-                image_url?: string | undefined;
-            };
-            quantity: {
-                total: number;
-                fulfilled: number;
-            };
-            totals: {
-                type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-                amount: number;
-                display_text?: string | undefined;
-            }[];
-            parent_id?: string | undefined;
-        }>, "many">;
-        fulfillment: z.ZodObject<{
-            expectations: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                method_type: z.ZodEnum<["shipping", "pickup", "digital"]>;
-                destination: z.ZodObject<{
-                    extended_address: z.ZodOptional<z.ZodString>;
-                    street_address: z.ZodOptional<z.ZodString>;
-                    address_locality: z.ZodOptional<z.ZodString>;
-                    address_region: z.ZodOptional<z.ZodString>;
-                    address_country: z.ZodOptional<z.ZodString>;
-                    postal_code: z.ZodOptional<z.ZodString>;
-                    first_name: z.ZodOptional<z.ZodString>;
-                    last_name: z.ZodOptional<z.ZodString>;
-                    phone_number: z.ZodOptional<z.ZodString>;
-                }, "strip", z.ZodTypeAny, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }, {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                }>;
-                description: z.ZodOptional<z.ZodString>;
-                fulfillable_on: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }, {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }>, "many">>;
-            events: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                occurred_at: z.ZodString;
-                type: z.ZodString;
-                line_items: z.ZodArray<z.ZodObject<{
-                    id: z.ZodString;
-                    quantity: z.ZodNumber;
-                }, "strip", z.ZodTypeAny, {
-                    id: string;
-                    quantity: number;
-                }, {
-                    id: string;
-                    quantity: number;
-                }>, "many">;
-                tracking_number: z.ZodOptional<z.ZodString>;
-                tracking_url: z.ZodOptional<z.ZodString>;
-                carrier: z.ZodOptional<z.ZodString>;
-                description: z.ZodOptional<z.ZodString>;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }, {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }>, "many">>;
-        }, "strip", z.ZodTypeAny, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }, {
-            expectations?: {
-                id: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                method_type: "shipping" | "pickup" | "digital";
-                destination: {
-                    extended_address?: string | undefined;
-                    street_address?: string | undefined;
-                    address_locality?: string | undefined;
-                    address_region?: string | undefined;
-                    address_country?: string | undefined;
-                    postal_code?: string | undefined;
-                    first_name?: string | undefined;
-                    last_name?: string | undefined;
-                    phone_number?: string | undefined;
-                };
-                description?: string | undefined;
-                fulfillable_on?: string | undefined;
-            }[] | undefined;
-            events?: {
-                id: string;
-                type: string;
-                line_items: {
-                    id: string;
-                    quantity: number;
-                }[];
-                occurred_at: string;
-                description?: string | undefined;
-                carrier?: string | undefined;
-                tracking_number?: string | undefined;
-                tracking_url?: string | undefined;
-            }[] | undefined;
-        }>;
-        adjustments: z.ZodOptional<z.ZodArray<z.ZodObject<{
-            id: z.ZodString;
-            type: z.ZodString;
-            occurred_at: z.ZodString;
-            status: z.ZodEnum<["pending", "completed", "failed"]>;
-            line_items: z.ZodOptional<z.ZodArray<z.ZodObject<{
-                id: z.ZodString;
-                quantity: z.ZodNumber;
-            }, "strip", z.ZodTypeAny, {
-                id: string;
-                quantity: number;
-            }, {
-                id: string;
-                quantity: number;
-            }>, "many">>;
-            amount: z.ZodOptional<z.ZodNumber>;
-            description: z.ZodOptional<z.ZodString>;
-        }, "strip", z.ZodTypeAny, {
-            id: string;
-            type: string;
-            status: "completed" | "pending" | "failed";
-            occurred_at: string;
-            amount?: number | undefined;
-            description?: string | undefined;
-            line_items?: {
-                id: string;
-                quantity: number;
-            }[] | undefined;
-        }, {
-            id: string;
-            type: string;
-            status: "completed" | "pending" | "failed";
-            occurred_at: string;
-            amount?: number | undefined;
-            description?: string | undefined;
-            line_items?: {
-                id: string;
-                quantity: number;
-            }[] | undefined;
-        }>, "many">>;
-        totals: z.ZodArray<z.ZodObject<{
-            type: z.ZodEnum<["items_discount", "subtotal", "discount", "fulfillment", "tax", "fee", "total"]>;
-            display_text: z.ZodOptional<z.ZodString>;
-            amount: z.ZodNumber;
-        }, "strip", z.ZodTypeAny, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }, {
-            type: "items_discount" | "subtotal" | "discount" | "fulfillment" | "tax" | "fee" | "total";
-            amount: number;
-            display_text?: string | undefined;
-        }>, "many">;
-    }, z.ZodTypeAny, "passthrough">>;
-}, z.ZodTypeAny, "passthrough">>;
+        }[] | undefined;
+    };
+    event_id: string;
+    created_time: string;
+}>;
 
 // @public
 export interface WebhookVerifier {
@@ -10240,7 +5233,7 @@ export interface WebhookVerifier {
 
 // Warnings were encountered during analysis:
 //
-// src/types/checkout.ts:15:18 - (ae-forgotten-export) The symbol "LogFn" needs to be exported by the entry point index.d.ts
+// src/UCPClient.ts:54:11 - (ae-forgotten-export) The symbol "LogFn" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

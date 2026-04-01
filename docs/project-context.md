@@ -13,7 +13,7 @@
 
 ## Current Version
 
-`0.2.0` (on npm as of 2026-03-28)
+`2.3.0` (on npm). SDK dependency: `@omnixhq/ucp-js-sdk@1.1.0`.
 
 ## Repository
 
@@ -27,6 +27,7 @@
 UCPClient.connect(config)
   └─ GET /.well-known/ucp
   └─ parse capabilities[]
+  └─ optionally fetch /.well-known/oauth-authorization-server (if identity_linking declared)
   └─ instantiate only supported capability classes
   └─ return frozen ConnectedClient
 ```
@@ -35,14 +36,14 @@ UCPClient.connect(config)
 
 ```typescript
 interface ConnectedClient {
-  profile: UCPProfile;
+  profile: UCPProfile; // full discovery profile
+  signingKeys: readonly JWK[]; // EC P-256 keys for webhook verification
   checkout: CheckoutCapability | null; // dev.ucp.shopping.checkout
   order: OrderCapability | null; // dev.ucp.shopping.order
   identityLinking: IdentityLinkingCapability | null; // dev.ucp.common.identity_linking
-  products: ProductsCapability; // always present
-  paymentHandlers: PaymentHandlerMap;
-  describeTools(): readonly ToolDescriptor[];
-  getAgentTools(): readonly AgentTool[];
+  paymentHandlers: PaymentHandlerMap; // namespace-keyed map from profile
+  describeTools(): readonly ToolDescriptor[]; // lightweight name+description list
+  getAgentTools(): readonly AgentTool[]; // full tools with parameters + execute
 }
 ```
 
@@ -61,32 +62,50 @@ interface AgentTool {
 
 ### Capability → Tools Mapping
 
-| Server declares                   | Tools added to getAgentTools()                                                               |
-| --------------------------------- | -------------------------------------------------------------------------------------------- |
-| `dev.ucp.shopping.checkout`       | `create_checkout`, `get_checkout`, `update_checkout`, `complete_checkout`, `cancel_checkout` |
-| `dev.ucp.shopping.fulfillment`    | + `set_fulfillment`, `select_destination`, `select_fulfillment_option`                       |
-| `dev.ucp.shopping.discount`       | + `apply_discount_codes`                                                                     |
-| `dev.ucp.shopping.order`          | + `get_order`                                                                                |
-| `dev.ucp.common.identity_linking` | + `get_authorization_url`, `exchange_auth_code`, `refresh_access_token`, `revoke_token`      |
-| _(always)_                        | `search_products`, `get_product`                                                             |
+| Server declares                   | Tools added to getAgentTools()                                                                                                                               |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `dev.ucp.shopping.checkout`       | `create_checkout`, `get_checkout`, `update_checkout`, `complete_checkout`, `cancel_checkout`                                                                 |
+| `dev.ucp.shopping.fulfillment`    | + `set_fulfillment`, `select_destination`, `select_fulfillment_option`, `create_fulfillment_method`, `update_fulfillment_method`, `update_fulfillment_group` |
+| `dev.ucp.shopping.discount`       | + `apply_discount_codes`                                                                                                                                     |
+| `dev.ucp.shopping.order`          | + `get_order`, `update_order`, `update_order_line_item`                                                                                                      |
+| `dev.ucp.common.identity_linking` | + `get_authorization_url`, `exchange_auth_code`, `refresh_access_token`, `revoke_token`                                                                      |
+
+`describeTools()` returns the same set (name + capability + description only, no parameters or execute).
+
+### CheckoutCapability Extensions
+
+When `dev.ucp.shopping.checkout` is declared, the checkout capability exposes boolean flags:
+
+```typescript
+client.checkout.extensions.fulfillment; // dev.ucp.shopping.fulfillment
+client.checkout.extensions.discount; // dev.ucp.shopping.discount
+client.checkout.extensions.buyerConsent; // dev.ucp.shopping.buyer_consent
+client.checkout.extensions.ap2Mandate; // dev.ucp.shopping.ap2_mandate
+```
 
 ## Source Layout
 
 ```
 src/
   types/
-    config.ts           — UCPClientConfig, UCP_CAPABILITIES constants
-    checkout.ts         — CheckoutSession, Create/Update/CompleteCheckoutPayload
-    order.ts            — UCPOrder, WebhookEvent
-    payment.ts          — PaymentHandlerInstance, PaymentHandlerMap
-    identity-linking.ts — OAuthServerMetadata, TokenResponse, AuthorizationParams
-    common.ts           — PostalAddress, BuyerConsent, LocalizationContext, SearchFilters
-    product.ts          — UCPProduct
+    config.ts           — UCPClientConfig, UCP_CAPABILITIES constants, DEFAULT_UCP_VERSION
+    checkout.ts         — CheckoutSession, CheckoutExtensions, Create/Update/CompleteCheckoutPayload,
+                          FulfillmentMethod*Payload, CheckoutSessionStatus
+    order.ts            — UCPSpecOrder, OrderUpdate, WebhookEvent, LineItemUpdatePayload
+    payment.ts          — PaymentCredential, PaymentInstrument, PaymentHandlerInstance, PaymentHandlerMap
+    identity-linking.ts — OAuthServerMetadata, TokenResponse, AuthorizationParams,
+                          TokenExchangeParams, TokenRefreshParams, TokenRevokeParams
+    common.ts           — PostalAddress, BuyerConsent, LocalizationContext, JWK
+                          (all derived from @omnixhq/ucp-js-sdk schemas via z.output<>)
+    index.ts            — re-exports all types
   capabilities/
-    checkout.ts         — CheckoutCapability (create, get, update, complete, cancel)
-    order.ts            — OrderCapability (get)
-    identity-linking.ts — IdentityLinkingCapability (OAuth 2.0 full flow)
-    products.ts         — ProductsCapability (search, get)
+    checkout.ts         — CheckoutCapability (create, get, update, complete, cancel,
+                          setFulfillment, selectDestination, selectFulfillmentOption,
+                          createFulfillmentMethod, updateFulfillmentMethod, updateFulfillmentGroup,
+                          applyDiscountCodes)
+    order.ts            — OrderCapability (get, update, updateLineItem)
+    identity-linking.ts — IdentityLinkingCapability (getAuthorizationUrl, exchangeCode,
+                          refreshToken, revokeToken)
   adapters/
     catch-errors.ts     — AdapterOptions, ToolErrorResult, safeExecute, formatToolError
     openai.ts           — toOpenAITools(), executeOpenAIToolCall()
@@ -95,25 +114,19 @@ src/
     langchain.ts        — toLangChainTools()
     mcp.ts              — toMCPTools(), executeMCPToolCall()
   agent-tools.ts        — AgentTool interface, getAgentTools(), JsonSchema
-  UCPClient.ts          — connect(), ConnectedClient
+  UCPClient.ts          — connect(), ConnectedClient, UCPProfile, ToolDescriptor
   http.ts               — HttpClient (headers, idempotency, error parsing, auth)
   errors.ts             — UCPError, UCPEscalationError, UCPIdempotencyConflictError, UCPOAuthError
-  schemas.ts            — Zod schemas (SDK re-exports)
+  schemas.ts            — Zod schema aliases + re-exports from @omnixhq/ucp-js-sdk;
+                          WebhookEventSchema (local — SDK doesn't own webhook envelope)
+  verify-signature.ts   — verifyRequestSignature(), createWebhookVerifier(), WebhookVerifier
+  parse-webhook-event.ts — parseWebhookEvent()
   index.ts              — Public API surface
 
-examples/
-  basic-checkout.ts          — Connect, search, create checkout, complete
-  capability-detection.ts    — Show what a UCP server supports
-  anthropic-agent-loop.ts    — Full agent loop with Anthropic Claude
-  openai-agent-loop.ts       — Full agent loop with OpenAI
-  langchain-agent.ts         — LangChain agent with DynamicStructuredTool
-  vercel-ai-nextjs.ts        — Next.js App Router route handler with streamText
-  mcp-server.ts              — Expose UCP tools as an MCP server
-
 scripts/
-  mock-ucp-server.ts         — Spec-compliant local UCP server for testing
-  agent-demo.ts              — End-to-end Claude agent demo (Anthropic SDK)
-  test-gateway-connection.ts — Live gateway integration test
+  mock-ucp-server.ts         — Spec-compliant local UCP server (port 3001) for integration tests
+  agent-demo.ts              — End-to-end Claude agent demo (Anthropic SDK, costs API credits)
+  test-gateway-connection.ts — Live gateway smoke test
   agents/
     openai-agent.ts          — OpenAI adapter example (run in CI)
     anthropic-agent.ts       — Anthropic adapter example (run in CI)
@@ -122,28 +135,43 @@ scripts/
     langchain-agent.ts       — LangChain adapter example (run in CI)
 ```
 
+## Schema Strategy
+
+All public types are derived from `@omnixhq/ucp-js-sdk` schemas via `z.output<typeof XSchema>`. No manual interfaces that duplicate SDK-owned shapes.
+
+Three custom (non-SDK) schemas are justified and remain:
+
+| Schema                      | Location       | Why custom                                                                   |
+| --------------------------- | -------------- | ---------------------------------------------------------------------------- |
+| `WebhookEventSchema`        | `schemas.ts`   | Webhook envelope (`event_id`, `created_time`) — not owned by UCP spec        |
+| `PaymentHandlerMapSchema`   | `UCPClient.ts` | Map-level wrapper composing `PaymentHandlerBaseSchema` — SDK has no map type |
+| `OAuthServerMetadataSchema` | `UCPClient.ts` | RFC 8414 (OAuth 2.0 metadata) — not UCP spec; has `.passthrough()` correctly |
+
 ## Public Exports
 
 ### Main (`@omnixhq/ucp-client`)
 
-- `UCPClient` — `connect(config)` → `ConnectedClient`
+- `UCPClient`, `connect` — connect to a UCP server
 - `UCPError`, `UCPEscalationError`, `UCPIdempotencyConflictError`, `UCPOAuthError`
-- `CheckoutCapability`, `OrderCapability`, `IdentityLinkingCapability`, `ProductsCapability`
+- `CheckoutCapability`, `OrderCapability`, `IdentityLinkingCapability`
 - `getAgentTools()`, `AgentTool`, `JsonSchema`
-- `AdapterOptions`, `ToolErrorResult` — adapter error-handling option and return type
+- `verifyRequestSignature()`, `createWebhookVerifier()`, `WebhookVerifier`
+- `parseWebhookEvent()`
+- `AdapterOptions`, `ToolErrorResult`
+- All `@omnixhq/ucp-js-sdk` schemas re-exported (150+ schemas)
 - All types from `src/types/`
 
 ### Subpath exports (framework adapters)
 
-| Subpath                         | Exports                                                                  |
-| ------------------------------- | ------------------------------------------------------------------------ |
-| `@omnixhq/ucp-client/openai`    | `toOpenAITools`, `executeOpenAIToolCall`, `OpenAIFunction`, `OpenAITool` |
-| `@omnixhq/ucp-client/anthropic` | `toAnthropicTools`, `executeAnthropicToolCall`, `AnthropicTool`          |
-| `@omnixhq/ucp-client/vercel-ai` | `toVercelAITools`, `VercelAIToolDefinition`, `VercelAIToolMap`           |
-| `@omnixhq/ucp-client/langchain` | `toLangChainTools`, `LangChainTool`                                      |
-| `@omnixhq/ucp-client/mcp`       | `toMCPTools`, `executeMCPToolCall`, `MCPTool`                            |
+| Subpath                         | Exports                                        |
+| ------------------------------- | ---------------------------------------------- |
+| `@omnixhq/ucp-client/openai`    | `toOpenAITools`, `executeOpenAIToolCall`       |
+| `@omnixhq/ucp-client/anthropic` | `toAnthropicTools`, `executeAnthropicToolCall` |
+| `@omnixhq/ucp-client/vercel-ai` | `toVercelAITools`                              |
+| `@omnixhq/ucp-client/langchain` | `toLangChainTools`                             |
+| `@omnixhq/ucp-client/mcp`       | `toMCPTools`, `executeMCPToolCall`             |
 
-All adapters are zero-dependency pure mappings — no external SDK imports.
+All adapters accept optional `AdapterOptions` (`catchErrors?: boolean`). When `catchErrors: true`, errors are returned as `ToolErrorResult` instead of throwing.
 
 ## Error Handling
 
@@ -154,40 +182,44 @@ All adapters are zero-dependency pure mappings — no external SDK imports.
 | `UCPIdempotencyConflictError` | HTTP 409 (idempotency key reused with different body) |
 | `UCPOAuthError`               | OAuth token exchange / refresh / revocation failure   |
 
-`UCPError` carries: `code`, `type`, `statusCode`, `path`, `contentType`, `messages[]` (all gateway messages).
+`UCPError` carries: `code`, `type`, `statusCode`, `path`, `contentType`, `messages[]`.
+
+`MessageSeverity` values: `'recoverable'`, `'requires_buyer_input'`, `'requires_buyer_review'`, `'unrecoverable'`.
 
 ## HTTP Client Behaviour
 
-- All requests carry: `UCP-Agent`, `X-Request-ID` (UUID), `Content-Type: application/json`
-- Mutating requests (POST, PUT, DELETE) carry `Idempotency-Key` (UUID, regenerated per call)
-- Bearer token auth via `accessToken` in config
-- 409 responses throw `UCPIdempotencyConflictError`; gateway `messages[]` preserved when present
+- All requests carry: `UCP-Agent` (profile URL + version), `request-id` (UUID), `Content-Type: application/json`
+- Mutating requests (POST, PUT) carry `idempotency-key` (UUID, regenerated per call)
+- Optional `requestSignature` config field adds `request-signature` header to every request
+- Bearer token auth via `accessToken` on `HttpClient` (used by `IdentityLinkingCapability`)
+- 409 responses → `UCPIdempotencyConflictError`; gateway `messages[]` preserved when present
+- `validate()` falls back to raw data with a warning when schema validation fails (backwards-compat guarantee)
+
+## Webhook Flow
+
+```
+1. Receive POST with Request-Signature header
+2. verifier.verify(rawBody, signature)  — fetches keys from /.well-known/ucp, caches by kid
+3. parseWebhookEvent(rawBody)           — validates and returns typed WebhookEvent
+4. event.order.id, event.event_id, ...
+```
+
+`createWebhookVerifier` refetches keys on `kid` cache miss (zero-downtime key rotation support).
 
 ## Build & Release
 
 - **Build tool**: tsdown → dual ESM + CJS output in `dist/`
 - **Type declarations**: `.d.ts` (ESM) + `.d.cts` (CJS) per entry point
-- **Validation**: attw (exports map, `no-resolution` ignored for node10 subpath), publint
-- **Release**: release-please reads conventional commits, opens Release PR, publishes to npm on merge
+- **API baseline**: `docs/ucp-client.api.md` — regenerate with `npx api-extractor run --local` after any public API change
+- **Validation**: attw (exports map), publint
+- **Release**: release-please reads conventional commits, opens Release PR, publishes to npm on merge to `main`
 - **Secrets required**: `NPM_TOKEN`, `RELEASE_PLEASE_TOKEN` (GitHub Actions)
 
 ## Testing
 
 - **Framework**: Vitest
 - **Coverage threshold**: 80% (functions, lines, branches)
-- **Unit tests**: mock `fetch` via `vi.fn()`
-- **Integration tests**: skipped unless `GATEWAY_URL` env is set
+- **Unit tests**: mock `fetch` via `vi.fn()`; 319 unit tests
+- **Integration tests**: skipped unless `INTEGRATION=true`; run against `scripts/mock-ucp-server.ts` (port 3001)
 - **Type tests**: `src/__tests__/types/*.test-d.ts` via `vitest run --typecheck.only` (`npm run test:types`)
-- **CI jobs**: Build+Lint+Test, Integration (mock server), Agent — OpenAI/Anthropic/MCP/Vercel AI/LangChain (5 per-adapter jobs running `scripts/agents/*.ts`)
-
-## Open Tickets (next sprint)
-
-See Notion → 🎫 Tickets → ucp-client for full list. Key open items:
-
-| Ticket   | Description                                      | Priority |
-| -------- | ------------------------------------------------ | -------- |
-| UCPM-239 | Fix UCP-Agent header — remove `version` field    | P2       |
-| UCPM-230 | Error processing helpers (severity partitioning) | P1       |
-| UCPM-237 | Auth config (Bearer, API key)                    | P2       |
-| UCPM-226 | Request-Signature header (client-side signing)   | P0       |
-| v0.2.0   | Production hardening (timeout, retry, 429)       | Next     |
+- **CI jobs**: Build + Lint + Test, Integration (mock server), per-adapter agent examples (5 jobs)

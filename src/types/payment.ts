@@ -8,6 +8,8 @@ export type CardCredential = SdkCardCredential;
 
 export type PaymentCredential = TokenCredential | CardCredential;
 
+import type { z } from 'zod';
+import type { PaymentHandlerBaseSchema } from '../schemas.js';
 import type { PostalAddress } from './common.js';
 
 export interface PaymentInstrument {
@@ -23,13 +25,7 @@ export interface PaymentInstrument {
   readonly billing_address?: PostalAddress;
 }
 
-export interface PaymentHandlerInstance {
-  readonly id: string;
-  readonly version: string;
-  readonly spec: string;
-  readonly schema: string;
-  readonly config?: Readonly<Record<string, unknown>>;
-}
+export type PaymentHandlerInstance = z.output<typeof PaymentHandlerBaseSchema>;
 
 export interface PaymentHandlerMap {
   readonly [namespace: string]: readonly PaymentHandlerInstance[];

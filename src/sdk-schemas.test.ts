@@ -52,7 +52,6 @@ import {
   // Payment
   PaymentSchema,
   PaymentCredentialSchema,
-  ExtendedPaymentCredentialSchema,
   PaymentIdentitySchema,
   PaymentInstrumentResponseSchema,
   CardCredentialSchema,
@@ -106,7 +105,6 @@ import {
   EmbeddedConfigSchema,
   ExpectationSchema,
   LinkSchema,
-  PlatformConfigSchema,
   RetailLocationSchema,
   ShippingDestinationSchema,
   TotalSchema,
@@ -146,7 +144,7 @@ describe('Checkout (base) schemas', () => {
   });
 
   it('CheckoutUpdateRequestSchema', () => {
-    expect(CheckoutUpdateRequestSchema.safeParse({ id: 'chk_1', line_items: [] }).success).toBe(
+    expect(CheckoutUpdateRequestSchema.safeParse({ id: 'chk_123', line_items: [] }).success).toBe(
       true,
     );
   });
@@ -371,12 +369,6 @@ describe('Payment schemas', () => {
 
   it('PaymentCredentialSchema', () => {
     expect(PaymentCredentialSchema.safeParse({ type: 'token' }).success).toBe(true);
-  });
-
-  it('ExtendedPaymentCredentialSchema (deprecated)', () => {
-    expect(
-      ExtendedPaymentCredentialSchema.safeParse({ type: 'token', token: 'tok_123' }).success,
-    ).toBe(true);
   });
 
   it('PaymentIdentitySchema', () => {
@@ -650,10 +642,6 @@ describe('Misc schemas', () => {
     expect(
       LinkSchema.safeParse({ type: 'continue', url: 'https://store.example/checkout' }).success,
     ).toBe(true);
-  });
-
-  it('PlatformConfigSchema (deprecated)', () => {
-    expect(PlatformConfigSchema.safeParse({}).success).toBe(true);
   });
 
   it('RetailLocationSchema', () => {

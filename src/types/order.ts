@@ -1,6 +1,15 @@
-import type { Order } from '@omnixhq/ucp-js-sdk';
+import type { z } from 'zod';
+import type {
+  UCPSpecOrderSchema,
+  LineItemUpdateRequestSchema,
+  OrderUpdateSchema,
+} from '../schemas.js';
 
-export type UCPSpecOrder = Order;
+export type UCPSpecOrder = z.output<typeof UCPSpecOrderSchema>;
+
+export type OrderUpdate = z.output<typeof OrderUpdateSchema>;
+
+export type LineItemUpdatePayload = z.output<typeof LineItemUpdateRequestSchema>;
 
 export interface WebhookEvent {
   readonly event_id: string;

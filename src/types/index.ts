@@ -19,9 +19,12 @@ export type {
   CreateCheckoutPayload,
   UpdateCheckoutPayload,
   CompleteCheckoutPayload,
+  FulfillmentMethodCreatePayload,
+  FulfillmentMethodUpdatePayload,
+  FulfillmentGroupUpdatePayload,
 } from './checkout.js';
 
-export type { UCPSpecOrder, WebhookEvent } from './order.js';
+export type { UCPSpecOrder, OrderUpdate, WebhookEvent, LineItemUpdatePayload } from './order.js';
 
 export type {
   OAuthServerMetadata,

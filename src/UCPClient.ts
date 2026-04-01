@@ -1,8 +1,7 @@
 import { z } from 'zod';
-import type { UcpDiscoveryProfile } from '@omnixhq/ucp-js-sdk';
 import { HttpClient } from './http.js';
 import type { LogFn } from './http.js';
-import { UCPProfileSchema, JWKSchema } from './schemas.js';
+import { UCPProfileSchema, JWKSchema, PaymentHandlerBaseSchema } from './schemas.js';
 import type { JWK } from './types/common.js';
 import { CheckoutCapability } from './capabilities/checkout.js';
 import { OrderCapability } from './capabilities/order.js';
@@ -16,7 +15,7 @@ import { getAgentTools } from './agent-tools.js';
 import type { AgentTool } from './agent-tools.js';
 
 /** UCP discovery profile returned by `GET /.well-known/ucp`. */
-export type UCPProfile = UcpDiscoveryProfile;
+export type UCPProfile = z.output<typeof UCPProfileSchema>;
 
 /** Describes a single tool the agent can use with the connected server. */
 export interface ToolDescriptor {
@@ -51,21 +50,6 @@ export interface ConnectedClient {
   getAgentTools(): readonly AgentTool[];
 }
 
-/**
- * Connect to a UCP server, discover its capabilities, and return a {@link ConnectedClient}.
- *
- * @example
- * ```typescript
- * const client = await connect({
- *   gatewayUrl: 'https://store.example.com/ucp',
- *   agentProfileUrl: 'https://platform.example.com/.well-known/ucp',
- * });
- *
- * if (client.checkout) {
- *   const session = await client.checkout.create({ line_items: [...] });
- * }
- * ```
- */
 export async function connect(
   config: UCPClientConfig,
   options?: { readonly onValidationWarning?: LogFn },
@@ -106,18 +90,6 @@ export async function connect(
   return Object.freeze(client);
 }
 
-/**
- * UCP client entry point. Use `UCPClient.connect()` to discover server capabilities
- * and get a {@link ConnectedClient}.
- *
- * @example
- * ```typescript
- * const client = await UCPClient.connect({
- *   gatewayUrl: 'https://store.example.com/ucp',
- *   agentProfileUrl: 'https://platform.example.com/.well-known/ucp',
- * });
- * ```
- */
 export class UCPClient {
   private constructor() {
     /* use UCPClient.connect() or the standalone connect() function */
@@ -140,17 +112,7 @@ function extractCapabilityNames(profile: UCPProfile): Set<string> {
   return new Set(Object.keys(capabilities));
 }
 
-const PaymentHandlerInstanceSchema = z
-  .object({
-    id: z.string(),
-    version: z.string(),
-    spec: z.string(),
-    schema: z.string(),
-    config: z.record(z.unknown()).optional(),
-  })
-  .passthrough();
-
-const PaymentHandlerMapSchema = z.record(z.array(PaymentHandlerInstanceSchema));
+const PaymentHandlerMapSchema = z.record(z.array(PaymentHandlerBaseSchema));
 
 function extractPaymentHandlers(profile: UCPProfile): PaymentHandlerMap {
   const raw = (profile as Record<string, unknown>)['payment_handlers'];
@@ -166,7 +128,7 @@ function extractSigningKeys(profile: UCPProfile): readonly JWK[] {
   const keys: JWK[] = [];
   for (const item of raw) {
     const result = JWKSchema.safeParse(item);
-    if (result.success) keys.push(result.data as JWK);
+    if (result.success) keys.push(result.data);
   }
   return keys;
 }
@@ -236,21 +198,9 @@ function buildToolDescriptors(
 
   if (checkout) {
     tools.push(
-      {
-        name: 'create_checkout',
-        capability: 'checkout',
-        description: 'Create a checkout session',
-      },
-      {
-        name: 'get_checkout',
-        capability: 'checkout',
-        description: 'Get checkout session by ID',
-      },
-      {
-        name: 'update_checkout',
-        capability: 'checkout',
-        description: 'Update a checkout session',
-      },
+      { name: 'create_checkout', capability: 'checkout', description: 'Create a checkout session' },
+      { name: 'get_checkout', capability: 'checkout', description: 'Get checkout session by ID' },
+      { name: 'update_checkout', capability: 'checkout', description: 'Update a checkout session' },
       {
         name: 'complete_checkout',
         capability: 'checkout',
@@ -280,6 +230,21 @@ function buildToolDescriptors(
           capability: 'checkout.fulfillment',
           description: 'Select fulfillment option (e.g., express shipping)',
         },
+        {
+          name: 'create_fulfillment_method',
+          capability: 'checkout.fulfillment',
+          description: 'Add a new fulfillment method to a checkout session',
+        },
+        {
+          name: 'update_fulfillment_method',
+          capability: 'checkout.fulfillment',
+          description: 'Update an existing fulfillment method on a checkout session',
+        },
+        {
+          name: 'update_fulfillment_group',
+          capability: 'checkout.fulfillment',
+          description: 'Update a fulfillment group within a fulfillment method',
+        },
       );
     }
 
@@ -294,15 +259,12 @@ function buildToolDescriptors(
 
   if (order) {
     tools.push(
+      { name: 'get_order', capability: 'order', description: 'Get order by ID' },
+      { name: 'update_order', capability: 'order', description: 'Update an order' },
       {
-        name: 'get_order',
+        name: 'update_order_line_item',
         capability: 'order',
-        description: 'Get order by ID',
-      },
-      {
-        name: 'update_order',
-        capability: 'order',
-        description: 'Update an order',
+        description: 'Update a line item within an order',
       },
     );
   }
