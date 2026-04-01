@@ -246,6 +246,11 @@ function buildToolDescriptors(
     tools.push(
       { name: 'get_order', capability: 'order', description: 'Get order by ID' },
       { name: 'update_order', capability: 'order', description: 'Update an order' },
+      {
+        name: 'update_order_line_item',
+        capability: 'order',
+        description: 'Update a line item within an order',
+      },
     );
   }
 

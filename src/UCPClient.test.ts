@@ -163,6 +163,7 @@ describe('describeTools', () => {
 
     expect(toolNames).toContain('get_order');
     expect(toolNames).toContain('update_order');
+    expect(toolNames).toContain('update_order_line_item');
   });
 
   it('returns no tools when server has no capabilities', async () => {
