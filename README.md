@@ -16,9 +16,25 @@ Every AI agent that wants to buy something from a UCP store needs to discover ca
 
 ## Install
 
+Two release channels track the two UCP spec tracks:
+
+### Stable (recommended)
+
+Based on the stable UCP spec (`@omnixhq/ucp-js-sdk@latest`). Supports checkout, fulfillment, discount, order, and identity linking.
+
 ```bash
 npm install @omnixhq/ucp-client
 ```
+
+### Draft
+
+Based on the draft UCP spec (`@omnixhq/ucp-js-sdk@next`). Includes everything in stable plus capabilities still being finalized in the spec (catalog, cart, and others as they land).
+
+```bash
+npm install @omnixhq/ucp-client@next
+```
+
+> **Note:** Draft builds track the spec draft and may have breaking changes between releases. Use stable in production.
 
 ## Quick Start
 
