@@ -1423,26 +1423,7 @@ export const CartResponseSchema: z.ZodObject<{
 export { CartSchema }
 
 // @public (undocumented)
-export interface CartUpdatePayload {
-    // (undocumented)
-    readonly buyer?: {
-        readonly first_name?: string;
-        readonly last_name?: string;
-        readonly email?: string;
-        readonly phone_number?: string;
-    };
-    // (undocumented)
-    readonly context?: Record<string, unknown>;
-    // (undocumented)
-    readonly line_items?: ReadonlyArray<{
-        readonly item: {
-            readonly id: string;
-        };
-        readonly quantity: number;
-    }>;
-    // (undocumented)
-    readonly signals?: Record<string, unknown>;
-}
+export type CartUpdatePayload = z.output<typeof CartUpdateRequestSchema>;
 
 export { CartUpdateRequestSchema }
 
@@ -1471,7 +1452,7 @@ export { CategorySchema }
 export class CheckoutCapability {
     constructor(http: HttpClient, extensions: CheckoutExtensions);
     // (undocumented)
-    applyDiscountCodes(id: string, codes: readonly string[], patch?: FulfillmentPatch): Promise<CheckoutSession>;
+    applyDiscountCodes(id: string, codes: readonly string[]): Promise<CheckoutSession>;
     // (undocumented)
     cancel(id: string): Promise<CheckoutSession>;
     // (undocumented)
@@ -1484,13 +1465,11 @@ export class CheckoutCapability {
     // (undocumented)
     get(id: string): Promise<CheckoutSession>;
     // (undocumented)
-    selectDestination(id: string, destinationId: string, fulfillmentType?: string, patch?: FulfillmentPatch): Promise<CheckoutSession>;
+    selectDestination(id: string, destinationId: string, fulfillmentType?: string): Promise<CheckoutSession>;
     // (undocumented)
-    selectFulfillmentOption(id: string, optionId: string, destinationId?: string, fulfillmentType?: string, patch?: FulfillmentPatch): Promise<CheckoutSession>;
-    // Warning: (ae-forgotten-export) The symbol "FulfillmentPatch" needs to be exported by the entry point index.d.ts
-    //
+    selectFulfillmentOption(id: string, optionId: string, destinationId?: string, fulfillmentType?: string): Promise<CheckoutSession>;
     // (undocumented)
-    setFulfillment(id: string, type: string, patch?: FulfillmentPatch): Promise<CheckoutSession>;
+    setFulfillment(id: string, type: string): Promise<CheckoutSession>;
     // (undocumented)
     update(id: string, patch: UpdateCheckoutPayload): Promise<CheckoutSession>;
     // (undocumented)
@@ -3815,20 +3794,7 @@ export { CheckoutStatusEnumSchema }
 export { CheckoutUpdateRequestSchema }
 
 // @public (undocumented)
-export interface CompleteCheckoutPayload {
-    // (undocumented)
-    readonly ap2?: {
-        readonly checkout_mandate?: string;
-    };
-    // (undocumented)
-    readonly payment?: {
-        readonly instruments: ReadonlyArray<PaymentInstrument>;
-    };
-    // (undocumented)
-    readonly payment_data?: PaymentInstrument;
-    // (undocumented)
-    readonly risk_signals?: Readonly<Record<string, unknown>>;
-}
+export type CompleteCheckoutPayload = z.output<typeof CheckoutCompleteRequestSchema>;
 
 // @public (undocumented)
 export const CompleteCheckoutRequestSchema: z.ZodObject<{
@@ -4455,32 +4421,7 @@ export type ContentType = 'plain' | 'markdown';
 export { ContextSchema }
 
 // @public (undocumented)
-export interface CreateCheckoutPayload {
-    // (undocumented)
-    readonly buyer?: {
-        readonly first_name?: string;
-        readonly last_name?: string;
-        readonly email?: string;
-        readonly phone_number?: string;
-        readonly consent?: BuyerConsent;
-    };
-    // (undocumented)
-    readonly context?: LocalizationContext;
-    // (undocumented)
-    readonly currency?: string;
-    // (undocumented)
-    readonly line_items: ReadonlyArray<{
-        readonly item: {
-            readonly id: string;
-        };
-        readonly quantity: number;
-    }>;
-    // (undocumented)
-    readonly payment?: {
-        readonly instruments?: readonly unknown[];
-        readonly handlers?: readonly unknown[];
-    };
-}
+export type CreateCheckoutPayload = z.output<typeof CheckoutCreateRequestSchema>;
 
 // @public (undocumented)
 export const CreateCheckoutRequestSchema: z.ZodObject<{
@@ -6607,49 +6548,7 @@ export { UcpVersionConstraintSchema }
 export { UcpVersionSchema }
 
 // @public (undocumented)
-export interface UpdateCheckoutPayload {
-    // (undocumented)
-    readonly buyer?: {
-        readonly first_name?: string;
-        readonly last_name?: string;
-        readonly email?: string;
-        readonly phone_number?: string;
-        readonly consent?: BuyerConsent;
-    };
-    // (undocumented)
-    readonly context?: LocalizationContext;
-    // (undocumented)
-    readonly discounts?: {
-        readonly codes?: readonly string[];
-    };
-    // (undocumented)
-    readonly fulfillment?: {
-        readonly destinations?: ReadonlyArray<{
-            readonly id: string;
-            readonly address: {
-                readonly street_address?: string;
-                readonly address_locality?: string;
-                readonly address_region?: string;
-                readonly postal_code?: string;
-                readonly address_country?: string;
-            };
-        }>;
-        readonly methods?: ReadonlyArray<{
-            readonly id: string;
-            readonly type: string;
-            readonly line_item_ids?: readonly string[];
-            readonly selected_destination_id?: string;
-            readonly groups?: ReadonlyArray<{
-                readonly id: string;
-                readonly selected_option_id?: string;
-            }>;
-        }>;
-    };
-    // (undocumented)
-    readonly payment?: {
-        readonly instruments?: ReadonlyArray<PaymentInstrument>;
-    };
-}
+export type UpdateCheckoutPayload = z.output<typeof CheckoutUpdateRequestSchema>;
 
 // @public (undocumented)
 export const UpdateCheckoutRequestSchema: z.ZodObject<{

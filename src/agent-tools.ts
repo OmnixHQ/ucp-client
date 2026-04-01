@@ -169,7 +169,10 @@ function checkoutTools(client: ConnectedClient): AgentTool[] {
       },
       execute: async (params) => {
         const { id, ...patch } = params as { id: string; [key: string]: unknown };
-        return client.checkout!.update(id, patch);
+        return client.checkout!.update(
+          id,
+          patch as Parameters<NonNullable<typeof client.checkout>['update']>[1],
+        );
       },
     },
     {
